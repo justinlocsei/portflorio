@@ -1,2 +1,5 @@
+[env]
+_.path = ["./bin"]
+
 [tools]
 node = "24.19.0"

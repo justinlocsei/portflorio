@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 export const REPO_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
+  '..',
   '..'
 );
 

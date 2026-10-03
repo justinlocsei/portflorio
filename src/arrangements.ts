@@ -1,3 +1,4 @@
+import { isFile } from './fs.ts';
 import { getPaths } from './paths.ts';
 import { getISODate } from './time.ts';
 
@@ -5,24 +6,39 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /**
- * The structure of an arrangement stored on disk
+ * Paths to an arrangement stored on disk
  */
-type StoredArrangement = {
-  data: string;
+type ArrangementPaths = {
+  details: string;
   directory: string;
-  id: string;
   image: string;
 };
 
 /**
- * Details on an arrangement
+ * Details for an arrangement
  */
 type ArrangementDetails = {
   flowers: string[];
 };
 
 /**
- * An arrangement
+ * Metadata for an arrangement
+ */
+type ArrangementMetadata = {
+  date: Date;
+  guid: string;
+  id: string;
+};
+
+/**
+ * An arrangement stored on disk
+ */
+type StoredArrangement = ArrangementMetadata & {
+  paths: ArrangementPaths;
+};
+
+/**
+ * A fully loaded arrangement
  */
 type Arrangement = StoredArrangement & {
   details: ArrangementDetails;
@@ -45,32 +61,67 @@ export async function addArrangement({
   flowers: string[];
   image: string;
 }): Promise<Arrangement> {
-  const paths = getPaths();
-
   const details: ArrangementDetails = {
     flowers: [...flowers].sort()
   };
 
-  const directory = path.join(paths.arrangements, getISODate());
+  const date = new Date();
+  const dateString = getISODate(date);
+
+  const directory = path.join(getPaths().arrangements, dateString);
   await fs.mkdir(directory, { recursive: true });
 
-  const existing = await findArrangementsIn(directory);
-  const id = asID(existing.length + 1);
+  const others = await findArrangementsIn(directory);
+  const id = others.length + 1;
 
-  const asPath = (ext: string) => path.join(directory, `${id}.${ext}`);
-  const image = asPath('jpg');
-  const data = asPath('json');
+  const paths = getStoragePaths(directory, id);
 
-  await fs.copyFile(imagePath, image);
-  await fs.writeFile(data, JSON.stringify(details, null, 2));
+  await fs.copyFile(imagePath, paths.image);
+  await fs.writeFile(paths.details, JSON.stringify(details, null, 2));
+
+  return loadArrangement(await getStoredArrangement(directory, id));
+}
+
+/**
+ * Produce the paths for an arrangement in a directory
+ */
+function getStoragePaths(directory: string, id: number): ArrangementPaths {
+  const asPath = (ext: string) => path.join(directory, `${asID(id)}.${ext}`);
 
   return {
-    data,
-    details,
+    details: asPath('json'),
     directory,
-    id,
-    image
+    image: asPath('jpg')
   };
+}
+
+/**
+ * Produce a reference to a stored arrangement
+ */
+async function getStoredArrangement(
+  directory: string,
+  number: number
+): Promise<StoredArrangement> {
+  const id = asID(number);
+
+  const paths = getStoragePaths(directory, number);
+  const dateString = path.basename(directory);
+
+  return {
+    paths,
+    date: new Date(dateString),
+    guid: `${dateString}-${id}`,
+    id
+  };
+}
+
+/**
+ * Report whether an arrangement appears to have valid files
+ */
+function arrangementHasFiles(paths: ArrangementPaths): Promise<boolean> {
+  return Promise
+    .all([paths.details, paths.image].map(isFile))
+    .then(c => c.every(Boolean));
 }
 
 /**
@@ -79,24 +130,16 @@ export async function addArrangement({
 async function findArrangementsIn(
   directory: string
 ): Promise<StoredArrangement[]> {
-  const entries = await fs.readdir(directory);
-  const names = new Set(entries);
   const arrangements: StoredArrangement[] = [];
 
   for (let index = 1;; index += 1) {
-    const id = asID(index);
-    const image = `${id}.jpg`;
+    const stored = await getStoredArrangement(directory, index);
 
-    if (!names.has(image)) {
+    if (await arrangementHasFiles(stored.paths)) {
+      arrangements.push(stored);
+    } else {
       break;
     }
-
-    arrangements.push({
-      data: `${id}.json`,
-      directory,
-      id,
-      image
-    });
   }
 
   return arrangements;
@@ -110,7 +153,7 @@ async function loadArrangement(
 ): Promise<Arrangement> {
   return {
     ...stored,
-    details: JSON.parse(await fs.readFile(stored.data, 'utf-8'))
+    details: JSON.parse(await fs.readFile(stored.paths.details, 'utf-8'))
   };
 }
 

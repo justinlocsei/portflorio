@@ -1,3 +1,4 @@
+import { toJSON } from '../core/data.ts';
 import { getISODate } from '../core/time.ts';
 import type {
   Arrangement,
@@ -44,7 +45,7 @@ export async function addArrangement({
   const paths = getStoragePaths(directory, id);
 
   await fs.copyFile(imagePath, paths.image);
-  await fs.writeFile(paths.details, JSON.stringify(details, null, 2));
+  await fs.writeFile(paths.details, toJSON(details));
 
   return loadArrangement(await getStoredArrangement(directory, id));
 }

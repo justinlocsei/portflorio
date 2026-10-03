@@ -162,9 +162,12 @@ async function loadArrangement(
  */
 export async function findArrangements(): Promise<Arrangement[]> {
   const available: Arrangement[] = [];
+  const root = getPaths().arrangements;
 
-  for (const directory of await fs.readdir(getPaths().arrangements)) {
-    for (const arrangement of await findArrangementsIn(directory)) {
+  for (const directory of await fs.readdir(root)) {
+    for (
+      const arrangement of await findArrangementsIn(path.join(root, directory))
+    ) {
       available.push(await loadArrangement(arrangement));
     }
   }

@@ -1,48 +1,15 @@
+import { getISODate } from '../core/time.ts';
+import type {
+  Arrangement,
+  ArrangementDetails,
+  ArrangementPaths,
+  StoredArrangement
+} from '../core/types.ts';
 import { isFile } from './fs.ts';
 import { getPaths } from './paths.ts';
-import { getISODate } from './time.ts';
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-
-/**
- * Paths to an arrangement stored on disk
- */
-type ArrangementPaths = {
-  details: string;
-  directory: string;
-  image: string;
-};
-
-/**
- * Details for an arrangement
- */
-type ArrangementDetails = {
-  flowers: string[];
-};
-
-/**
- * Metadata for an arrangement
- */
-type ArrangementMetadata = {
-  date: Date;
-  guid: string;
-  id: string;
-};
-
-/**
- * An arrangement stored on disk
- */
-type StoredArrangement = ArrangementMetadata & {
-  paths: ArrangementPaths;
-};
-
-/**
- * A fully loaded arrangement
- */
-type Arrangement = StoredArrangement & {
-  details: ArrangementDetails;
-};
 
 /**
  * Treat a number as an arrangement ID

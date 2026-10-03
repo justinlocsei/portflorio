@@ -1,20 +1,14 @@
-import { findArrangements } from './arrangements.ts';
+import type { Arrangement, Flower } from './types.ts';
 
 /**
- * A flower used in an arrangement
+ * Summarize the flowers used in a list of arrangements
  */
-type Flower = {
-  name: string;
-  usedIn: string[];
-};
-
-/**
- * Get a list of all available flowers
- */
-export async function loadFlowers(): Promise<Flower[]> {
+export function summarizeFlowers(
+  arrangements: Arrangement[]
+): Flower[] {
   const usage = new Map<string, string[]>();
 
-  for (const arrangement of await findArrangements()) {
+  for (const arrangement of arrangements) {
     for (const flower of arrangement.details.flowers) {
       const usedIn = usage.get(flower) ?? [];
 

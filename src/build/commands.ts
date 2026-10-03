@@ -1,5 +1,5 @@
+import type { EnvironmentVariables } from '../core/types.ts';
 import { REPO_ROOT } from './paths.ts';
-import type { EnvironmentVariables } from './types.ts';
 
 import type {
   SpawnSyncOptions,

@@ -3,8 +3,6 @@ import { defineConfig } from 'vite';
 
 import { getPaths } from './src/build/paths.ts';
 
-import path from 'node:path';
-
 const paths = getPaths();
 
 export default defineConfig({
@@ -13,7 +11,7 @@ export default defineConfig({
     manifest: true,
     outDir: paths.dist.site,
     rollupOptions: {
-      input: path.join(paths.site, 'entry-client.tsx')
+      input: paths.entry.client
     }
   },
   plugins: [react()],

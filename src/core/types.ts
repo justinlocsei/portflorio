@@ -12,6 +12,7 @@ export type ArrangementPaths = {
  */
 export type ArrangementDetails = {
   flowers: string[];
+  notes?: string[];
 };
 
 /**

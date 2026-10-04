@@ -11,8 +11,13 @@ export const REPO_ROOT = path.resolve(
  * Get the paths for the repository
  */
 export function getPaths() {
+  const src = path.join(REPO_ROOT, 'src');
+
   return {
     arrangements: path.join(REPO_ROOT, 'arrangements'),
-    root: REPO_ROOT
+    dist: path.join(REPO_ROOT, 'dist'),
+    root: REPO_ROOT,
+    src,
+    site: path.join(src, 'site')
   };
 }

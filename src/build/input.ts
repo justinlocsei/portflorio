@@ -6,9 +6,13 @@ import readline from 'node:readline';
  * Lines are fully assembled once a blank line is entered.
  */
 export function requestLines({
+  input = process.stdin,
+  output = process.stdout,
   prompt,
   suggestions
 }: {
+  input?: NodeJS.ReadableStream;
+  output?: NodeJS.WritableStream;
   prompt?: string;
   suggestions?: string[];
 }): Promise<string[]> {
@@ -19,8 +23,8 @@ export function requestLines({
 
   const rl = readline.createInterface({
     completer,
-    input: process.stdin,
-    output: process.stdout,
+    input,
+    output,
     prompt
   });
 

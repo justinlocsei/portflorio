@@ -10,13 +10,9 @@ export default defineConfig({
     emptyOutDir: true,
     manifest: true,
     outDir: paths.dist.site,
-    rollupOptions: {
-      input: paths.entry.client
-    }
+    rollupOptions: { input: paths.entry.client }
   },
   plugins: [react()],
   root: paths.site,
-  ssr: {
-    noExternal: ['react', 'react-dom']
-  }
+  ssr: { noExternal: ['react', 'react-dom'] }
 });

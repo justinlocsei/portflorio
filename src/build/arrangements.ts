@@ -20,7 +20,7 @@ function asID(index: number): string {
 }
 
 /**
- * Place an arrangement image in a directory in the repo
+ * Add an arragement
  */
 export async function addArrangement({
   flowers,

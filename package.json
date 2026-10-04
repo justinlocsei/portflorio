@@ -13,7 +13,14 @@
   "engines": {
     "node": ">=22.0.0"
   },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
   "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.0",
     "@biomejs/biome": "^2.5.9",
     "@types/node": "^24.0.0",
     "dprint": "^0.57.0",
@@ -21,10 +28,12 @@
     "sharp": "^0.35.4",
     "tsdown": "^0.23.0",
     "typescript": "^6.0.3",
+    "vite": "^7.1.0",
     "vitest": "^5.0.0"
   },
   "allowScripts": {
     "dprint@0.57.4": true,
+    "esbuild@0.28.2": true,
     "fsevents@2.3.3": true
   }
 }

@@ -1,6 +1,7 @@
 import type { Manifest, ManifestChunk } from 'vite';
 import { build } from 'vite';
 
+import { ROOT_ELEMENT_ID } from '../core/site.ts';
 import { getPaths } from './paths.ts';
 import * as configs from './vite.ts';
 
@@ -11,7 +12,7 @@ import { pathToFileURL } from 'node:url';
 /**
  * A variable in the page template
  */
-type TemplateVariable = 'content' | 'head' | 'scripts';
+type TemplateVariable = 'content' | 'head' | 'root' | 'scripts';
 
 /**
  * Values assigned to template variables
@@ -30,7 +31,12 @@ async function renderPage(
     'utf8'
   );
 
-  for (const [key, value] of Object.entries(variables)) {
+  const resolved: TemplateVariables = {
+    root: ROOT_ELEMENT_ID,
+    ...variables
+  };
+
+  for (const [key, value] of Object.entries(resolved)) {
     text = text.replace(`<!--${key}-->`, value ?? '');
   }
 

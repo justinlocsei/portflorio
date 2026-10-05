@@ -129,9 +129,9 @@ async function loadArrangement(
 }
 
 /**
- * Find all available arrangements
+ * Load information on all available arrangements
  */
-export async function findArrangements(): Promise<Arrangement[]> {
+export async function loadArrangements(): Promise<Arrangement[]> {
   const available: Arrangement[] = [];
   const root = getPaths().arrangements;
 

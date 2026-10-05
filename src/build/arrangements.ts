@@ -23,9 +23,11 @@ function asID(index: number): string {
  * Add an arragement
  */
 export async function addArrangement({
+  date,
   flowers,
   image: imagePath
 }: {
+  date?: string;
   flowers: string[];
   image: string;
 }): Promise<Arrangement> {
@@ -33,10 +35,11 @@ export async function addArrangement({
     flowers: [...flowers].sort()
   };
 
-  const date = new Date();
-  const dateString = getISODate(date);
+  const directory = path.join(
+    getPaths().arrangements,
+    date || getISODate()
+  );
 
-  const directory = path.join(getPaths().arrangements, dateString);
   await fs.mkdir(directory, { recursive: true });
 
   const others = await findArrangementsIn(directory);

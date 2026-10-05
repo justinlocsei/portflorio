@@ -9,10 +9,12 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
+const TEMPLATE_VARIABLES = ['content', 'head', 'root', 'scripts'] as const;
+
 /**
  * A variable in the page template
  */
-type TemplateVariable = 'content' | 'head' | 'root' | 'scripts';
+type TemplateVariable = typeof TEMPLATE_VARIABLES[number];
 
 /**
  * Values assigned to template variables
@@ -35,6 +37,12 @@ async function renderPage(
     root: ROOT_ELEMENT_ID,
     ...variables
   };
+
+  for (const variable of TEMPLATE_VARIABLES) {
+    if (!(variable in resolved)) {
+      resolved[variable] = '';
+    }
+  }
 
   for (const [key, value] of Object.entries(resolved)) {
     text = text.replace(`<!--${key}-->`, value ?? '');

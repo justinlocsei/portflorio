@@ -48,7 +48,7 @@ export async function addArrangement({
   const paths = getStoragePaths(directory, id);
 
   await fs.copyFile(imagePath, paths.image);
-  await fs.writeFile(paths.details, toJSON(details));
+  await fs.writeFile(paths.details, `${toJSON(details)}\n`);
 
   return loadArrangement(await getStoredArrangement(directory, id));
 }

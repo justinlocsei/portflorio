@@ -1,6 +1,6 @@
 import { assert, describe, it } from 'vitest';
 
-import { getISODate } from './time.ts';
+import { getISODate, isISODate } from './time.ts';
 
 describe('getISODate', () => {
   it('uses an ISO date format', () => {
@@ -12,5 +12,19 @@ describe('getISODate', () => {
 
   it('returns the current date in ISO format', () => {
     assert.match(getISODate(), /^\d{4}-\d{2}-\d{2}$/);
+  });
+});
+
+describe('isISODate', () => {
+  it('reports valid ISO 8601 dates', () => {
+    assert.isTrue(isISODate('2026-01-01'));
+  });
+
+  it('reports valid ISO 8601 dates with the correct form', () => {
+    assert.isFalse(isISODate('2026-01-41'));
+  });
+
+  it('reports invalid ISO 8601 dates', () => {
+    assert.isFalse(isISODate('2026-01-01-01'));
   });
 });

@@ -11,3 +11,11 @@ export function getISODate(reference?: Date): string {
 
   return date;
 }
+
+/**
+ * Report whether a string is a valid ISO 8601 date
+ */
+export function isISODate(date: string): boolean {
+  return /^(\d{4}-\d{2}-\d{2})$/.test(date)
+    && !Number.isNaN(new Date(date).getTime());
+}

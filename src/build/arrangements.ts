@@ -154,3 +154,19 @@ export async function loadArrangements(): Promise<Arrangement[]> {
 
   return available;
 }
+
+/**
+ * Pick an arrangement from a list
+ */
+export function pickArrangement(
+  available: Arrangement[],
+  guid: string
+): Arrangement {
+  const found = available.find(a => a.guid === guid);
+
+  if (!found) {
+    throw new Error(`Arrangement not found: ${guid}`);
+  }
+
+  return found;
+}

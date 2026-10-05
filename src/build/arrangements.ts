@@ -117,6 +117,20 @@ async function findArrangementsIn(
 }
 
 /**
+ * Find all stored arrangements
+ */
+export async function findArrangements(): Promise<StoredArrangement[]> {
+  const available: StoredArrangement[] = [];
+  const root = getPaths().arrangements;
+
+  for (const directory of await fs.readdir(root)) {
+    available.push(...(await findArrangementsIn(path.join(root, directory))));
+  }
+
+  return available;
+}
+
+/**
  * Load a stored arrangement
  */
 async function loadArrangement(
@@ -133,14 +147,9 @@ async function loadArrangement(
  */
 export async function loadArrangements(): Promise<Arrangement[]> {
   const available: Arrangement[] = [];
-  const root = getPaths().arrangements;
 
-  for (const directory of await fs.readdir(root)) {
-    for (
-      const arrangement of await findArrangementsIn(path.join(root, directory))
-    ) {
-      available.push(await loadArrangement(arrangement));
-    }
+  for (const arrangement of await findArrangements()) {
+    available.push(await loadArrangement(arrangement));
   }
 
   return available;

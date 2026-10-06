@@ -3,4 +3,5 @@ dist/
 node_modules/
 src/site/generated/
 src/site/index.html
+src/site/public/images
 tmp/

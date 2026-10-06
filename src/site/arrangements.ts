@@ -15,13 +15,14 @@ import type {
  * Unpack an arrangement
  */
 function unpackArrangement(packed: PackedArrangement): Arrangement {
-  const [date, id, flowers] = packed;
+  const [date, id, flowers, full, thumbnail] = packed;
   const selector: ArrangementSelectorRequest = { date, id };
 
   return {
     date: new Date(date),
     flowers,
     guid: selectorToGUID(selector),
+    images: { full, thumbnail },
     id,
     route: routes.arrangement(selector)
   };

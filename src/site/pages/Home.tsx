@@ -13,8 +13,10 @@ export default function Home() {
               <img
                 alt=''
                 decoding='async'
+                height={arrangement.images.thumbnail.height}
                 loading='lazy'
-                src={arrangement.images.thumbnail}
+                src={arrangement.images.thumbnail.url}
+                width={arrangement.images.thumbnail.width}
               />
               <time dateTime={getISODate(arrangement.date)}>
                 {formatDate(arrangement.date)}

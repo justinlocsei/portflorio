@@ -1,4 +1,15 @@
 /**
+ * Format a date for display
+ */
+export function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+/**
  * Get the current date in ISO 8601 format
  */
 export function getISODate(reference?: Date): string {

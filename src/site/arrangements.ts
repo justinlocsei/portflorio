@@ -1,6 +1,7 @@
 import type { ArrangementSelectorRequest } from '../core/arrangements.ts';
 import { selectorToGUID } from '../core/arrangements.ts';
 import routes from '../core/routes.ts';
+import type { Image } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
 import packedArrangements from './generated/arrangements.json' with {
   type: 'json'
@@ -8,8 +9,16 @@ import packedArrangements from './generated/arrangements.json' with {
 import type {
   Arrangement,
   ArrangementSelector,
-  PackedArrangement
+  PackedArrangement,
+  PackedImage
 } from './types.ts';
+
+/**
+ * Unpack an image
+ */
+function unpackImage([width, height, url]: PackedImage): Image {
+  return { height, url, width };
+}
 
 /**
  * Unpack an arrangement
@@ -22,7 +31,10 @@ function unpackArrangement(packed: PackedArrangement): Arrangement {
     date: new Date(date),
     flowers,
     guid: selectorToGUID(selector),
-    images: { full, thumbnail },
+    images: {
+      full: unpackImage(full),
+      thumbnail: unpackImage(thumbnail)
+    },
     id,
     route: routes.arrangement(selector)
   };

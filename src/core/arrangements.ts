@@ -24,7 +24,7 @@ export type ArrangementSelectorRequest = IsArrangementSelector<
 /**
  * Treat a number as an arrangement ID
  */
-function asID(index: number): string {
+export function asID(index: number): string {
   return String(index).padStart(2, '0');
 }
 

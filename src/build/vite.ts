@@ -38,6 +38,7 @@ function buildConfig({
   const vendor = getVendorPackages();
 
   return defineConfig({
+    appType: 'spa',
     build: {
       emptyOutDir: true,
       manifest: true,

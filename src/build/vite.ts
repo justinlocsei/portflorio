@@ -1,9 +1,9 @@
 import react from '@vitejs/plugin-react';
+import fs from 'fs-extra';
 import { defineConfig } from 'vite';
 
 import { getPaths } from './paths.ts';
 
-import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
 const paths = getPaths();
@@ -14,7 +14,7 @@ const paths = getPaths();
 function getVendorPackages(): string[] {
   return Object.keys(
     JSON.parse(
-      readFileSync(path.join(paths.root, 'package.json'), 'utf8')
+      fs.readFileSync(path.join(paths.root, 'package.json'), 'utf8')
     ).dependencies as Record<string, string>
   );
 }

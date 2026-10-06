@@ -1,3 +1,5 @@
+import fs from 'fs-extra';
+
 import { asID, selectorToGUID } from '../core/arrangements.ts';
 import { getISODate } from '../core/time.ts';
 import type {
@@ -10,7 +12,6 @@ import { writeJSON } from './data.ts';
 import { isFile } from './fs.ts';
 import { getPaths } from './paths.ts';
 
-import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /**

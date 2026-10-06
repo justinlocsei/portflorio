@@ -1,19 +1,19 @@
+import fs from 'fs-extra';
 import { afterEach, assert, beforeEach, describe, it } from 'vitest';
 
 import { isDirectory, isFile } from './fs.ts';
 
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 let tempDir = '';
 
 beforeEach(async () => {
-  tempDir = await mkdtemp(path.join(tmpdir(), 'portflorio-fs-'));
+  tempDir = await fs.mkdtemp(path.join(tmpdir(), 'portflorio-fs-'));
 });
 
 afterEach(async () => {
-  await rm(tempDir, { force: true, recursive: true });
+  await fs.remove(tempDir);
 });
 
 describe('isDirectory', () => {
@@ -23,7 +23,7 @@ describe('isDirectory', () => {
 
   it('returns false when the path is a file', async () => {
     const file = path.join(tempDir, '01.json');
-    await writeFile(file, '{}');
+    await fs.writeFile(file, '{}');
 
     assert.isFalse(await isDirectory(file));
   });
@@ -36,7 +36,7 @@ describe('isDirectory', () => {
 describe('isFile', () => {
   it('returns true for a file', async () => {
     const file = path.join(tempDir, '01.json');
-    await writeFile(file, '{}');
+    await fs.writeFile(file, '{}');
 
     assert.isTrue(await isFile(file));
   });

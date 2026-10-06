@@ -1,3 +1,4 @@
+import fs from 'fs-extra';
 import sharp from 'sharp';
 
 import type { Variant } from '../core/types/utils.ts';
@@ -7,7 +8,6 @@ import { getPaths } from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
 
 import { createHash } from 'node:crypto';
-import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /**

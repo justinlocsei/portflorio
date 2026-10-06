@@ -1,14 +1,14 @@
 import type { ArrangementSelector } from '../core/arrangements.ts';
+import type { ArrangementMetadata } from '../core/types.ts';
 
 export type { ArrangementSelector };
 
 /**
  * An arrangement exposed to the site
  */
-export type Arrangement = {
-  date: string;
+export type Arrangement = ArrangementMetadata & {
   flowers: string[];
-  id: string;
+  route: string;
 };
 
 /**

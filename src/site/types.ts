@@ -4,10 +4,19 @@ import type { ArrangementMetadata } from '../core/types.ts';
 export type { ArrangementSelector };
 
 /**
+ * Images generated for an arrangement
+ */
+export type ArrangementImages = {
+  full: string;
+  thumbnail: string;
+};
+
+/**
  * An arrangement exposed to the site
  */
 export type Arrangement = ArrangementMetadata & {
   flowers: string[];
+  images: ArrangementImages;
   route: string;
 };
 
@@ -17,5 +26,7 @@ export type Arrangement = ArrangementMetadata & {
 export type PackedArrangement = [
   date: string,
   id: string,
-  flowers: string[]
+  flowers: string[],
+  image: string,
+  thumbnail: string
 ];

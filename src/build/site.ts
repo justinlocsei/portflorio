@@ -6,6 +6,7 @@ import { ROOT_ELEMENT_ID } from '../core/site.ts';
 import type { Arrangement } from '../core/types.ts';
 import { loadArrangements } from './arrangements.ts';
 import { generateSiteData } from './data.ts';
+import { buildArrangementImages } from './images.ts';
 import { getPaths, routeToFile } from './paths.ts';
 import * as configs from './vite.ts';
 
@@ -57,10 +58,10 @@ async function renderPage(
 }
 
 /**
- * Generate date files used by the site
+ * Generate data files used by the site
  */
 async function generateData(): Promise<Arrangement[]> {
-  const arrangements = await loadArrangements();
+  const arrangements = await buildArrangementImages(await loadArrangements());
 
   await generateSiteData(arrangements);
 
@@ -129,12 +130,13 @@ function extractAssets(entry: ManifestChunk): TemplateVariables {
  */
 export async function buildStaticSite(): Promise<void> {
   const paths = getPaths();
-  const arrangements = await generateData();
 
   await fs.rm(
     paths.dist.root,
     { force: true, recursive: true }
   );
+
+  const arrangements = await generateData();
 
   await build(configs.client);
   await build(configs.server);

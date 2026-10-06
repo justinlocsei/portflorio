@@ -1,7 +1,14 @@
 import sharp from 'sharp';
 
 import type { Variant } from '../core/types/utils.ts';
+import type { Arrangement } from '../core/types.ts';
 import { map } from '../core/utils.ts';
+import { getPaths } from './paths.ts';
+import type { ProcessedArrangement } from './types.ts';
+
+import { createHash } from 'node:crypto';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 /**
  * An approach to resizing an image
@@ -47,4 +54,42 @@ export async function resize(
     buffer: data,
     size: info
   };
+}
+
+/**
+ * Build images for each arrangement in a list
+ */
+export async function buildArrangementImages(
+  arrangements: Arrangement[]
+): Promise<ProcessedArrangement[]> {
+  const dirs = getPaths().dist;
+  const prefix = path.relative(dirs.site, dirs.images);
+
+  await fs.mkdir(dirs.images, { recursive: true });
+
+  const writeImage = (buffer: Buffer) => {
+    const hash = createHash('sha256')
+      .update(buffer)
+      .digest('hex');
+
+    const file = `${hash}.jpg`;
+    fs.writeFile(path.join(dirs.images, file), buffer);
+
+    return `/${prefix}/${file}`;
+  };
+
+  return Promise.all(
+    arrangements.map(async (arrangement): Promise<ProcessedArrangement> => {
+      const full = await fs.readFile(arrangement.paths.image);
+      const thumbnail = await resize(full, { pixels: 480, type: 'long-edge' });
+
+      return {
+        ...arrangement,
+        images: {
+          full: writeImage(full),
+          thumbnail: writeImage(thumbnail.buffer)
+        }
+      };
+    })
+  );
 }

@@ -10,3 +10,12 @@ export type Arrangement = {
   flowers: string[];
   id: string;
 };
+
+/**
+ * A compact representation of an arrangement
+ */
+export type PackedArrangement = [
+  date: string,
+  id: string,
+  flowers: string[]
+];

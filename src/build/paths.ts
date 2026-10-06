@@ -15,13 +15,16 @@ export function getPaths() {
   const dist = path.join(REPO_ROOT, 'dist');
   const site = path.join(src, 'site');
 
+  const distSite = path.join(dist, 'site');
+
   return {
     arrangements: path.join(REPO_ROOT, 'arrangements'),
     dist: {
       build: path.join(dist, 'build'),
+      images: path.join(distSite, 'images'),
       root: dist,
       serverBundle: path.join(dist, 'build', 'server.js'),
-      site: path.join(dist, 'site')
+      site: distSite
     },
     entry: {
       client: path.join(site, 'entry', 'client.tsx'),

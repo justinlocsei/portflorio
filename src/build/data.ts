@@ -2,23 +2,23 @@ import { toJSON } from '../core/data.ts';
 import { getISODate } from '../core/time.ts';
 import type { Arrangement as LoadedArrangement } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
-import type { Arrangement } from '../site/types.ts';
+import type { PackedArrangement } from '../site/types.ts';
 import { getPaths } from './paths.ts';
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /**
- * Convert a stored arrangement to a version used by the site
+ * Pack an arrangement for the site
  */
-function toSiteArrangement(arrangement: LoadedArrangement): Arrangement {
+function packArrangement(arrangement: LoadedArrangement): PackedArrangement {
   const { date, details, id } = arrangement;
 
-  return {
-    date: getISODate(date),
-    flowers: details.flowers,
-    id
-  };
+  return [
+    getISODate(date),
+    id,
+    details.flowers
+  ];
 }
 
 /**
@@ -32,7 +32,7 @@ export async function generateSiteData(
   await fs.mkdir(root, { recursive: true });
 
   await writeJSON(
-    sortBy(arrangements, a => a.guid).map(toSiteArrangement),
+    sortBy(arrangements, a => a.guid).map(packArrangement),
     path.join(root, 'arrangements.json')
   );
 }

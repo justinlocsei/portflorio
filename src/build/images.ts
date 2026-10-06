@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import sharp from 'sharp';
 
 import type { Variant } from '../core/types/utils.ts';
-import type { Arrangement } from '../core/types.ts';
+import type { Arrangement, Dimensions, Image } from '../core/types.ts';
 import { map } from '../core/utils.ts';
 import { getPaths } from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
@@ -14,11 +14,6 @@ import path from 'node:path';
  * An approach to resizing an image
  */
 type ResizeApproach = Variant<'long-edge', { pixels: number }>;
-
-/**
- * The dimensions of an image
- */
-type Dimensions = Record<'height' | 'width', number>;
 
 /**
  * A resized image

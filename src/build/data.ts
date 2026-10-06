@@ -2,12 +2,20 @@ import fs from 'fs-extra';
 
 import { toJSON } from '../core/data.ts';
 import { getISODate } from '../core/time.ts';
+import type { Image } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
-import type { PackedArrangement } from '../site/types.ts';
+import type { PackedArrangement, PackedImage } from '../site/types.ts';
 import { getPaths } from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
 
 import path from 'node:path';
+
+/**
+ * Pack an image
+ */
+function packImage({ height, url, width }: Image): PackedImage {
+  return [width, height, url];
+}
 
 /**
  * Pack an arrangement for the site
@@ -19,8 +27,8 @@ function packArrangement(arrangement: ProcessedArrangement): PackedArrangement {
     getISODate(date),
     id,
     details.flowers,
-    images.full,
-    images.thumbnail
+    packImage(images.full),
+    packImage(images.thumbnail)
   ];
 }
 

@@ -16,6 +16,14 @@ export type ArrangementDetails = {
 };
 
 /**
+ * Images generated for an arrangement
+ */
+export type ArrangementImages = {
+  full: string;
+  thumbnail: string;
+};
+
+/**
  * Metadata for an arrangement
  */
 export type ArrangementMetadata = {

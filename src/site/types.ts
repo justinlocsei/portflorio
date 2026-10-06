@@ -1,15 +1,7 @@
 import type { ArrangementSelector } from '../core/arrangements.ts';
-import type { ArrangementMetadata } from '../core/types.ts';
+import type { ArrangementImages, ArrangementMetadata } from '../core/types.ts';
 
 export type { ArrangementSelector };
-
-/**
- * Images generated for an arrangement
- */
-export type ArrangementImages = {
-  full: string;
-  thumbnail: string;
-};
 
 /**
  * An arrangement exposed to the site

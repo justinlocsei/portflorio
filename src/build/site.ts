@@ -2,6 +2,7 @@ import type { Manifest, ManifestChunk } from 'vite';
 import { build } from 'vite';
 
 import { ROOT_ELEMENT_ID } from '../core/site.ts';
+import type { Arrangement } from '../core/types.ts';
 import { loadArrangements } from './arrangements.ts';
 import { generateSiteData } from './data.ts';
 import { getPaths } from './paths.ts';
@@ -56,8 +57,12 @@ async function renderPage(
 /**
  * Generate date files used by the site
  */
-async function generateData(): Promise<void> {
-  await generateSiteData(await loadArrangements());
+async function generateData(): Promise<Arrangement[]> {
+  const arrangements = await loadArrangements();
+
+  await generateSiteData(arrangements);
+
+  return arrangements;
 }
 
 /**

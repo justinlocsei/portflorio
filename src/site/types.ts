@@ -13,12 +13,17 @@ export type Arrangement = ArrangementMetadata & {
 };
 
 /**
+ * A compact representation of an image
+ */
+export type PackedImage = [width: number, height: number, url: string];
+
+/**
  * A compact representation of an arrangement
  */
 export type PackedArrangement = [
   date: string,
   id: string,
   flowers: string[],
-  image: string,
-  thumbnail: string
+  image: PackedImage,
+  thumbnail: PackedImage
 ];

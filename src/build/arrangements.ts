@@ -117,8 +117,12 @@ export async function findArrangements(): Promise<StoredArrangement[]> {
   const available: StoredArrangement[] = [];
   const root = getPaths().arrangements;
 
-  for (const directory of await fs.readdir(root)) {
-    available.push(...(await findArrangementsIn(path.join(root, directory))));
+  for (const directory of await fs.readdir(root, { withFileTypes: true })) {
+    if (directory.isDirectory()) {
+      available.push(
+        ...(await findArrangementsIn(path.join(root, directory.name)))
+      );
+    }
   }
 
   return available;

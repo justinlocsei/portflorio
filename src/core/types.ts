@@ -18,7 +18,7 @@ export type ArrangementDetails = {
 /**
  * Metadata for an arrangement
  */
-type ArrangementMetadata = {
+export type ArrangementMetadata = {
   date: Date;
   guid: string;
   id: string;

@@ -27,6 +27,7 @@ export function getPaths() {
       client: path.join(site, 'entry', 'client.tsx'),
       server: path.join(site, 'entry', 'server.tsx')
     },
+    generated: path.join(site, 'generated'),
     root: REPO_ROOT,
     src,
     site

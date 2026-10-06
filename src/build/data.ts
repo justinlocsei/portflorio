@@ -1,3 +1,5 @@
+import fs from 'fs-extra';
+
 import { toJSON } from '../core/data.ts';
 import { getISODate } from '../core/time.ts';
 import { sortBy } from '../core/utils.ts';
@@ -5,7 +7,6 @@ import type { PackedArrangement } from '../site/types.ts';
 import { getPaths } from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
 
-import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /**

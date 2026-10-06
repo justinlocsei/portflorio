@@ -2,6 +2,8 @@ import type { Manifest, ManifestChunk } from 'vite';
 import { build } from 'vite';
 
 import { ROOT_ELEMENT_ID } from '../core/site.ts';
+import { loadArrangements } from './arrangements.ts';
+import { generateSiteData } from './data.ts';
 import { getPaths } from './paths.ts';
 import * as configs from './vite.ts';
 
@@ -52,6 +54,13 @@ async function renderPage(
 }
 
 /**
+ * Generate date files used by the site
+ */
+async function generateData(): Promise<void> {
+  await generateSiteData(await loadArrangements());
+}
+
+/**
  * Build the entry point for the development server
  */
 export async function buildDevelopmentIndex(): Promise<void> {
@@ -61,6 +70,8 @@ export async function buildDevelopmentIndex(): Promise<void> {
     .relative(paths.site, paths.entry.client)
     .split(path.sep)
     .join('/');
+
+  await generateData();
 
   await renderPage(
     { scripts: `<script type="module" src="/${script}"></script>` },
@@ -117,6 +128,7 @@ export async function buildStaticSite(): Promise<void> {
     { force: true, recursive: true }
   );
 
+  await generateData();
   await build(configs.client);
   await build(configs.server);
 

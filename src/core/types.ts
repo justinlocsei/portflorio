@@ -21,11 +21,18 @@ export type ArrangementDetails = {
 export type Dimensions = Record<'height' | 'width', number>;
 
 /**
+ * An image of an arrangement
+ */
+export type Image = Dimensions & {
+  url: string;
+};
+
+/**
  * Images generated for an arrangement
  */
 export type ArrangementImages = {
-  full: string;
-  thumbnail: string;
+  full: Image;
+  thumbnail: Image;
 };
 
 /**

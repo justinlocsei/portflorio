@@ -82,3 +82,37 @@ export function map(input: any, field?: any): any {
     return mapTaggedUnion(input, 'type');
   }
 }
+
+/**
+ * A value that can be used for sorting
+ */
+type Sortable = number | string;
+
+/**
+ * Compare two sortable values
+ */
+function compareSortable(a: Sortable, b: Sortable): number {
+  return (typeof a === 'number' && typeof b === 'number')
+    ? a - b
+    : String(a).localeCompare(String(b));
+}
+
+/**
+ * Sort a list by one or more selectors
+ */
+export function sortBy<T>(
+  items: readonly T[],
+  ...selectors: Array<(item: T) => Sortable>
+): T[] {
+  return items.toSorted((a, b) => {
+    for (const selector of selectors) {
+      const order = compareSortable(selector(a), selector(b));
+
+      if (order !== 0) {
+        return order;
+      }
+    }
+
+    return 0;
+  });
+}

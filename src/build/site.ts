@@ -1,11 +1,12 @@
 import type { Manifest, ManifestChunk } from 'vite';
 import { build } from 'vite';
 
+import { listRoutes } from '../core/routes.ts';
 import { ROOT_ELEMENT_ID } from '../core/site.ts';
 import type { Arrangement } from '../core/types.ts';
 import { loadArrangements } from './arrangements.ts';
 import { generateSiteData } from './data.ts';
-import { getPaths } from './paths.ts';
+import { getPaths, routeToFile } from './paths.ts';
 import * as configs from './vite.ts';
 
 import fs from 'node:fs/promises';
@@ -51,6 +52,7 @@ async function renderPage(
     text = text.replace(`<!--${key}-->`, value ?? '');
   }
 
+  await fs.mkdir(path.dirname(target), { recursive: true });
   await fs.writeFile(target, text);
 }
 
@@ -127,13 +129,13 @@ function extractAssets(entry: ManifestChunk): TemplateVariables {
  */
 export async function buildStaticSite(): Promise<void> {
   const paths = getPaths();
+  const arrangements = await generateData();
 
   await fs.rm(
     paths.dist.root,
     { force: true, recursive: true }
   );
 
-  await generateData();
   await build(configs.client);
   await build(configs.server);
 
@@ -148,16 +150,18 @@ export async function buildStaticSite(): Promise<void> {
   const tags = extractAssets(entry);
 
   const renderApp = (await import(pathToFileURL(paths.dist.serverBundle).href))
-    .default as unknown;
+    .default as ((pathname: string) => string);
 
   if (typeof renderApp !== 'function') {
     throw new Error('Could not load the app rendered');
   }
 
-  await renderPage(
-    { ...tags, content: renderApp() },
-    path.join(paths.dist.site, 'index.html')
-  );
+  for (const pathname of listRoutes(arrangements)) {
+    await renderPage(
+      { ...tags, content: renderApp(pathname) },
+      routeToFile(pathname, paths.dist.site)
+    );
+  }
 
   console.log(`Site available: ${paths.dist.site}`);
 }

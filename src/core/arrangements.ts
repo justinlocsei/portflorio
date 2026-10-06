@@ -55,7 +55,10 @@ export function selectorToGUID(
 export function guidToSelector(
   guid: string
 ): ArrangementSelector | null {
-  const [dateString, idString] = guid.split('-');
+  const parts = guid.split('-');
+  const idString = parts.pop();
+
+  const dateString = parts.join('-');
   const id = idString ? parseInt(idString, 10) : undefined;
 
   if (

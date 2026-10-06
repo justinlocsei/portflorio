@@ -1,3 +1,4 @@
+import fs from 'fs-extra';
 import type { Manifest, ManifestChunk } from 'vite';
 import { build } from 'vite';
 
@@ -6,11 +7,11 @@ import { ROOT_ELEMENT_ID } from '../core/site.ts';
 import type { Arrangement } from '../core/types.ts';
 import { loadArrangements } from './arrangements.ts';
 import { generateSiteData } from './data.ts';
+import { ensureSymlink } from './fs.ts';
 import { buildArrangementImages } from './images.ts';
 import { getPaths, routeToFile } from './paths.ts';
 import * as configs from './vite.ts';
 
-import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -69,6 +70,18 @@ async function generateData(): Promise<Arrangement[]> {
 }
 
 /**
+ * Make built assets available in the development server
+ */
+async function exposeDevelopmentAssets(): Promise<void> {
+  const paths = getPaths();
+
+  await ensureSymlink(
+    path.join(paths.site, 'public', 'images'),
+    paths.dist.images
+  );
+}
+
+/**
  * Build the entry point for the development server
  */
 export async function buildDevelopmentIndex(): Promise<void> {
@@ -80,6 +93,7 @@ export async function buildDevelopmentIndex(): Promise<void> {
     .join('/');
 
   await generateData();
+  await exposeDevelopmentAssets();
 
   await renderPage(
     { scripts: `<script type="module" src="/${script}"></script>` },

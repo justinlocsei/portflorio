@@ -1,9 +1,9 @@
 import { toJSON } from '../core/data.ts';
 import { getISODate } from '../core/time.ts';
-import type { Arrangement as LoadedArrangement } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
 import type { PackedArrangement } from '../site/types.ts';
 import { getPaths } from './paths.ts';
+import type { ProcessedArrangement } from './types.ts';
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -11,13 +11,15 @@ import path from 'node:path';
 /**
  * Pack an arrangement for the site
  */
-function packArrangement(arrangement: LoadedArrangement): PackedArrangement {
-  const { date, details, id } = arrangement;
+function packArrangement(arrangement: ProcessedArrangement): PackedArrangement {
+  const { date, details, id, images } = arrangement;
 
   return [
     getISODate(date),
     id,
-    details.flowers
+    details.flowers,
+    images.full,
+    images.thumbnail
   ];
 }
 
@@ -25,14 +27,14 @@ function packArrangement(arrangement: LoadedArrangement): PackedArrangement {
  * Generate data files used by the site
  */
 export async function generateSiteData(
-  arrangements: LoadedArrangement[]
+  arrangements: ProcessedArrangement[]
 ): Promise<void> {
   const root = getPaths().generated;
 
   await fs.mkdir(root, { recursive: true });
 
   await writeJSON(
-    sortBy(arrangements, a => a.guid).map(packArrangement),
+    sortBy(arrangements, a => a.guid).map(a => packArrangement(a)),
     path.join(root, 'arrangements.json')
   );
 }

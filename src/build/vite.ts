@@ -79,8 +79,6 @@ export const client = buildConfig({
   vendorChunk: true
 });
 
-export default client;
-
 export const server = buildConfig({
   entryFileNames: path.relative(
     paths.dist.build,

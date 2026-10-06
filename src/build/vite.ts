@@ -40,7 +40,7 @@ function buildConfig({
   return defineConfig({
     appType: 'spa',
     build: {
-      emptyOutDir: true,
+      emptyOutDir: false,
       manifest: true,
       outDir: output,
       rollupOptions: {

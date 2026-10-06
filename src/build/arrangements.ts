@@ -1,3 +1,4 @@
+import { asID, selectorToGUID } from '../core/arrangements.ts';
 import { getISODate } from '../core/time.ts';
 import type {
   Arrangement,
@@ -11,13 +12,6 @@ import { getPaths } from './paths.ts';
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-
-/**
- * Treat a number as an arrangement ID
- */
-function asID(index: number): string {
-  return String(index).padStart(2, '0');
-}
 
 /**
  * Add an arragement
@@ -76,13 +70,13 @@ async function getStoredArrangement(
   const id = asID(number);
 
   const paths = getStoragePaths(directory, number);
-  const dateString = path.basename(directory);
+  const date = path.basename(directory);
 
   return {
-    paths,
-    date: new Date(dateString),
-    guid: `${dateString}-${id}`,
-    id
+    date: new Date(date),
+    guid: selectorToGUID({ date, id }),
+    id,
+    paths
   };
 }
 

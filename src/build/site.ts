@@ -9,7 +9,7 @@ import { loadArrangements } from './arrangements.ts';
 import { generateSiteData } from './data.ts';
 import { ensureSymlink } from './fs.ts';
 import { buildArrangementImages } from './images.ts';
-import { getPaths, routeToFile } from './paths.ts';
+import paths, { routeToFile } from './paths.ts';
 import * as configs from './vite.ts';
 
 import path from 'node:path';
@@ -35,7 +35,7 @@ async function renderPage(
   target: string
 ): Promise<void> {
   let text = await fs.readFile(
-    path.join(getPaths().site, 'page.template.html'),
+    path.join(paths.site, 'page.template.html'),
     'utf8'
   );
 
@@ -73,8 +73,6 @@ async function generateData(): Promise<Arrangement[]> {
  * Make built assets available in the development server
  */
 async function exposeDevelopmentAssets(): Promise<void> {
-  const paths = getPaths();
-
   await ensureSymlink(
     path.join(paths.site, 'public', 'images'),
     paths.dist.images
@@ -85,8 +83,6 @@ async function exposeDevelopmentAssets(): Promise<void> {
  * Build the entry point for the development server
  */
 export async function buildDevelopmentIndex(): Promise<void> {
-  const paths = getPaths();
-
   const script = path
     .relative(paths.site, paths.entry.client)
     .split(path.sep)
@@ -143,8 +139,6 @@ function extractAssets(entry: ManifestChunk): TemplateVariables {
  * Build assets for the static site
  */
 export async function buildStaticSite(): Promise<void> {
-  const paths = getPaths();
-
   await fs.rm(
     paths.dist.root,
     { force: true, recursive: true }

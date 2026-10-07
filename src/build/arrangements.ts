@@ -10,7 +10,7 @@ import type {
 } from '../core/types.ts';
 import { writeJSON } from './data.ts';
 import { isFile } from './fs.ts';
-import { getPaths } from './paths.ts';
+import paths from './paths.ts';
 
 import path from 'node:path';
 
@@ -31,7 +31,7 @@ export async function addArrangement({
   };
 
   const directory = path.join(
-    getPaths().arrangements,
+    paths.arrangements,
     date || getISODate()
   );
 
@@ -40,10 +40,10 @@ export async function addArrangement({
   const others = await findArrangementsIn(directory);
   const id = others.length + 1;
 
-  const paths = getStoragePaths(directory, id);
+  const stored = getStoragePaths(directory, id);
 
-  await fs.copyFile(imagePath, paths.image);
-  await writeJSON(details, paths.details);
+  await fs.copyFile(imagePath, stored.image);
+  await writeJSON(details, stored.details);
 
   return loadArrangement(await getStoredArrangement(directory, id));
 }
@@ -116,7 +116,7 @@ async function findArrangementsIn(
  */
 export async function findArrangements(): Promise<StoredArrangement[]> {
   const available: StoredArrangement[] = [];
-  const root = getPaths().arrangements;
+  const root = paths.arrangements;
 
   for (const directory of await fs.readdir(root, { withFileTypes: true })) {
     if (directory.isDirectory()) {

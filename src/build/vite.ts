@@ -2,11 +2,9 @@ import react from '@vitejs/plugin-react';
 import fs from 'fs-extra';
 import { defineConfig } from 'vite';
 
-import { getPaths } from './paths.ts';
+import paths from './paths.ts';
 
 import path from 'node:path';
-
-const paths = getPaths();
 
 /**
  * Get npm packages to include in the vendor chunk

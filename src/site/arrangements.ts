@@ -3,6 +3,7 @@ import { selectorToGUID } from '../core/arrangements.ts';
 import routes from '../core/routes.ts';
 import type { Image } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
+import { resolveFlowers } from './flowers.ts';
 import packedArrangements from './generated/arrangements.json' with {
   type: 'json'
 };
@@ -24,12 +25,12 @@ function unpackImage([width, height, url]: PackedImage): Image {
  * Unpack an arrangement
  */
 function unpackArrangement(packed: PackedArrangement): Arrangement {
-  const [date, id, flowers, full, thumbnail] = packed;
+  const [date, id, flowerIndexes, full, thumbnail] = packed;
   const selector: ArrangementSelectorRequest = { date, id };
 
   return {
     date: new Date(date),
-    flowers,
+    flowers: resolveFlowers(flowerIndexes),
     guid: selectorToGUID(selector),
     images: {
       full: unpackImage(full),

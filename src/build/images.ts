@@ -62,7 +62,10 @@ export async function buildArrangementImages(
 
   await fs.mkdir(dirs.images, { recursive: true });
 
-  const writeImage = async (buffer: Buffer) => {
+  const writeImage = async (
+    buffer: Buffer,
+    size: Dimensions
+  ): Promise<Image> => {
     const hash = createHash('sha256')
       .update(buffer)
       .digest('hex');
@@ -70,19 +73,21 @@ export async function buildArrangementImages(
     const file = `${hash}.jpg`;
     await fs.writeFile(path.join(dirs.images, file), buffer);
 
-    return `/${prefix}/${file}`;
+    return { ...size, url: `/${prefix}/${file}` };
   };
 
   return Promise.all(
     arrangements.map(async (arrangement): Promise<ProcessedArrangement> => {
       const full = await fs.readFile(arrangement.paths.image);
+      const size = await sharp(full).rotate().metadata();
+
       const thumbnail = await resize(full, { pixels: 480, type: 'long-edge' });
 
       return {
         ...arrangement,
         images: {
-          full: await writeImage(full),
-          thumbnail: await writeImage(thumbnail.buffer)
+          full: await writeImage(full, size),
+          thumbnail: await writeImage(thumbnail.buffer, thumbnail.size)
         }
       };
     })

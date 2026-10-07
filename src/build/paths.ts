@@ -50,3 +50,5 @@ export function routeToFile(
     'index.html'
   );
 }
+
+export default getPaths();

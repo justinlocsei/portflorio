@@ -6,7 +6,7 @@ import { getISODate } from '../core/time.ts';
 import type { Image } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
 import type { PackedArrangement, PackedImage } from '../site/types.ts';
-import { getPaths } from './paths.ts';
+import paths from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
 
 import path from 'node:path';
@@ -62,7 +62,7 @@ function packArrangement(
 export async function generateSiteData(
   arrangements: ProcessedArrangement[]
 ): Promise<void> {
-  const root = getPaths().generated;
+  const root = paths.generated;
   const flowers = summarizeFlowers(arrangements).map(f => f.name);
 
   await fs.mkdir(root, { recursive: true });

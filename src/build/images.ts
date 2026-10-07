@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import type { Variant } from '../core/types/utils.ts';
 import type { Arrangement, Dimensions, Image } from '../core/types.ts';
 import { map } from '../core/utils.ts';
-import { getPaths } from './paths.ts';
+import paths from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
 
 import { createHash } from 'node:crypto';
@@ -57,7 +57,7 @@ export async function resize(
 export async function buildArrangementImages(
   arrangements: Arrangement[]
 ): Promise<ProcessedArrangement[]> {
-  const dirs = getPaths().dist;
+  const dirs = paths.dist;
   const prefix = path.relative(dirs.site, dirs.images);
 
   await fs.mkdir(dirs.images, { recursive: true });

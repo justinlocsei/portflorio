@@ -19,6 +19,7 @@ export function getPaths() {
 
   return {
     arrangements: path.join(REPO_ROOT, 'arrangements'),
+    components: path.join(site, 'components'),
     dist: {
       build: path.join(dist, 'build'),
       images: path.join(distSite, 'images'),

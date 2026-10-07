@@ -23,7 +23,7 @@ export type PackedImage = [width: number, height: number, url: string];
 export type PackedArrangement = [
   date: string,
   id: string,
-  flowers: string[],
+  flowers: number[],
   image: PackedImage,
   thumbnail: PackedImage
 ];

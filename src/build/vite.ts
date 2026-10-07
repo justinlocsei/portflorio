@@ -64,6 +64,7 @@ function buildConfig({
       },
       ssr
     },
+    css: { devSourcemap: true },
     plugins: [react()],
     root: paths.site,
     ssr: { noExternal: vendor }

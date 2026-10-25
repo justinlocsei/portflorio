@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
 import fs from 'fs-extra';
+import ruscus from 'ruscus/vite';
 import { defineConfig } from 'vite';
 
 import paths from './paths.ts';
@@ -65,7 +66,7 @@ function buildConfig({
       ssr
     },
     css: { devSourcemap: true },
-    plugins: [react()],
+    plugins: [react(), ruscus()],
     root: paths.site,
     ssr: { noExternal: vendor }
   });

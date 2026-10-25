@@ -15,7 +15,8 @@
   ],
   "excludes": [
     "dist",
-    "node_modules"
+    "node_modules",
+    "package*.json"
   ],
   "plugins": [
     "npm:@dprint/json@0.23.0",

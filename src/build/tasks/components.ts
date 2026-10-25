@@ -30,7 +30,7 @@ async function generateComponentFiles(name: string): Promise<string[]> {
   const rootDir = paths.components;
 
   const tsx = `
-import C from './${name}.module.css';
+import C from './${name}.styles.css';
 
 export default function ${name}() {
   return (
@@ -42,9 +42,13 @@ export default function ${name}() {
   `;
 
   const css = `
-.root {
-  font-weight: normal;
-}
+import { component } from 'ruscus';
+
+export default component('${name}')
+  .elements(e => ({
+    content: e()
+  }))
+  .apply();
   `;
 
   const write = async (ext: string, content: string): Promise<string> => {
@@ -56,7 +60,7 @@ export default function ${name}() {
   };
 
   return Promise.all([
-    write('module.css', css),
+    write('styles.css', css),
     write('tsx', tsx)
   ]);
 }

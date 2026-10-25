@@ -1,10 +1,12 @@
 import type { Children } from '../react.ts';
-import C from './Page.module.css';
+import C from './Page.styles.ts';
 
 export default function Page({ children }: { children: Children }) {
   return (
     <main className={C.root}>
-      {children}
+      <div className={C.body}>
+        {children}
+      </div>
     </main>
   );
 }

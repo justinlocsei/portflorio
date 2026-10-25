@@ -30,7 +30,7 @@ async function generateComponentFiles(name: string): Promise<string[]> {
   const rootDir = paths.components;
 
   const tsx = `
-import C from './${name}.styles.css';
+import C from './${name}.styles.ts';
 
 export default function ${name}() {
   return (
@@ -60,7 +60,7 @@ export default component('${name}')
   };
 
   return Promise.all([
-    write('styles.css', css),
+    write('styles.ts', css),
     write('tsx', tsx)
   ]);
 }

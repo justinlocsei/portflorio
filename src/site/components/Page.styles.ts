@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-export default component('page')
+export default component('Page')
   .elements(e => ({
     body: e()
   }))

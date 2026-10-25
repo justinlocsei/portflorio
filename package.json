@@ -16,7 +16,7 @@
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "ruscus": "^0.0.2"
+    "ruscus": "file:../ruscus"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.9",

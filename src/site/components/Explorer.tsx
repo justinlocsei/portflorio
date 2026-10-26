@@ -11,7 +11,7 @@ export default function Explorer({
   return (
     <div className={C.root}>
       <aside className={C.lens}>
-        <Lens />
+        <Lens arrangements={arrangements} />
       </aside>
 
       <main className={C.gallery}>

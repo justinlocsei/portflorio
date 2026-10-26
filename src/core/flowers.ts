@@ -6,13 +6,30 @@ import type { Arrangement, Flower } from './types.ts';
 export function summarizeArrangementFlowers(
   arrangements: Arrangement[]
 ): Flower[] {
+  return summarizeFlowers(
+    arrangements.map(a => ({ flowers: a.details.flowers, guid: a.guid }))
+  );
+}
+
+/**
+ * A record of an arrangement with flowers
+ */
+type HasFlowers = {
+  flowers: string[];
+  guid: string;
+};
+
+/**
+ * Summarize the flowers associated with a list of items
+ */
+export function summarizeFlowers(items: HasFlowers[]): Flower[] {
   const usage = new Map<string, string[]>();
 
-  for (const arrangement of arrangements) {
-    for (const flower of arrangement.details.flowers) {
+  for (const item of items) {
+    for (const flower of item.flowers) {
       const usedIn = usage.get(flower) ?? [];
 
-      usedIn.push(arrangement.guid);
+      usedIn.push(item.guid);
       usage.set(flower, usedIn);
     }
   }

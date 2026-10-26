@@ -3,7 +3,7 @@ import type { Arrangement, Flower } from './types.ts';
 /**
  * Summarize the flowers used in a list of arrangements
  */
-export function summarizeFlowers(
+export function summarizeArrangementFlowers(
   arrangements: Arrangement[]
 ): Flower[] {
   const usage = new Map<string, string[]>();

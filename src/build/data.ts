@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 
 import { toJSON } from '../core/data.ts';
-import { summarizeFlowers } from '../core/flowers.ts';
+import { summarizeArrangementFlowers } from '../core/flowers.ts';
 import { getISODate } from '../core/time.ts';
 import type { Image } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
@@ -63,7 +63,7 @@ export async function generateSiteData(
   arrangements: ProcessedArrangement[]
 ): Promise<void> {
   const root = paths.generated;
-  const flowers = summarizeFlowers(arrangements).map(f => f.name);
+  const flowers = summarizeArrangementFlowers(arrangements).map(f => f.name);
 
   await fs.mkdir(root, { recursive: true });
 

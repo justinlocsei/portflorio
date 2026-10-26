@@ -1,30 +1,11 @@
-import { formatDate, getISODate } from '../../core/time.ts';
 import { arrangements } from '../arrangements.ts';
+import Explorer from '../components/Explorer.tsx';
 import Page from '../components/Page.tsx';
 
 export default function Home() {
   return (
     <Page>
-      <h1>Portflorio</h1>
-      <ul>
-        {arrangements.map(arrangement => (
-          <li key={arrangement.guid}>
-            <a href={arrangement.route}>
-              <img
-                alt=''
-                decoding='async'
-                height={arrangement.images.thumbnail.height}
-                loading='lazy'
-                src={arrangement.images.thumbnail.url}
-                width={arrangement.images.thumbnail.width}
-              />
-              <time dateTime={getISODate(arrangement.date)}>
-                {formatDate(arrangement.date)}
-              </time>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <Explorer arrangements={arrangements} />
     </Page>
   );
 }

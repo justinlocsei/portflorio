@@ -37,7 +37,7 @@ function unpackArrangement(packed: PackedArrangement): Arrangement {
     guid: selectorToGUID(selector),
     images: {
       full: unpackImage(full),
-      thumbnail: unpackImage(thumbnail)
+      preview: unpackImage(thumbnail)
     },
     id,
     route: routes.arrangement(selector)

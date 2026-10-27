@@ -31,7 +31,7 @@ export type Image = Dimensions & {
  */
 export type ArrangementImages = {
   full: Image;
-  thumbnail: Image;
+  preview: Image;
 };
 
 /**

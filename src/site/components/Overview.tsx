@@ -19,10 +19,10 @@ export default function Overview({
           }`}
           className={C.image}
           decoding='async'
-          height={images.thumbnail.height}
+          height={images.preview.height}
           loading='lazy'
-          src={images.thumbnail.url}
-          width={images.thumbnail.width}
+          src={images.preview.url}
+          width={images.preview.width}
         />
       </a>
 

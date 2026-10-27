@@ -87,7 +87,7 @@ export async function buildArrangementImages(
         ...arrangement,
         images: {
           full: await writeImage(full, size),
-          thumbnail: await writeImage(thumbnail.buffer, thumbnail.size)
+          preview: await writeImage(thumbnail.buffer, thumbnail.size)
         }
       };
     })

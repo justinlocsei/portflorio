@@ -52,7 +52,7 @@ function packArrangement(
     id,
     packFlowers(details.flowers, flowers),
     packImage(images.full),
-    packImage(images.thumbnail)
+    packImage(images.preview)
   ];
 }
 

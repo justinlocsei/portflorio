@@ -10,17 +10,15 @@ export function formatDate(date: Date): string {
 }
 
 /**
- * Get the current date in ISO 8601 format
+ * Get the UTC date in ISO 8601 form
  */
 export function getISODate(reference?: Date): string {
-  const iso = (reference ?? new Date()).toISOString();
-  const [date] = iso.split('T');
+  const date = reference ?? new Date();
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
 
-  if (!date) {
-    throw new Error(`Could not extract the date from ISO string: ${iso}`);
-  }
-
-  return date;
+  return `${year}-${month}-${day}`;
 }
 
 /**

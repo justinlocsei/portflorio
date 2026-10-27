@@ -69,3 +69,20 @@ export type Flower = {
   name: string;
   usedIn: string[];
 };
+
+declare const ISODateBrand: unique symbol;
+declare const UTCDateBrand: unique symbol;
+
+/**
+ * An UTC date in ISO 8601 format
+ */
+export type ISODate = string & {
+  readonly [ISODateBrand]: typeof ISODateBrand;
+};
+
+/**
+ * A UTC calendar date with no time component
+ */
+export type UTCDate = Date & {
+  readonly [UTCDateBrand]: typeof UTCDateBrand;
+};

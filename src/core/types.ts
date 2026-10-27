@@ -42,8 +42,7 @@ export type ArrangementImages<T = Image> = {
  */
 export type ArrangementMetadata = {
   date: UTCDate;
-  guid: string;
-  id: string;
+  id: number;
 };
 
 /**

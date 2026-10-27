@@ -1,9 +1,7 @@
 import fs from 'fs-extra';
 import sharp from 'sharp';
 
-import type { Variant } from '../core/types/utils.ts';
-import type { Arrangement, Dimensions, Image } from '../core/types.ts';
-import { map } from '../core/utils.ts';
+import type { Image, StoredArrangement } from '../core/types.ts';
 import paths from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
 
@@ -11,51 +9,10 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 
 /**
- * An approach to resizing an image
- */
-type ResizeApproach = Variant<'long-edge', { pixels: number }>;
-
-/**
- * A resized image
- */
-type ResizedImage = {
-  buffer: Buffer;
-  size: Dimensions;
-};
-
-/**
- * Resize an image
- */
-export async function resize(
-  input: Buffer,
-  approach: ResizeApproach,
-  { quality = 80 }: { quality?: number } = {}
-): Promise<ResizedImage> {
-  let image = sharp(input).rotate();
-
-  image = map(approach).to({
-    'long-edge': ({ pixels }) =>
-      image.resize(pixels, pixels, {
-        fit: 'inside',
-        withoutEnlargement: true
-      })
-  });
-
-  const { data, info } = await image
-    .jpeg({ mozjpeg: true, quality })
-    .toBuffer({ resolveWithObject: true });
-
-  return {
-    buffer: data,
-    size: info
-  };
-}
-
-/**
  * Build images for each arrangement in a list
  */
 export async function buildArrangementImages(
-  arrangements: Arrangement[]
+  arrangements: StoredArrangement[]
 ): Promise<ProcessedArrangement[]> {
   const dirs = paths.dist;
   const prefix = path.relative(dirs.site, dirs.images);
@@ -63,31 +20,38 @@ export async function buildArrangementImages(
   await fs.mkdir(dirs.images, { recursive: true });
 
   const writeImage = async (
-    buffer: Buffer,
-    size: Dimensions
+    source: string
   ): Promise<Image> => {
+    const buffer = await fs.readFile(source);
+    const size = await sharp(buffer).metadata();
+
     const hash = createHash('sha256')
       .update(buffer)
       .digest('hex');
 
     const file = `${hash}.jpg`;
-    await fs.writeFile(path.join(dirs.images, file), buffer);
 
-    return { ...size, url: `/${prefix}/${file}` };
+    await fs.writeFile(
+      path.join(dirs.images, file),
+      buffer
+    );
+
+    return {
+      height: size.height,
+      url: `/${prefix}/${file}`,
+      width: size.width
+    };
   };
 
   return Promise.all(
     arrangements.map(async (arrangement): Promise<ProcessedArrangement> => {
-      const full = await fs.readFile(arrangement.paths.image);
-      const size = await sharp(full).rotate().metadata();
-
-      const thumbnail = await resize(full, { pixels: 480, type: 'long-edge' });
+      const { images } = arrangement.paths;
 
       return {
         ...arrangement,
         images: {
-          full: await writeImage(full, size),
-          preview: await writeImage(thumbnail.buffer, thumbnail.size)
+          full: await writeImage(images.full),
+          preview: await writeImage(images.preview)
         }
       };
     })

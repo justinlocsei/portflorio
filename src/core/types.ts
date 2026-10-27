@@ -45,7 +45,7 @@ export type EnvironmentVariables = Record<string, string | undefined>;
  */
 export type Flower = {
   name: string;
-  usedIn: string[];
+  usedIn: number[];
 };
 
 /**

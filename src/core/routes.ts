@@ -1,13 +1,7 @@
-import type {
-  ArrangementSelector,
-  ArrangementSelectorRequest
-} from './arrangements.ts';
-import { guidToSelector, selectorToGUID } from './arrangements.ts';
 import type { StoredArrangement } from './types.ts';
 
 const routes = {
-  arrangement: (a: ArrangementSelectorRequest): string =>
-    `/${selectorToGUID(a)}`,
+  arrangement: (id: number): string => `/arrangements/${id}`,
   home: () => '/'
 };
 
@@ -30,7 +24,7 @@ type IsMatchedRoute<T extends RouteID, U = object> = U & {
  */
 type MatchedRoute =
   | IsMatchedRoute<'home'>
-  | IsMatchedRoute<'arrangement', { arrangement: ArrangementSelector }>;
+  | IsMatchedRoute<'arrangement', { id: number }>;
 
 /**
  * Produce a list of all supported routes
@@ -38,7 +32,7 @@ type MatchedRoute =
 export function listRoutes(arrangements: StoredArrangement[]): string[] {
   return [
     routes.home(),
-    ...arrangements.map(a => routes.arrangement(a))
+    ...arrangements.map(a => routes.arrangement(a.id))
   ].sort();
 }
 
@@ -50,11 +44,12 @@ export function matchRoute(path: string): MatchedRoute | null {
     return { type: 'home' };
   }
 
-  const selector = guidToSelector(path.slice(1));
+  const match = path.match(/^\/arrangements\/(\d+)$/);
+  const id = match?.[1];
 
-  if (selector) {
+  if (id) {
     return {
-      arrangement: selector,
+      id: parseInt(id, 10),
       type: 'arrangement'
     };
   }

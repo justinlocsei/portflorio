@@ -4,7 +4,7 @@
 export type ArrangementPaths = {
   details: string;
   directory: string;
-  image: string;
+  images: ArrangementImages<string>;
 };
 
 /**
@@ -30,11 +30,11 @@ export type Image = Dimensions & {
 };
 
 /**
- * Images generated for an arrangement
+ * An arrangement's images
  */
-export type ArrangementImages = {
-  full: Image;
-  preview: Image;
+export type ArrangementImages<T = Image> = {
+  full: T;
+  preview: T;
 };
 
 /**

@@ -38,7 +38,7 @@ export type ArrangementImages = {
  * Metadata for an arrangement
  */
 export type ArrangementMetadata = {
-  date: Date;
+  date: UTCDate;
   guid: string;
   id: string;
 };

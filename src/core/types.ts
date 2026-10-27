@@ -17,7 +17,10 @@ export type ArrangementDetails = {
 /**
  * The width and height of an image in pixels
  */
-export type Dimensions = Record<'height' | 'width', number>;
+export type Dimensions = {
+  height: number;
+  width: number;
+};
 
 /**
  * An image of an arrangement

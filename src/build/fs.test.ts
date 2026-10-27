@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import { afterEach, assert, beforeEach, describe, it } from 'vitest';
 
-import { isDirectory, isFile } from './fs.ts';
+import { ensureSymlink, isDirectory, isFile } from './fs.ts';
 
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -14,6 +14,22 @@ beforeEach(async () => {
 
 afterEach(async () => {
   await fs.remove(tempDir);
+});
+
+describe('ensureSymlink', () => {
+  it('creates a symlink', async () => {
+    const target = path.join(tempDir, 'target');
+    const link = path.join(tempDir, 'link');
+
+    await fs.mkdir(target);
+    await fs.writeFile(path.join(target, 'photo.jpg'), 'bytes');
+
+    await ensureSymlink(link, target);
+    assert.isTrue((await fs.lstat(link)).isSymbolicLink());
+
+    await ensureSymlink(link, target);
+    assert.isTrue((await fs.lstat(link)).isSymbolicLink());
+  });
 });
 
 describe('isDirectory', () => {

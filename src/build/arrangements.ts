@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 
 import { asID, selectorToGUID } from '../core/arrangements.ts';
-import { getISODate } from '../core/time.ts';
+import { getISODate, parseDate, tryISODate } from '../core/time.ts';
 import type {
   Arrangement,
   ArrangementDetails,
@@ -71,10 +71,10 @@ async function getStoredArrangement(
   const id = asID(number);
 
   const paths = getStoragePaths(directory, number);
-  const date = path.basename(directory);
+  const date = tryISODate(path.basename(directory));
 
   return {
-    date: new Date(date),
+    date: parseDate(date),
     guid: selectorToGUID({ date, id }),
     id,
     paths

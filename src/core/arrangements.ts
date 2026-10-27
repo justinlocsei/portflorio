@@ -1,4 +1,5 @@
-import { getISODate, isISODate } from './time.ts';
+import { getISODate, isISODate, tryISODate } from './time.ts';
+import type { ISODate, UTCDate } from './types.ts';
 
 /**
  * Define a selector for an arrangement
@@ -11,13 +12,13 @@ type IsArrangementSelector<D, I> = {
 /**
  * A standardized arrangement selector
  */
-export type ArrangementSelector = IsArrangementSelector<string, string>;
+export type ArrangementSelector = IsArrangementSelector<ISODate, string>;
 
 /**
  * A flexible request for an arrangement selector
  */
 export type ArrangementSelectorRequest = IsArrangementSelector<
-  Date | string,
+  ISODate | UTCDate,
   number | string
 >;
 
@@ -35,12 +36,8 @@ export function selectorToGUID(
   { date, id }: ArrangementSelectorRequest
 ): string {
   const dateString = typeof date === 'string'
-    ? date
+    ? tryISODate(date)
     : getISODate(date);
-
-  if (!isISODate(dateString)) {
-    throw new Error(`Invalid date: ${dateString}`);
-  }
 
   const idString = typeof id === 'string'
     ? id

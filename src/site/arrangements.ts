@@ -1,6 +1,7 @@
 import type { ArrangementSelectorRequest } from '../core/arrangements.ts';
 import { selectorToGUID } from '../core/arrangements.ts';
 import routes from '../core/routes.ts';
+import { parseDate, tryISODate } from '../core/time.ts';
 import type { Image } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
 import { resolveFlowers } from './flowers.ts';
@@ -25,11 +26,13 @@ function unpackImage([width, height, url]: PackedImage): Image {
  * Unpack an arrangement
  */
 function unpackArrangement(packed: PackedArrangement): Arrangement {
-  const [date, id, flowerIndexes, full, thumbnail] = packed;
+  const [rawDate, id, flowerIndexes, full, thumbnail] = packed;
+
+  const date = tryISODate(rawDate);
   const selector: ArrangementSelectorRequest = { date, id };
 
   return {
-    date: new Date(date),
+    date: parseDate(date),
     flowers: resolveFlowers(flowerIndexes),
     guid: selectorToGUID(selector),
     images: {

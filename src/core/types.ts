@@ -1,10 +1,11 @@
+declare const ISODateBrand: unique symbol;
+declare const UTCDateBrand: unique symbol;
+
 /**
- * Paths to an arrangement stored on disk
+ * A fully loaded arrangement
  */
-export type ArrangementPaths = {
-  details: string;
-  directory: string;
-  images: ArrangementImages<string>;
+export type Arrangement = StoredArrangement & {
+  details: ArrangementDetails;
 };
 
 /**
@@ -12,21 +13,6 @@ export type ArrangementPaths = {
  */
 export type ArrangementDetails = {
   flowers: string[];
-};
-
-/**
- * The width and height of an image in pixels
- */
-export type Dimensions = {
-  height: number;
-  width: number;
-};
-
-/**
- * An image of an arrangement
- */
-export type Image = Dimensions & {
-  url: string;
 };
 
 /**
@@ -46,17 +32,20 @@ export type ArrangementMetadata = {
 };
 
 /**
- * An arrangement stored on disk
+ * Paths to an arrangement stored on disk
  */
-export type StoredArrangement = ArrangementMetadata & {
-  paths: ArrangementPaths;
+export type ArrangementPaths = {
+  details: string;
+  directory: string;
+  images: ArrangementImages<string>;
 };
 
 /**
- * A fully loaded arrangement
+ * The width and height of an image in pixels
  */
-export type Arrangement = StoredArrangement & {
-  details: ArrangementDetails;
+export type Dimensions = {
+  height: number;
+  width: number;
 };
 
 /**
@@ -72,14 +61,25 @@ export type Flower = {
   usedIn: string[];
 };
 
-declare const ISODateBrand: unique symbol;
-declare const UTCDateBrand: unique symbol;
+/**
+ * An image of an arrangement
+ */
+export type Image = Dimensions & {
+  url: string;
+};
 
 /**
  * An UTC date in ISO 8601 format
  */
 export type ISODate = string & {
   readonly [ISODateBrand]: typeof ISODateBrand;
+};
+
+/**
+ * An arrangement stored on disk
+ */
+export type StoredArrangement = ArrangementMetadata & {
+  paths: ArrangementPaths;
 };
 
 /**

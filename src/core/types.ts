@@ -2,17 +2,12 @@ declare const ISODateBrand: unique symbol;
 declare const UTCDateBrand: unique symbol;
 
 /**
- * A fully loaded arrangement
+ * An arrangement
  */
-export type Arrangement = StoredArrangement & {
-  details: ArrangementDetails;
-};
-
-/**
- * Details for an arrangement
- */
-export type ArrangementDetails = {
+export type Arrangement = {
+  date: UTCDate;
   flowers: string[];
+  id: number;
 };
 
 /**
@@ -21,14 +16,6 @@ export type ArrangementDetails = {
 export type ArrangementImages<T = Image> = {
   full: T;
   preview: T;
-};
-
-/**
- * Metadata for an arrangement
- */
-export type ArrangementMetadata = {
-  date: UTCDate;
-  id: number;
 };
 
 /**
@@ -78,7 +65,7 @@ export type ISODate = string & {
 /**
  * An arrangement stored on disk
  */
-export type StoredArrangement = ArrangementMetadata & {
+export type StoredArrangement = Arrangement & {
   paths: ArrangementPaths;
 };
 

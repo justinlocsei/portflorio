@@ -48,7 +48,7 @@ export function parseDate(iso: ISODate): UTCDate {
 /**
  * Use a valid ISO 8601 date string
  */
-export function useDate(date: string): ISODate {
+export function tryISODate(date: string): ISODate {
   if (!isValidISODate(date)) {
     throw new Error(`Invalid ISO date: ${date}`);
   }

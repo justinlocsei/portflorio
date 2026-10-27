@@ -5,13 +5,13 @@ import {
   getISODate,
   isISODate,
   parseDate,
-  useDate
+  tryISODate
 } from './time.ts';
 
 describe('formatDate', () => {
   it('uses US date formatting in UTC', () => {
     assert.equal(
-      formatDate(parseDate(useDate('2026-01-01'))),
+      formatDate(parseDate(tryISODate('2026-01-01'))),
       'January 1, 2026'
     );
   });
@@ -20,7 +20,7 @@ describe('formatDate', () => {
 describe('getISODate', () => {
   it('uses an ISO date format', () => {
     assert.equal(
-      getISODate(parseDate(useDate('2026-01-01'))),
+      getISODate(parseDate(tryISODate('2026-01-01'))),
       '2026-01-01'
     );
   });
@@ -46,20 +46,20 @@ describe('isISODate', () => {
 
 describe('parseDate', () => {
   it('parses calendar dates as UTC midnight', () => {
-    const date = parseDate(useDate('2026-01-01'));
+    const date = parseDate(tryISODate('2026-01-01'));
 
     assert.equal(date.toISOString(), '2026-01-01T00:00:00.000Z');
   });
 });
 
-describe('useDate', () => {
+describe('tryISODate', () => {
   it('returns a branded ISO date', () => {
-    assert.equal(useDate('2026-01-01'), '2026-01-01');
+    assert.equal(tryISODate('2026-01-01'), '2026-01-01');
   });
 
   it('rejects invalid calendar dates', () => {
     assert.throws(
-      () => useDate('2026-2-28'),
+      () => tryISODate('2026-2-28'),
       /Invalid ISO date: 2026-2-28/
     );
   });

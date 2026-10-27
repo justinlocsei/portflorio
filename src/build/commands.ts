@@ -43,7 +43,9 @@ function run(
     .join('\n');
 
   if (result.status !== 0) {
-    process.exit(result.status);
+    throw new Error(
+      `${label} exited with code ${result.status ?? 'unknown'}\n${output}`
+    );
   }
 
   return output;

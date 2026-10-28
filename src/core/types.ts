@@ -13,7 +13,7 @@ export type Arrangement = {
 /**
  * An arrangement's images
  */
-export type ArrangementImages<T = Image> = {
+export type ArrangementImages<T = string> = {
   full: T;
   preview: T;
 };

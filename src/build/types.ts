@@ -15,7 +15,7 @@ export type ArrangementMetadata = {
  */
 export type ArrangementPaths = {
   directory: string;
-  images: ArrangementImages<string>;
+  images: ArrangementImages;
   meta: string;
 };
 

@@ -33,7 +33,7 @@ export async function addArrangement({
 }: {
   date?: string;
   flowers: string[];
-  images: ArrangementImages<string>;
+  images: ArrangementImages;
 }): Promise<StoredArrangement> {
   const id = (await countArrangements()) + 1;
   const stored = getStoragePaths(id);

@@ -42,7 +42,7 @@ export async function addArrangement({
 
   const meta: ArrangementMetadata = {
     date: customDate ? tryISODate(customDate) : getISODate(),
-    flowers: [...flowers].sort()
+    flowers: flowers.toSorted()
   };
 
   await writeJSON(meta, stored.meta);

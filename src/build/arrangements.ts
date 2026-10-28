@@ -1,170 +1,127 @@
 import fs from 'fs-extra';
 
-import { asID, selectorToGUID } from '../core/arrangements.ts';
 import { getISODate, parseDate, tryISODate } from '../core/time.ts';
+import type { Arrangement, ArrangementImages } from '../core/types.ts';
+import { writeJSON } from './data.ts';
+import paths from './paths.ts';
 import type {
-  Arrangement,
-  ArrangementDetails,
+  ArrangementMetadata,
   ArrangementPaths,
   StoredArrangement
-} from '../core/types.ts';
-import { writeJSON } from './data.ts';
-import { isFile } from './fs.ts';
-import paths from './paths.ts';
+} from './types.ts';
 
 import path from 'node:path';
+
+const ID_LENGTH = 4;
+const IS_ID = new RegExp(`^\\d{${ID_LENGTH}}$`);
+
+/**
+ * Format an arrangement ID for storage
+ */
+function asStoredID(id: number): string {
+  return `${id}`.padStart(ID_LENGTH, '0');
+}
 
 /**
  * Add an arragement
  */
 export async function addArrangement({
-  date,
+  date: customDate,
   flowers,
-  image: imagePath
+  images
 }: {
   date?: string;
   flowers: string[];
-  image: string;
-}): Promise<Arrangement> {
-  const details: ArrangementDetails = {
+  images: ArrangementImages<string>;
+}): Promise<StoredArrangement> {
+  const id = (await countArrangements()) + 1;
+  const stored = getStoragePaths(id);
+
+  await fs.mkdir(stored.directory);
+
+  const meta: ArrangementMetadata = {
+    date: customDate ? tryISODate(customDate) : getISODate(),
     flowers: [...flowers].sort()
   };
 
-  const directory = path.join(
-    paths.arrangements,
-    date || getISODate()
-  );
+  await writeJSON(meta, stored.meta);
+  await fs.copyFile(images.full, stored.images.full);
+  await fs.copyFile(images.preview, stored.images.preview);
 
-  await fs.mkdir(directory, { recursive: true });
-
-  const others = await findArrangementsIn(directory);
-  const id = others.length + 1;
-
-  const stored = getStoragePaths(directory, id);
-
-  await fs.copyFile(imagePath, stored.image);
-  await writeJSON(details, stored.details);
-
-  return loadArrangement(await getStoredArrangement(directory, id));
+  return loadArrangement(id);
 }
 
 /**
- * Produce the paths for an arrangement in a directory
+ * Count the number of stored arrangements
  */
-function getStoragePaths(directory: string, id: number): ArrangementPaths {
-  const asPath = (ext: string) => path.join(directory, `${asID(id)}.${ext}`);
+async function countArrangements(): Promise<number> {
+  const directories =
+    (await fs.readdir(paths.arrangements, { withFileTypes: true }))
+      .filter(d => d.isDirectory())
+      .filter(d => IS_ID.test(d.name));
+
+  return directories.length;
+}
+
+/**
+ * Produce the paths for a stored arrangement
+ */
+function getStoragePaths(id: number): ArrangementPaths {
+  const directory = path.join(paths.arrangements, asStoredID(id));
+  const asPath = (name: string) => path.join(directory, name);
 
   return {
-    details: asPath('json'),
+    meta: asPath('meta.json'),
     directory,
-    image: asPath('jpg')
-  };
-}
-
-/**
- * Produce a reference to a stored arrangement
- */
-async function getStoredArrangement(
-  directory: string,
-  number: number
-): Promise<StoredArrangement> {
-  const id = asID(number);
-
-  const paths = getStoragePaths(directory, number);
-  const date = tryISODate(path.basename(directory));
-
-  return {
-    date: parseDate(date),
-    guid: selectorToGUID({ date, id }),
-    id,
-    paths
-  };
-}
-
-/**
- * Report whether an arrangement appears to have valid files
- */
-function arrangementHasFiles(paths: ArrangementPaths): Promise<boolean> {
-  return Promise
-    .all([paths.details, paths.image].map(isFile))
-    .then(c => c.every(Boolean));
-}
-
-/**
- * List arrangements present in a directory
- */
-async function findArrangementsIn(
-  directory: string
-): Promise<StoredArrangement[]> {
-  const arrangements: StoredArrangement[] = [];
-
-  for (let index = 1;; index += 1) {
-    const stored = await getStoredArrangement(directory, index);
-
-    if (await arrangementHasFiles(stored.paths)) {
-      arrangements.push(stored);
-    } else {
-      break;
+    images: {
+      full: asPath('full.jpg'),
+      preview: asPath('preview.jpg')
     }
-  }
-
-  return arrangements;
-}
-
-/**
- * Find all stored arrangements
- */
-export async function findArrangements(): Promise<StoredArrangement[]> {
-  const available: StoredArrangement[] = [];
-  const root = paths.arrangements;
-
-  for (const directory of await fs.readdir(root, { withFileTypes: true })) {
-    if (directory.isDirectory()) {
-      available.push(
-        ...(await findArrangementsIn(path.join(root, directory.name)))
-      );
-    }
-  }
-
-  return available;
+  };
 }
 
 /**
  * Load a stored arrangement
  */
-async function loadArrangement(
-  stored: StoredArrangement
-): Promise<Arrangement> {
+async function loadArrangement(id: number): Promise<StoredArrangement> {
+  const stored = getStoragePaths(id);
+
+  const meta: ArrangementMetadata = await JSON.parse(
+    await fs.readFile(stored.meta, 'utf8')
+  );
+
   return {
-    ...stored,
-    details: JSON.parse(await fs.readFile(stored.paths.details, 'utf-8'))
+    date: parseDate(tryISODate(meta.date)),
+    flowers: meta.flowers,
+    id,
+    paths: stored
   };
 }
 
 /**
- * Load information on all available arrangements
+ * Load all stored arrangements
  */
-export async function loadArrangements(): Promise<Arrangement[]> {
-  const available: Arrangement[] = [];
+export async function loadArrangements(): Promise<StoredArrangement[]> {
+  const requests: Promise<StoredArrangement>[] = [];
 
-  for (const arrangement of await findArrangements()) {
-    available.push(await loadArrangement(arrangement));
+  for (let i = 1; i <= await countArrangements(); i += 1) {
+    requests.push(loadArrangement(i));
   }
 
-  return available;
+  return Promise.all(requests);
 }
 
 /**
  * Pick an arrangement from a list
  */
-export function pickArrangement(
-  available: Arrangement[],
-  guid: string
-): Arrangement {
-  const found = available.find(a => a.guid === guid);
+export function pickArrangement<T extends Arrangement>(
+  available: T[],
+  id: number
+): T {
+  const found = available.find(a => a.id === id);
 
   if (!found) {
-    throw new Error(`Arrangement not found: ${guid}`);
+    throw new Error(`Arrangement not found: ${id}`);
   }
 
   return found;

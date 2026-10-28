@@ -1,4 +1,4 @@
-import type { StoredArrangement } from './types.ts';
+import type { Arrangement } from './types.ts';
 
 const routes = {
   arrangement: (id: number): string => `/arrangements/${id}`,
@@ -29,7 +29,7 @@ type MatchedRoute =
 /**
  * Produce a list of all supported routes
  */
-export function listRoutes(arrangements: StoredArrangement[]): string[] {
+export function listRoutes(arrangements: Arrangement[]): string[] {
   return [
     routes.home(),
     ...arrangements.map(a => routes.arrangement(a.id))

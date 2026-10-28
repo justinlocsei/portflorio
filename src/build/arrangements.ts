@@ -124,8 +124,9 @@ export async function loadArrangements(): Promise<StoredArrangement[]> {
  */
 export function pickArrangement<T extends Arrangement>(
   available: T[],
-  id: number
+  storedID: StoredID
 ): T {
+  const id = Number(storedID);
   const found = available.find(a => a.id === id);
 
   if (!found) {
@@ -133,4 +134,15 @@ export function pickArrangement<T extends Arrangement>(
   }
 
   return found;
+}
+
+/**
+ * Use a valid stored ID
+ */
+export function tryStoredID(id: string): StoredID {
+  if (IS_ID.test(id)) {
+    return id as StoredID;
+  }
+
+  throw new Error(`Invalid stored ID: ${id}`);
 }

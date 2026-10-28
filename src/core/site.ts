@@ -4,11 +4,11 @@ export const ROOT_ELEMENT_ID = 'root';
 
 export const IMAGE_DIMENSIONS: ArrangementImages<Dimensions> = {
   full: {
-    height: 3000,
-    width: 2000
+    height: 2000,
+    width: 3000
   },
   preview: {
-    height: 1500,
-    width: 1000
+    height: 1000,
+    width: 1500
   }
 };

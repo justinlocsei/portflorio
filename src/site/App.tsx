@@ -10,7 +10,7 @@ export default function App({ path }: { path: string }) {
 
   return !route ? <NotFound /> : map(route).to({
     arrangement: r => {
-      const arrangement = selectArrangement(r.arrangement);
+      const arrangement = selectArrangement(r.id);
 
       return arrangement
         ? <Arrangement arrangement={arrangement} />

@@ -32,6 +32,7 @@ export async function generateSiteData(
     sortBy(arrangements, a => a.id).map((a): PackedArrangement => [
       getISODate(a.date),
       a.id,
+      a.mechanic,
       a.flowers.map(f => flowerIndexes.get(f) ?? 0),
       a.images.full,
       a.images.preview

@@ -1,7 +1,8 @@
 import type {
   ArrangementImages,
   Arrangement as CoreArrangement,
-  ISODate
+  ISODate,
+  Mechanic
 } from '../core/types.ts';
 
 /**
@@ -18,6 +19,7 @@ export type Arrangement = CoreArrangement & {
 export type PackedArrangement = [
   date: ISODate,
   id: number,
+  mechanic: Mechanic,
   flowers: number[],
   image: string,
   thumbnail: string

@@ -11,7 +11,7 @@ import type { Arrangement, PackedArrangement } from './types.ts';
  * Unpack an arrangement
  */
 function unpackArrangement(packed: PackedArrangement): Arrangement {
-  const [rawDate, id, flowerIndexes, full, preview] = packed;
+  const [rawDate, id, mechanic, flowerIndexes, full, preview] = packed;
 
   const date = tryISODate(rawDate);
 
@@ -19,6 +19,7 @@ function unpackArrangement(packed: PackedArrangement): Arrangement {
     date: parseDate(date),
     flowers: resolveFlowers(flowerIndexes),
     images: { full, preview },
+    mechanic,
     id,
     route: routes.arrangement(id)
   };

@@ -10,7 +10,7 @@ import {
 } from '../arrangements.ts';
 import { loadFlowers } from '../flowers.ts';
 import { requestLines } from '../input.ts';
-import { PLATFORM_IDS, shareArrangement } from '../share.ts';
+import { shareArrangement } from '../share.ts';
 
 export default C.group('Manage the catalog of arrangements', {
   add: C(
@@ -41,28 +41,18 @@ export default C.group('Manage the catalog of arrangements', {
   share: C(
     'Share an arrangement',
     {
-      arrangement: C.flag('string', 'The arrangement to share', {
+      id: C.flag('string', 'The ID of the arrangement to share', {
         completion: listArrangementIDs,
         required: true
-      }),
-      platform: C.flag(
-        'choice',
-        'The platform on which to post the arrangement',
-        { choices: PLATFORM_IDS, required: true }
-      )
+      })
     },
     async flags => {
       const arrangement = pickArrangement(
         await loadArrangements(),
-        tryStoredID(flags.arrangement)
+        tryStoredID(flags.id)
       );
 
-      const shared = await shareArrangement(
-        arrangement,
-        flags.platform
-      );
-
-      console.log(shared.post);
+      console.log(await shareArrangement(arrangement));
     }
   )
 });

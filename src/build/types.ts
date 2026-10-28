@@ -1,4 +1,8 @@
-import type { Arrangement, ArrangementImages } from '../core/types.ts';
+import type {
+  Arrangement,
+  ArrangementImages,
+  Mechanic
+} from '../core/types.ts';
 
 declare const StoredIDBrand: unique symbol;
 
@@ -8,6 +12,7 @@ declare const StoredIDBrand: unique symbol;
 export type ArrangementMetadata = {
   date: string;
   flowers: string[];
+  mechanic: Mechanic;
 };
 
 /**

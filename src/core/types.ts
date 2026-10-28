@@ -7,6 +7,7 @@ declare const UTCDateBrand: unique symbol;
 export type Arrangement = {
   date: UTCDate;
   flowers: string[];
+  mechanic: Mechanic;
   id: number;
 };
 
@@ -58,13 +59,12 @@ export type ISODate = string & {
   readonly [ISODateBrand]: typeof ISODateBrand;
 };
 
+export const MECHANICS = ['foam', 'kenzan', 'wire'] as const;
+
 /**
  * A floral mechanic
  */
-export type Mechanic =
-  | 'foam'
-  | 'kenzan'
-  | 'wire';
+export type Mechanic = typeof MECHANICS[number];
 
 /**
  * A UTC calendar date with no time component

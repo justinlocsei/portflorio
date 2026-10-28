@@ -9,6 +9,7 @@ import {
   pickArrangement,
   tryStoredID
 } from '../arrangements.ts';
+import { showOutput } from '../commands.ts';
 import { loadFlowers } from '../flowers.ts';
 import { findSourceImages } from '../images.ts';
 import { requestLines } from '../input.ts';
@@ -29,7 +30,9 @@ export default C.group('Manage the catalog of arrangements', {
     async ({ date, id, mechanic }) => {
       const images = await findSourceImages(paths.images, Number(id));
 
-      console.log('Flowers:');
+      showOutput('imgcat', [images.preview]);
+
+      console.log('\nFlowers:');
 
       const flowers = await requestLines({
         prompt: '- ',

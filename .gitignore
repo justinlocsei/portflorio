@@ -1,5 +1,5 @@
 .DS_Store
-/import
+/images
 dist/
 node_modules/
 src/site/generated/

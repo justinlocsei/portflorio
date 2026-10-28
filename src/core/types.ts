@@ -19,15 +19,6 @@ export type ArrangementImages<T = Image> = {
 };
 
 /**
- * Paths to an arrangement stored on disk
- */
-export type ArrangementPaths = {
-  details: string;
-  directory: string;
-  images: ArrangementImages<string>;
-};
-
-/**
  * The width and height of an image in pixels
  */
 export type Dimensions = {
@@ -60,13 +51,6 @@ export type Image = Dimensions & {
  */
 export type ISODate = string & {
   readonly [ISODateBrand]: typeof ISODateBrand;
-};
-
-/**
- * An arrangement stored on disk
- */
-export type StoredArrangement = Arrangement & {
-  paths: ArrangementPaths;
 };
 
 /**

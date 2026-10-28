@@ -1,5 +1,7 @@
 import fs from 'fs-extra';
 
+import type { ArrangementImages, ImageID } from '../core/types.ts';
+import { isFile } from './fs.ts';
 import paths from './paths.ts';
 import type { ProcessedArrangement, StoredArrangement } from './types.ts';
 
@@ -49,4 +51,34 @@ export async function buildArrangementImages(
       };
     })
   );
+}
+
+/**
+ * Find source images for an arrangement that match a pattern
+ *
+ * This naming pattern is enforced by Lightroom export presents.
+ */
+export async function findSourceImages(
+  directory: string,
+  id: number
+): Promise<ArrangementImages> {
+  const images: ArrangementImages = {
+    full: '',
+    preview: ''
+  };
+
+  for (const type of Object.keys(images) as ImageID[]) {
+    const file = path.join(
+      directory,
+      `portflorio-${id}-${type}.jpg`
+    );
+
+    if (await isFile(file)) {
+      images[type] = file;
+    } else {
+      throw new Error(`Source image not found: ${file}`);
+    }
+  }
+
+  return images;
 }

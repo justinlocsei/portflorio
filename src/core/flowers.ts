@@ -8,10 +8,10 @@ export function summarizeFlowers(arrangements: Arrangement[]): Flower[] {
 
   for (const arrangement of arrangements) {
     for (const flower of arrangement.flowers) {
-      const usedIn = usage.get(flower) ?? [];
+      const usedIn = usage.get(flower.name) ?? [];
 
       usedIn.push(arrangement.id);
-      usage.set(flower, usedIn);
+      usage.set(flower.name, usedIn);
     }
   }
 

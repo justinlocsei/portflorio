@@ -10,7 +10,9 @@ export async function shareArrangement(
   const [first, ...rest] = arrangement.flowers.toSorted();
 
   return listItems(
-    [first ?? '', ...rest.map(r => r.toLocaleLowerCase())].filter(Boolean),
+    [first?.name ?? '', ...rest.map(f => f.name.toLocaleLowerCase())].filter(
+      Boolean
+    ),
     'and'
   );
 }

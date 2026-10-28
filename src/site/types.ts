@@ -1,25 +1,16 @@
-import type { ArrangementSelector } from '../core/arrangements.ts';
 import type {
   ArrangementImages,
-  ArrangementMetadata,
+  Arrangement as CoreArrangement,
   ISODate
 } from '../core/types.ts';
-
-export type { ArrangementSelector };
 
 /**
  * An arrangement exposed to the site
  */
-export type Arrangement = ArrangementMetadata & {
-  flowers: string[];
+export type Arrangement = CoreArrangement & {
   images: ArrangementImages;
   route: string;
 };
-
-/**
- * A compact representation of an image
- */
-export type PackedImage = [width: number, height: number, url: string];
 
 /**
  * A compact representation of an arrangement
@@ -28,6 +19,6 @@ export type PackedArrangement = [
   date: ISODate,
   id: string,
   flowers: number[],
-  image: PackedImage,
-  thumbnail: PackedImage
+  image: string,
+  thumbnail: string
 ];

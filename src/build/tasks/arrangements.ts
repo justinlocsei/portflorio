@@ -1,6 +1,6 @@
 import C from 'larkspur';
 
-import { isISODate } from '../../core/time.ts';
+import { getISODate, isISODate } from '../../core/time.ts';
 import { MECHANICS } from '../../core/types.ts';
 import {
   addArrangement,
@@ -46,10 +46,15 @@ export default C.group('Manage the catalog of arrangements', {
         mechanic
       });
 
-      console.log(
-        '\nArrangement added',
-        JSON.stringify(arrangement, null, 2)
-      );
+      showOutput('git', ['add', paths.arrangements]);
+
+      showOutput('git', [
+        'commit',
+        '-m',
+        `Add arrangement for ${
+          getISODate(arrangement.date)
+        } (${arrangement.storedID})`
+      ]);
     }
   ),
 

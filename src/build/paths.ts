@@ -32,6 +32,7 @@ export function getPaths() {
       server: path.join(site, 'entry', 'server.tsx')
     },
     generated: path.join(site, 'generated'),
+    images: path.join(REPO_ROOT, 'images'),
     root: REPO_ROOT,
     src,
     site

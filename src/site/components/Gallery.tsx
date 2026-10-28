@@ -11,7 +11,7 @@ export default function Gallery({
     <div className={C.root}>
       <ul className={C.overviews}>
         {arrangements.map(arrangement => (
-          <li className={C.overview} key={arrangement.guid}>
+          <li className={C.overview} key={arrangement.id}>
             <Overview arrangement={arrangement} />
           </li>
         ))}

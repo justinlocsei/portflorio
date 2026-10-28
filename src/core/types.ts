@@ -47,7 +47,7 @@ export type Image = Dimensions & {
 };
 
 /**
- * An UTC date in ISO 8601 format
+ * A UTC date in ISO 8601 format
  */
 export type ISODate = string & {
   readonly [ISODateBrand]: typeof ISODateBrand;

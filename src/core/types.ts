@@ -59,6 +59,14 @@ export type ISODate = string & {
 };
 
 /**
+ * A floral mechanic
+ */
+export type Mechanic =
+  | 'foam'
+  | 'kenzan'
+  | 'wire';
+
+/**
  * A UTC calendar date with no time component
  */
 export type UTCDate = Date & {

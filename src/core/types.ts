@@ -47,6 +47,11 @@ export type Image = Dimensions & {
 };
 
 /**
+ * The ID of an arrangement image
+ */
+export type ImageID = keyof ArrangementImages;
+
+/**
  * A UTC date in ISO 8601 format
  */
 export type ISODate = string & {

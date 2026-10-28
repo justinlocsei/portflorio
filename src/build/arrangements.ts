@@ -7,7 +7,8 @@ import paths from './paths.ts';
 import type {
   ArrangementMetadata,
   ArrangementPaths,
-  StoredArrangement
+  StoredArrangement,
+  StoredID
 } from './types.ts';
 
 import path from 'node:path';
@@ -18,8 +19,8 @@ const IS_ID = new RegExp(`^\\d{${ID_LENGTH}}$`);
 /**
  * Format an arrangement ID for storage
  */
-function asStoredID(id: number): string {
-  return `${id}`.padStart(ID_LENGTH, '0');
+function asStoredID(id: number): StoredID {
+  return id.toString().padStart(ID_LENGTH, '0') as StoredID;
 }
 
 /**
@@ -55,12 +56,7 @@ export async function addArrangement({
  * Count the number of stored arrangements
  */
 async function countArrangements(): Promise<number> {
-  const directories =
-    (await fs.readdir(paths.arrangements, { withFileTypes: true }))
-      .filter(d => d.isDirectory())
-      .filter(d => IS_ID.test(d.name));
-
-  return directories.length;
+  return listArrangementIDs().then(ids => ids.length);
 }
 
 /**
@@ -78,6 +74,18 @@ function getStoragePaths(id: number): ArrangementPaths {
       preview: asPath('preview.jpg')
     }
   };
+}
+
+/**
+ * List the storage IDs of all available arrangements
+ */
+export async function listArrangementIDs(): Promise<StoredID[]> {
+  const directories =
+    (await fs.readdir(paths.arrangements, { withFileTypes: true }))
+      .filter(d => d.isDirectory())
+      .filter(d => IS_ID.test(d.name));
+
+  return directories.map(d => d.name as StoredID);
 }
 
 /**

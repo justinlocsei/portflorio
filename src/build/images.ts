@@ -1,9 +1,9 @@
 import fs from 'fs-extra';
 import sharp from 'sharp';
 
-import type { Image, StoredArrangement } from '../core/types.ts';
+import type { Image } from '../core/types.ts';
 import paths from './paths.ts';
-import type { ProcessedArrangement } from './types.ts';
+import type { ProcessedArrangement, StoredArrangement } from './types.ts';
 
 import { createHash } from 'node:crypto';
 import path from 'node:path';

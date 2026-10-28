@@ -1,5 +1,8 @@
+import { IMAGE_DIMENSIONS } from '../../core/site.ts';
 import Page from '../components/Page.tsx';
 import type { Arrangement as ArrangementType } from '../types.ts';
+
+const IMAGE = IMAGE_DIMENSIONS.full;
 
 export default function Arrangement(
   { arrangement }: { arrangement: ArrangementType }
@@ -9,9 +12,9 @@ export default function Arrangement(
       <article>
         <img
           alt=''
-          height={arrangement.images.full.height}
-          src={arrangement.images.full.url}
-          width={arrangement.images.full.width}
+          height={IMAGE.height}
+          src={arrangement.images.full}
+          width={IMAGE.width}
         />
         {arrangement.flowers.join(' - ')}
       </article>

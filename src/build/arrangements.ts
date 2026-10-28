@@ -109,7 +109,8 @@ async function loadArrangement(id: number): Promise<StoredArrangement> {
     ...meta,
     date: parseDate(tryISODate(meta.date)),
     id,
-    paths: stored
+    paths: stored,
+    storedID: asStoredID(id)
   };
 }
 

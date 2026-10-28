@@ -36,6 +36,7 @@ export type ProcessedArrangement = Arrangement & {
  */
 export type StoredArrangement = Arrangement & {
   paths: ArrangementPaths;
+  storedID: StoredID;
 };
 
 /**

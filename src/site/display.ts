@@ -1,5 +1,11 @@
 import { listItems } from '../core/text.ts';
-import type { Arrangement, Dimensions } from '../core/types.ts';
+import type { Arrangement, Dimensions, Mechanic } from '../core/types.ts';
+
+export const MECHANICS: Record<Mechanic, string> = {
+  foam: 'Foam',
+  kenzan: 'Kenzan',
+  wire: 'Wire'
+};
 
 /**
  * Produce a description of an arrangement

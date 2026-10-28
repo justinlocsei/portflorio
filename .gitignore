@@ -1,4 +1,5 @@
 .DS_Store
+/import
 dist/
 node_modules/
 src/site/generated/

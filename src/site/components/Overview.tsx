@@ -1,7 +1,10 @@
+import { IMAGE_DIMENSIONS } from '../../core/site.ts';
 import { listItems } from '../../core/text.ts';
 import { formatDate, getISODate } from '../../core/time.ts';
 import type { Arrangement } from '../types.ts';
 import C from './Overview.styles.ts';
+
+const IMAGE = IMAGE_DIMENSIONS.preview;
 
 export default function Overview({
   arrangement
@@ -19,10 +22,10 @@ export default function Overview({
           }`}
           className={C.image}
           decoding='async'
-          height={images.preview.height}
+          height={IMAGE.height}
           loading='lazy'
-          src={images.preview.url}
-          width={images.preview.width}
+          src={images.preview}
+          width={IMAGE.width}
         />
       </a>
 

@@ -17,7 +17,7 @@ export type Arrangement = CoreArrangement & {
  */
 export type PackedArrangement = [
   date: ISODate,
-  id: string,
+  id: number,
   flowers: number[],
   image: string,
   thumbnail: string

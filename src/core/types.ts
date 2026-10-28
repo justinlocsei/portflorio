@@ -16,7 +16,7 @@ export type ArrangedFlower = {
  */
 export type Arrangement = {
   date: UTCDate;
-  flowers: string[];
+  flowers: ArrangedFlower[];
   mechanic: Mechanic;
   id: number;
 };

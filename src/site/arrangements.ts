@@ -1,46 +1,26 @@
-import type { ArrangementSelectorRequest } from '../core/arrangements.ts';
-import { selectorToGUID } from '../core/arrangements.ts';
 import routes from '../core/routes.ts';
 import { parseDate, tryISODate } from '../core/time.ts';
-import type { Image } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
 import { resolveFlowers } from './flowers.ts';
 import packedArrangements from './generated/arrangements.json' with {
   type: 'json'
 };
-import type {
-  Arrangement,
-  ArrangementSelector,
-  PackedArrangement,
-  PackedImage
-} from './types.ts';
-
-/**
- * Unpack an image
- */
-function unpackImage([width, height, url]: PackedImage): Image {
-  return { height, url, width };
-}
+import type { Arrangement, PackedArrangement } from './types.ts';
 
 /**
  * Unpack an arrangement
  */
 function unpackArrangement(packed: PackedArrangement): Arrangement {
-  const [rawDate, id, flowerIndexes, full, thumbnail] = packed;
+  const [rawDate, id, flowerIndexes, full, preview] = packed;
 
   const date = tryISODate(rawDate);
-  const selector: ArrangementSelectorRequest = { date, id };
 
   return {
     date: parseDate(date),
     flowers: resolveFlowers(flowerIndexes),
-    guid: selectorToGUID(selector),
-    images: {
-      full: unpackImage(full),
-      preview: unpackImage(thumbnail)
-    },
+    images: { full, preview },
     id,
-    route: routes.arrangement(selector)
+    route: routes.arrangement(id)
   };
 }
 
@@ -52,7 +32,7 @@ function loadArrangements(): Arrangement[] {
     unpackArrangement
   );
 
-  return sortBy(arrangements, a => a.guid);
+  return sortBy(arrangements, a => a.id);
 }
 
 export const arrangements = loadArrangements();
@@ -60,10 +40,6 @@ export const arrangements = loadArrangements();
 /**
  * Select an arrangement
  */
-export function selectArrangement(
-  selector: ArrangementSelector
-): Arrangement | undefined {
-  const guid = selectorToGUID(selector);
-
-  return arrangements.find(a => a.guid === guid);
+export function selectArrangement(id: number): Arrangement | undefined {
+  return arrangements.find(a => a.id === id);
 }

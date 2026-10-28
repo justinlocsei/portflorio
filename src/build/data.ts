@@ -3,58 +3,12 @@ import fs from 'fs-extra';
 import { toJSON } from '../core/data.ts';
 import { summarizeFlowers } from '../core/flowers.ts';
 import { getISODate } from '../core/time.ts';
-import type { Image } from '../core/types.ts';
 import { sortBy } from '../core/utils.ts';
-import type { PackedArrangement, PackedImage } from '../site/types.ts';
+import type { PackedArrangement } from '../site/types.ts';
 import paths from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
 
 import path from 'node:path';
-
-/**
- * Pack an image
- */
-function packImage({ height, url, width }: Image): PackedImage {
-  return [width, height, url];
-}
-
-/**
- * Pack flower names for an arrangement as global indexes
- */
-function packFlowers(
-  names: string[],
-  allNames: string[]
-): number[] {
-  const indexes = new Map(allNames.map((name, i) => [name, i]));
-
-  return names.map(name => {
-    const index = indexes.get(name);
-
-    if (index === undefined) {
-      throw new Error(`No index found for flower: ${name}`);
-    }
-
-    return index;
-  });
-}
-
-/**
- * Pack an arrangement for the site
- */
-function packArrangement(
-  arrangement: ProcessedArrangement,
-  flowers: string[]
-): PackedArrangement {
-  const { date, details, id, images } = arrangement;
-
-  return [
-    getISODate(date),
-    id,
-    packFlowers(details.flowers, flowers),
-    packImage(images.full),
-    packImage(images.preview)
-  ];
-}
 
 /**
  * Generate data files used by the site
@@ -63,14 +17,25 @@ export async function generateSiteData(
   arrangements: ProcessedArrangement[]
 ): Promise<void> {
   const root = paths.generated;
-  const flowers = summarizeFlowers(arrangements).map(f => f.name);
+
+  const flowerNames = summarizeFlowers(arrangements).map(f => f.name);
+  const flowerIndexes = new Map(flowerNames.map((name, i) => [name, i]));
 
   await fs.mkdir(root, { recursive: true });
 
-  await writeJSON(flowers, path.join(root, 'flowers.json'));
+  await writeJSON(
+    flowerNames.toSorted(),
+    path.join(root, 'flowers.json')
+  );
 
   await writeJSON(
-    sortBy(arrangements, a => a.guid).map(a => packArrangement(a, flowers)),
+    sortBy(arrangements, a => a.id).map((a): PackedArrangement => [
+      getISODate(a.date),
+      a.id,
+      a.flowers.map(f => flowerIndexes.get(f) ?? 0),
+      a.images.full,
+      a.images.preview
+    ]),
     path.join(root, 'arrangements.json')
   );
 }

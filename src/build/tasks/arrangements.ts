@@ -3,9 +3,10 @@ import C from 'larkspur';
 import { isISODate } from '../../core/time.ts';
 import {
   addArrangement,
-  findArrangements,
+  listArrangementIDs,
   loadArrangements,
-  pickArrangement
+  pickArrangement,
+  tryStoredID
 } from '../arrangements.ts';
 import { loadFlowers } from '../flowers.ts';
 import { requestLines } from '../input.ts';
@@ -41,7 +42,7 @@ export default C.group('Manage the catalog of arrangements', {
     'Share an arrangement',
     {
       arrangement: C.flag('string', 'The arrangement to share', {
-        completion: () => findArrangements().then(as => as.map(a => a.guid)),
+        completion: listArrangementIDs,
         required: true
       }),
       platform: C.flag(
@@ -53,7 +54,7 @@ export default C.group('Manage the catalog of arrangements', {
     async flags => {
       const arrangement = pickArrangement(
         await loadArrangements(),
-        flags.arrangement
+        tryStoredID(flags.arrangement)
       );
 
       const shared = await shareArrangement(

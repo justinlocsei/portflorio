@@ -1,5 +1,15 @@
+import type { Color } from './colors.ts';
+
 declare const ISODateBrand: unique symbol;
 declare const UTCDateBrand: unique symbol;
+
+/**
+ * A flower used in an arrangement
+ */
+export type ArrangedFlower = {
+  color: Color;
+  name: string;
+};
 
 /**
  * An arrangement

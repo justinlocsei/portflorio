@@ -33,7 +33,7 @@ function loadArrangements(): Arrangement[] {
     unpackArrangement
   );
 
-  return sortBy(arrangements, a => a.id);
+  return sortBy(arrangements, a => a.id * -1);
 }
 
 export const arrangements = loadArrangements();

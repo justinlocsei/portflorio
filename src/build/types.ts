@@ -1,4 +1,5 @@
 import type {
+  ArrangedFlower,
   Arrangement,
   ArrangementImages,
   Mechanic
@@ -11,7 +12,7 @@ declare const StoredIDBrand: unique symbol;
  */
 export type ArrangementMetadata = {
   date: string;
-  flowers: string[];
+  flowers: ArrangedFlower[];
   mechanic: Mechanic;
 };
 

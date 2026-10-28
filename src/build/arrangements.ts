@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 
 import { getISODate, parseDate, tryISODate } from '../core/time.ts';
 import type {
+  ArrangedFlower,
   Arrangement,
   ArrangementImages,
   Mechanic
@@ -37,7 +38,7 @@ export async function addArrangement({
   mechanic
 }: {
   date?: string;
-  flowers: string[];
+  flowers: ArrangedFlower[];
   images: ArrangementImages;
   mechanic: Mechanic;
 }): Promise<StoredArrangement> {

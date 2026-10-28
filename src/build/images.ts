@@ -1,7 +1,5 @@
 import fs from 'fs-extra';
-import sharp from 'sharp';
 
-import type { Image } from '../core/types.ts';
 import paths from './paths.ts';
 import type { ProcessedArrangement, StoredArrangement } from './types.ts';
 
@@ -21,9 +19,8 @@ export async function buildArrangementImages(
 
   const writeImage = async (
     source: string
-  ): Promise<Image> => {
+  ): Promise<string> => {
     const buffer = await fs.readFile(source);
-    const size = await sharp(buffer).metadata();
 
     const hash = createHash('sha256')
       .update(buffer)
@@ -36,11 +33,7 @@ export async function buildArrangementImages(
       buffer
     );
 
-    return {
-      height: size.height,
-      url: `/${prefix}/${file}`,
-      width: size.width
-    };
+    return `/${prefix}/${file}`;
   };
 
   return Promise.all(

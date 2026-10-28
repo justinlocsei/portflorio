@@ -1,5 +1,7 @@
 import type { Arrangement, ArrangementImages } from '../core/types.ts';
 
+declare const StoredIDBrand: unique symbol;
+
 /**
  * Stored arrangement metadata
  */
@@ -29,4 +31,11 @@ export type ProcessedArrangement = Arrangement & {
  */
 export type StoredArrangement = Arrangement & {
   paths: ArrangementPaths;
+};
+
+/**
+ * An ID for a stored arrangement
+ */
+export type StoredID = string & {
+  readonly [StoredIDBrand]: typeof StoredIDBrand;
 };

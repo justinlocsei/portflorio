@@ -1,7 +1,11 @@
 import fs from 'fs-extra';
 
 import { getISODate, parseDate, tryISODate } from '../core/time.ts';
-import type { Arrangement, ArrangementImages } from '../core/types.ts';
+import type {
+  Arrangement,
+  ArrangementImages,
+  Mechanic
+} from '../core/types.ts';
 import { writeJSON } from './data.ts';
 import paths from './paths.ts';
 import type {
@@ -29,11 +33,13 @@ function asStoredID(id: number): StoredID {
 export async function addArrangement({
   date: customDate,
   flowers,
-  images
+  images,
+  mechanic
 }: {
   date?: string;
   flowers: string[];
   images: ArrangementImages;
+  mechanic: Mechanic;
 }): Promise<StoredArrangement> {
   const id = (await countArrangements()) + 1;
   const stored = getStoragePaths(id);
@@ -42,7 +48,8 @@ export async function addArrangement({
 
   const meta: ArrangementMetadata = {
     date: customDate ? tryISODate(customDate) : getISODate(),
-    flowers: flowers.toSorted()
+    flowers: flowers.toSorted(),
+    mechanic
   };
 
   await writeJSON(meta, stored.meta);
@@ -99,8 +106,8 @@ async function loadArrangement(id: number): Promise<StoredArrangement> {
   );
 
   return {
+    ...meta,
     date: parseDate(tryISODate(meta.date)),
-    flowers: meta.flowers,
     id,
     paths: stored
   };

@@ -1,7 +1,7 @@
 import routes from '../core/routes.ts';
 import { parseDate, tryISODate } from '../core/time.ts';
 import { sortBy } from '../core/utils.ts';
-import { resolveArrangedFlowers } from './flowers.ts';
+import { unpackFlowers } from './flowers.ts';
 import packedArrangements from './generated/arrangements.json' with {
   type: 'json'
 };
@@ -17,7 +17,7 @@ function unpackArrangement(packed: PackedArrangement): Arrangement {
 
   return {
     date: parseDate(date),
-    flowers: resolveArrangedFlowers(packedFlowers),
+    flowers: unpackFlowers(packedFlowers),
     images: { full, preview },
     mechanic,
     id,

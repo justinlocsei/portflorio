@@ -1,17 +1,20 @@
 import { COLOR_IDS } from '../core/colors.ts';
-import type { ArrangedFlower } from '../core/types.ts';
+import type { ArrangedFlower, Color } from '../core/types.ts';
+import { sortBy } from '../core/utils.ts';
 import flowerList from './generated/flowers.json' with { type: 'json' };
 import type { PackedArrangedFlower } from './types.ts';
 
 export const flowers = flowerList as string[];
 
 /**
- * Resolver flower indexes to names
+ * Resolve packed flowers
  */
-export function resolveArrangedFlowers(
+export function unpackFlowers(
   packed: PackedArrangedFlower[]
 ): ArrangedFlower[] {
-  return packed.map(([flowerIndex, colorIndex]) => {
+  const flowerColors = new Map<string, Color[]>();
+
+  for (const [flowerIndex, colorIndex] of packed) {
     const name = flowers[flowerIndex];
     const color = COLOR_IDS[colorIndex];
 
@@ -23,6 +26,21 @@ export function resolveArrangedFlowers(
       throw new Error(`Invalid color index: ${colorIndex}`);
     }
 
-    return { color, name };
-  });
+    if (!flowerColors.has(name)) {
+      flowerColors.set(name, []);
+    }
+
+    flowerColors.get(name)?.push(color);
+  }
+
+  return sortBy(
+    Array
+      .from(flowerColors.entries())
+      .map(
+        ([name, colors]): ArrangedFlower => {
+          return { color: colors.toSorted(), name };
+        }
+      ),
+    f => f.name
+  );
 }

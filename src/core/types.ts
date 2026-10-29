@@ -48,6 +48,7 @@ export type EnvironmentVariables = Record<string, string | undefined>;
  * Information on a flower's usage across a set of arrangements
  */
 export type Flower = {
+  colors: Color[];
   name: string;
   usedIn: number[];
 };

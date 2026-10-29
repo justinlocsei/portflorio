@@ -1,16 +1,37 @@
 {
   "date": "2026-07-24",
-  "flowers": [
-    "Craspedia",
-    "Dianthus",
-    "Eucalyptus",
-    "Mums",
-    "Pennycress",
-    "Pittosporum",
-    "Roses",
-    "Solidago",
-    "Stock",
-    "Veronica"
-  ],
+  "flowers": {
+    "Craspedia": [
+      "yellow"
+    ],
+    "Dianthus": [
+      "peach",
+      "white"
+    ],
+    "Eucalyptus": [
+      "green"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Pennycress": [
+      "chartreuse"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "yellow"
+    ],
+    "Solidago": [
+      "yellow"
+    ],
+    "Stock": [
+      "white"
+    ],
+    "Veronica": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

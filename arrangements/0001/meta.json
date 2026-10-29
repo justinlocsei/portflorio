@@ -1,15 +1,33 @@
 {
   "date": "2026-01-08",
-  "flowers": [
-    "Bupleurum",
-    "Chamomile",
-    "Dianthus",
-    "Hypericum berries",
-    "Mums",
-    "Myrtle",
-    "Pittosporum",
-    "Roses",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Bupleurum": [
+      "chartreuse"
+    ],
+    "Chamomile": [
+      "white"
+    ],
+    "Dianthus": [
+      "peach"
+    ],
+    "Hypericum berries": [
+      "white"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Myrtle": [
+      "green"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "yellow"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

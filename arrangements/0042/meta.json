@@ -1,15 +1,35 @@
 {
   "date": "2026-05-20",
-  "flowers": [
-    "Dianthus",
-    "Eucalyptus",
-    "Limonium",
-    "Mums",
-    "Pittosporum",
-    "Roses",
-    "Ruscus",
-    "Stock",
-    "Veronica"
-  ],
+  "flowers": {
+    "Dianthus": [
+      "magenta",
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Limonium": [
+      "white"
+    ],
+    "Mums": [
+      "magenta"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "pink"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Stock": [
+      "pink"
+    ],
+    "Veronica": [
+      "purple",
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

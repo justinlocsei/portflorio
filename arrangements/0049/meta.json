@@ -1,15 +1,33 @@
 {
   "date": "2026-06-07",
-  "flowers": [
-    "Asters",
-    "Dianthus",
-    "Eryngium",
-    "Eucalyptus",
-    "Hypericum berries",
-    "Mums",
-    "Roses",
-    "Stock",
-    "Tree fern"
-  ],
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Cordyline": [
+      "burgundy"
+    ],
+    "Dianthus": [
+      "magenta"
+    ],
+    "Eryngium": [
+      "lavender"
+    ],
+    "Eucalyptus": [
+      "green"
+    ],
+    "Mums": [
+      "blush"
+    ],
+    "Roses": [
+      "pink"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Veronica": [
+      "purple"
+    ]
+  },
   "mechanic": "foam"
 }

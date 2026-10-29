@@ -1,15 +1,12 @@
 {
   "date": "2026-06-29",
-  "flowers": [
-    "Alstroemeria",
-    "Asters",
-    "Dianthus",
-    "Dusty miller",
-    "Eryngium",
-    "Mums",
-    "Pittosporum",
-    "Roses",
-    "Stock"
-  ],
+  "flowers": {
+    "Cordyline": [
+      "green"
+    ],
+    "Mums": [
+      "white"
+    ]
+  },
   "mechanic": "kenzan"
 }

@@ -1,15 +1,33 @@
 {
   "date": "2026-01-21",
-  "flowers": [
-    "Baby's breath",
-    "Calla lilies",
-    "Dianthus",
-    "Mums",
-    "Salal",
-    "Statice",
-    "Stock",
-    "Tree fern",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Calla lilies": [
+      "magenta"
+    ],
+    "Dianthus": [
+      "magenta"
+    ],
+    "Mums": [
+      "white"
+    ],
+    "Salal": [
+      "green"
+    ],
+    "Statice": [
+      "purple"
+    ],
+    "Stock": [
+      "purple"
+    ],
+    "Tree fern": [
+      "green"
+    ],
+    "Wax flower": [
+      "blush"
+    ]
+  },
   "mechanic": "foam"
 }

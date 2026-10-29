@@ -1,14 +1,30 @@
 {
   "date": "2026-01-12",
-  "flowers": [
-    "Asters",
-    "Baby's breath",
-    "Eucalyptus",
-    "Mums",
-    "Myrtle",
-    "Roses",
-    "Veronica",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Asters": [
+      "magenta"
+    ],
+    "Baby's breath": [
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Mums": [
+      "magenta"
+    ],
+    "Myrtle": [
+      "green"
+    ],
+    "Roses": [
+      "white"
+    ],
+    "Veronica": [
+      "white"
+    ],
+    "Wax flower": [
+      "pink"
+    ]
+  },
   "mechanic": "wire"
 }

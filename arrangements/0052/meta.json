@@ -1,8 +1,33 @@
 {
   "date": "2026-06-29",
-  "flowers": [
-    "Cordyline",
-    "Mums"
-  ],
+  "flowers": {
+    "Alstroemeria": [
+      "white"
+    ],
+    "Asters": [
+      "lavender"
+    ],
+    "Dianthus": [
+      "white"
+    ],
+    "Dusty miller": [
+      "sage"
+    ],
+    "Eryngium": [
+      "lavender"
+    ],
+    "Mums": [
+      "blush"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "yellow"
+    ],
+    "Stock": [
+      "magenta"
+    ]
+  },
   "mechanic": "wire"
 }

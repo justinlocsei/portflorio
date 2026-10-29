@@ -1,15 +1,33 @@
 {
   "date": "2026-04-04",
-  "flowers": [
-    "Bells of Ireland",
-    "Calla lilies",
-    "Chamomile",
-    "Eucalyptus",
-    "Mums",
-    "Nagi",
-    "Ranunculus",
-    "Roses",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Bells of Ireland": [
+      "chartreuse"
+    ],
+    "Calla lilies": [
+      "yellow"
+    ],
+    "Chamomile": [
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Nagi": [
+      "green"
+    ],
+    "Ranunculus": [
+      "white"
+    ],
+    "Roses": [
+      "yellow"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

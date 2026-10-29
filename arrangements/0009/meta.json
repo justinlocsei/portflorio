@@ -1,13 +1,22 @@
 {
   "date": "2026-02-07",
-  "flowers": [
-    "Alstroemeria",
-    "Bupleurum",
-    "Cocculus",
-    "Eucalyptus",
-    "Mums",
-    "Stock",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Bupleurum": [
+      "chartreuse"
+    ],
+    "Cocculus": [
+      "green"
+    ],
+    "Mums": [
+      "magenta",
+      "white"
+    ],
+    "Roses": [
+      "pink"
+    ],
+    "Wax flower": [
+      "pink"
+    ]
+  },
   "mechanic": "foam"
 }

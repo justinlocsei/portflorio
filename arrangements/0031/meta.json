@@ -1,9 +1,36 @@
 {
   "date": "2026-04-25",
-  "flowers": [
-    "Alstroemeria",
-    "Bells of Ireland",
-    "Mums"
-  ],
+  "flowers": {
+    "Calla lilies": [
+      "burgundy"
+    ],
+    "Dianthus": [
+      "blush"
+    ],
+    "Hypericum berries": [
+      "orange"
+    ],
+    "Mums": [
+      "white"
+    ],
+    "Myrtle": [
+      "green"
+    ],
+    "Roses": [
+      "blush"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Stock": [
+      "pink"
+    ],
+    "Tree fern": [
+      "green"
+    ],
+    "Veronica": [
+      "pink"
+    ]
+  },
   "mechanic": "wire"
 }

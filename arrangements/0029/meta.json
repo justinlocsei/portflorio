@@ -1,13 +1,15 @@
 {
   "date": "2026-04-15",
-  "flowers": [
-    "Dianthus",
-    "Mums",
-    "Nagi",
-    "Robellini",
-    "Roses",
-    "Veronica",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Alstroemeria": [
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "kenzan"
 }

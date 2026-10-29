@@ -1,16 +1,37 @@
 {
   "date": "2026-05-21",
-  "flowers": [
-    "Baby's breath",
-    "Chamomile",
-    "Dianthus",
-    "Hypericum berries",
-    "Mums",
-    "Pittosporum",
-    "Roses",
-    "Ruscus",
-    "Tree fern",
-    "Veronica"
-  ],
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Chamomile": [
+      "yellow"
+    ],
+    "Dianthus": [
+      "orange",
+      "peach"
+    ],
+    "Hypericum berries": [
+      "red"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "blush"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Tree fern": [
+      "green"
+    ],
+    "Veronica": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

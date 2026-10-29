@@ -1,15 +1,34 @@
 {
   "date": "2026-04-24",
-  "flowers": [
-    "Bupleurum",
-    "Craspedia",
-    "Dianthus",
-    "Mums",
-    "Ranunculus",
-    "Roses",
-    "Ruscus",
-    "Veronica",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Bupleurum": [
+      "chartreuse"
+    ],
+    "Craspedia": [
+      "yellow"
+    ],
+    "Dianthus": [
+      "white"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Ranunculus": [
+      "yellow"
+    ],
+    "Roses": [
+      "white",
+      "yellow"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Veronica": [
+      "white"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

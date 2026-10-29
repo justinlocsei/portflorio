@@ -1,16 +1,36 @@
 {
   "date": "2026-07-09",
-  "flowers": [
-    "Alstroemeria",
-    "Baby's breath",
-    "Craspedia",
-    "Mums",
-    "Pittosporum",
-    "Robellini",
-    "Roses",
-    "Ruscus",
-    "Solidago",
-    "Stock"
-  ],
+  "flowers": {
+    "Alstroemeria": [
+      "peach"
+    ],
+    "Baby's breath": [
+      "white"
+    ],
+    "Craspedia": [
+      "yellow"
+    ],
+    "Mums": [
+      "peach"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Robellini": [
+      "green"
+    ],
+    "Roses": [
+      "white"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Solidago": [
+      "yellow"
+    ],
+    "Stock": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

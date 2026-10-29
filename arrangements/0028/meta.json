@@ -1,9 +1,27 @@
 {
   "date": "2026-04-15",
-  "flowers": [
-    "Alstroemeria",
-    "Eucalyptus",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Dianthus": [
+      "magenta"
+    ],
+    "Mums": [
+      "blush"
+    ],
+    "Nagi": [
+      "green"
+    ],
+    "Robellini": [
+      "green"
+    ],
+    "Roses": [
+      "pink"
+    ],
+    "Veronica": [
+      "white"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

@@ -1,12 +1,15 @@
 {
   "date": "2026-04-08",
-  "flowers": [
-    "Asters",
-    "Chamomile",
-    "Eucalyptus",
-    "Mums",
-    "Roses",
-    "Tree fern"
-  ],
+  "flowers": {
+    "Bupleurum": [
+      "chartreuse"
+    ],
+    "Mums": [
+      "white"
+    ],
+    "Sunflowers": [
+      "yellow"
+    ]
+  },
   "mechanic": "kenzan"
 }

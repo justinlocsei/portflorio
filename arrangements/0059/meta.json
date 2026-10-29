@@ -1,16 +1,34 @@
 {
   "date": "2026-10-04",
-  "flowers": [
-    "Calla lilies",
-    "Chamomile",
-    "Dahlias",
-    "Dianthus",
-    "Hypericum berries",
-    "Mums",
-    "Pittosporum",
-    "Ruscus",
-    "Safflower",
-    "Stock"
-  ],
+  "flowers": {
+    "Calla lilies": [
+      "orange"
+    ],
+    "Chamomile": [
+      "white"
+    ],
+    "Dahlias": [
+      "peach"
+    ],
+    "Hypericum berries": [
+      "peach"
+    ],
+    "Mums": [
+      "burgundy",
+      "peach"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Safflower": [
+      "orange"
+    ],
+    "Stock": [
+      "blush"
+    ]
+  },
   "mechanic": "foam"
 }

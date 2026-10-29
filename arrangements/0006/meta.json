@@ -1,16 +1,33 @@
 {
   "date": "2026-01-24",
-  "flowers": [
-    "Alstroemeria",
-    "Chamomile",
-    "Eucalyptus",
-    "Mums",
-    "Myrtle",
-    "Robellini",
-    "Roses",
-    "Salal",
-    "Statice",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Alstroemeria": [
+      "white"
+    ],
+    "Chamomile": [
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Mums": [
+      "burgundy"
+    ],
+    "Myrtle": [
+      "green"
+    ],
+    "Robellini": [
+      "green"
+    ],
+    "Roses": [
+      "pink"
+    ],
+    "Salal": [
+      "green"
+    ],
+    "Statice": [
+      "purple"
+    ]
+  },
   "mechanic": "wire"
 }

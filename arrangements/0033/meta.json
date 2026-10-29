@@ -1,15 +1,33 @@
 {
   "date": "2026-04-28",
-  "flowers": [
-    "Baby's breath",
-    "Dianthus",
-    "Hypericum berries",
-    "Leatherleaf",
-    "Mums",
-    "Ranunculus",
-    "Roses",
-    "Salal",
-    "Stock"
-  ],
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Dianthus": [
+      "magenta"
+    ],
+    "Hypericum berries": [
+      "peach"
+    ],
+    "Leatherleaf": [
+      "green"
+    ],
+    "Mums": [
+      "magenta"
+    ],
+    "Ranunculus": [
+      "pink"
+    ],
+    "Roses": [
+      "magenta"
+    ],
+    "Salal": [
+      "green"
+    ],
+    "Stock": [
+      "magenta"
+    ]
+  },
   "mechanic": "foam"
 }

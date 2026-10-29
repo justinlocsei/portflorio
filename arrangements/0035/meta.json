@@ -1,9 +1,15 @@
 {
   "date": "2026-05-03",
-  "flowers": [
-    "Bupleurum",
-    "Calla lilies",
-    "Mums"
-  ],
+  "flowers": {
+    "Bupleurum": [
+      "purple"
+    ],
+    "Calla lilies": [
+      "burgundy"
+    ],
+    "Mums": [
+      "blush"
+    ]
+  },
   "mechanic": "kenzan"
 }

@@ -1,10 +1,18 @@
 {
   "date": "2026-03-30",
-  "flowers": [
-    "Eucalyptus",
-    "Mums",
-    "Roses",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Mums": [
+      "burgundy"
+    ],
+    "Roses": [
+      "white"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "wire"
 }

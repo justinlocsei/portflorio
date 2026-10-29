@@ -1,8 +1,12 @@
 {
   "date": "2026-05-25",
-  "flowers": [
-    "Mums",
-    "Stock"
-  ],
+  "flowers": {
+    "Mums": [
+      "pink"
+    ],
+    "Stock": [
+      "purple"
+    ]
+  },
   "mechanic": "kenzan"
 }

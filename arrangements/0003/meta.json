@@ -1,14 +1,30 @@
 {
   "date": "2026-01-15",
-  "flowers": [
-    "Calla lilies",
-    "Delphinium",
-    "Eucalyptus",
-    "Hypericum berries",
-    "Limonium",
-    "Nagi",
-    "Ranunculus",
-    "Roses"
-  ],
+  "flowers": {
+    "Calla lilies": [
+      "white"
+    ],
+    "Delphinium": [
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Hypericum berries": [
+      "red"
+    ],
+    "Limonium": [
+      "white"
+    ],
+    "Nagi": [
+      "green"
+    ],
+    "Ranunculus": [
+      "burgundy"
+    ],
+    "Roses": [
+      "red"
+    ]
+  },
   "mechanic": "foam"
 }

@@ -1,14 +1,31 @@
 {
   "date": "2026-10-27",
-  "flowers": [
-    "Calla lilies",
-    "Chamomile",
-    "Dianthus",
-    "Mums",
-    "Pittosporum",
-    "Ruscus",
-    "Stock",
-    "Yarrow"
-  ],
+  "flowers": {
+    "Calla lilies": [
+      "yellow",
+      "white"
+    ],
+    "Chamomile": [
+      "white"
+    ],
+    "Dianthus": [
+      "yellow"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Stock": [
+      "white"
+    ],
+    "Yarrow": [
+      "yellow"
+    ]
+  },
   "mechanic": "foam"
 }

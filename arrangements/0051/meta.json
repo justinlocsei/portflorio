@@ -1,16 +1,15 @@
 {
   "date": "2026-06-11",
-  "flowers": [
-    "Asters",
-    "Baby's breath",
-    "Cordyline",
-    "Hydrangeas",
-    "Mums",
-    "Pittosporum",
-    "Ruscus",
-    "Stock",
-    "Sunflowers",
-    "Veronica"
-  ],
+  "flowers": {
+    "Eryngium": [
+      "lavender"
+    ],
+    "Mums": [
+      "white"
+    ],
+    "Veronica": [
+      "lavender"
+    ]
+  },
   "mechanic": "kenzan"
 }

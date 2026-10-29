@@ -1,16 +1,33 @@
 {
   "date": "2026-03-10",
-  "flowers": [
-    "Bells of Ireland",
-    "Boxwood",
-    "Dianthus",
-    "Freesia",
-    "Mums",
-    "Myrtle",
-    "Ranunculus",
-    "Roses",
-    "Veronica",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Bells of Ireland": [
+      "chartreuse"
+    ],
+    "Boxwood": [
+      "green"
+    ],
+    "Dianthus": [
+      "white"
+    ],
+    "Freesia": [
+      "yellow"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Myrtle": [
+      "green"
+    ],
+    "Roses": [
+      "yellow"
+    ],
+    "Veronica": [
+      "white"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "wire"
 }

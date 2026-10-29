@@ -1,15 +1,34 @@
 {
   "date": "2026-02-11",
-  "flowers": [
-    "Acacia",
-    "Baby's breath",
-    "Dianthus",
-    "Eucalyptus",
-    "Limonium",
-    "Mums",
-    "Roses",
-    "Veronica",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Acacia": [
+      "sage"
+    ],
+    "Baby's breath": [
+      "white"
+    ],
+    "Dianthus": [
+      "white",
+      "magenta"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Limonium": [
+      "blush"
+    ],
+    "Mums": [
+      "magenta"
+    ],
+    "Roses": [
+      "magenta"
+    ],
+    "Veronica": [
+      "purple"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

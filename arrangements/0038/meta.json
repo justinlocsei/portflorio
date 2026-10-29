@@ -1,14 +1,30 @@
 {
   "date": "2026-05-12",
-  "flowers": [
-    "Baby's breath",
-    "Dianthus",
-    "Eucalyptus",
-    "Hypericum berries",
-    "Myrtle",
-    "Roses",
-    "Stock",
-    "Veronica"
-  ],
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Dianthus": [
+      "peach"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Hypericum berries": [
+      "white"
+    ],
+    "Myrtle": [
+      "green"
+    ],
+    "Roses": [
+      "peach"
+    ],
+    "Stock": [
+      "white"
+    ],
+    "Veronica": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

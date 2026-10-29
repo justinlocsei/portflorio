@@ -1,14 +1,30 @@
 {
   "date": "2026-10-26",
-  "flowers": [
-    "Asters",
-    "Baby's breath",
-    "Dianthus",
-    "Hypericum berries",
-    "Mums",
-    "Pittosporum",
-    "Roses",
-    "Ruscus"
-  ],
+  "flowers": {
+    "Asters": [
+      "white"
+    ],
+    "Baby's breath": [
+      "white"
+    ],
+    "Dianthus": [
+      "peach"
+    ],
+    "Hypericum berries": [
+      "white"
+    ],
+    "Mums": [
+      "peach"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "white"
+    ],
+    "Ruscus": [
+      "green"
+    ]
+  },
   "mechanic": "foam"
 }

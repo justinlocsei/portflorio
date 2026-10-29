@@ -1,12 +1,25 @@
 {
   "date": "2026-04-04",
-  "flowers": [
-    "Dianthus",
-    "Eucalyptus",
-    "Mums",
-    "Ranunculus",
-    "Stock",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Dianthus": [
+      "magenta"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Mums": [
+      "burgundy"
+    ],
+    "Ranunculus": [
+      "magenta",
+      "white"
+    ],
+    "Stock": [
+      "purple"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

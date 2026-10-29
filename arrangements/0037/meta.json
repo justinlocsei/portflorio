@@ -1,14 +1,33 @@
 {
   "date": "2026-05-09",
-  "flowers": [
-    "Bells of Ireland",
-    "Dianthus",
-    "Eucalyptus",
-    "Hypericum berries",
-    "Mums",
-    "Ranunculus",
-    "Roses",
-    "Veronica"
-  ],
+  "flowers": {
+    "Bells of Ireland": [
+      "chartreuse"
+    ],
+    "Dianthus": [
+      "magenta",
+      "pink",
+      "white"
+    ],
+    "Eucalyptus": [
+      "green"
+    ],
+    "Hypericum berries": [
+      "white"
+    ],
+    "Mums": [
+      "blush"
+    ],
+    "Ranunculus": [
+      "white"
+    ],
+    "Roses": [
+      "white",
+      "magenta"
+    ],
+    "Veronica": [
+      "pink"
+    ]
+  },
   "mechanic": "foam"
 }

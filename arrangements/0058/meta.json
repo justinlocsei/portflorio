@@ -1,14 +1,32 @@
 {
   "date": "2026-09-29",
-  "flowers": [
-    "Alstroemeria",
-    "Calla lilies",
-    "Dianthus",
-    "Eucalyptus",
-    "Mums",
-    "Ruscus",
-    "Stock",
-    "Veronica"
-  ],
+  "flowers": {
+    "Alstroemeria": [
+      "yellow"
+    ],
+    "Calla lilies": [
+      "orange",
+      "yellow"
+    ],
+    "Dianthus": [
+      "peach"
+    ],
+    "Eucalyptus": [
+      "green"
+    ],
+    "Mums": [
+      "orange",
+      "yellow"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Stock": [
+      "white"
+    ],
+    "Veronica": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

@@ -1,12 +1,27 @@
 {
   "date": "2026-04-08",
-  "flowers": [
-    "Asters",
-    "Chamomile",
-    "Eucalyptus",
-    "Mums",
-    "Roses",
-    "Tree fern"
-  ],
+  "flowers": {
+    "Asters": [
+      "white"
+    ],
+    "Chamomile": [
+      "white"
+    ],
+    "Dianthus": [
+      "yellow"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Roses": [
+      "yellow"
+    ],
+    "Tree fern": [
+      "green"
+    ]
+  },
   "mechanic": "foam"
 }

@@ -1,15 +1,33 @@
 {
   "date": "2026-03-03",
-  "flowers": [
-    "Baby's breath",
-    "Calla lilies",
-    "Dianthus",
-    "Eucalyptus",
-    "Hypericum berries",
-    "Leatherleaf",
-    "Mums",
-    "Roses",
-    "Veronica"
-  ],
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Calla lilies": [
+      "white"
+    ],
+    "Dianthus": [
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Hypericum berries": [
+      "white"
+    ],
+    "Leatherleaf": [
+      "green"
+    ],
+    "Mums": [
+      "white"
+    ],
+    "Roses": [
+      "white"
+    ],
+    "Veronica": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

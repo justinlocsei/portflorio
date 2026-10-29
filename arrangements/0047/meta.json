@@ -1,16 +1,37 @@
 {
   "date": "2026-06-02",
-  "flowers": [
-    "Asters",
-    "Craspedia",
-    "Dianthus",
-    "Mums",
-    "Myrtle",
-    "Pittosporum",
-    "Roses",
-    "Ruscus",
-    "Sunflowers",
-    "Veronica"
-  ],
+  "flowers": {
+    "Asters": [
+      "white"
+    ],
+    "Craspedia": [
+      "yellow"
+    ],
+    "Dianthus": [
+      "yellow"
+    ],
+    "Mums": [
+      "white",
+      "yellow"
+    ],
+    "Myrtle": [
+      "green"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "white"
+    ],
+    "Ruscus": [
+      "green"
+    ],
+    "Sunflowers": [
+      "yellow"
+    ],
+    "Veronica": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

@@ -1,10 +1,18 @@
 {
   "date": "2026-03-10",
-  "flowers": [
-    "Boxwood",
-    "Ranunculus",
-    "Roses",
-    "Stock"
-  ],
+  "flowers": {
+    "Boxwood": [
+      "green"
+    ],
+    "Ranunculus": [
+      "white"
+    ],
+    "Roses": [
+      "yellow"
+    ],
+    "Stock": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

@@ -1,8 +1,31 @@
 {
   "date": "2026-05-14",
-  "flowers": [
-    "Mums",
-    "Stock"
-  ],
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Bells of Ireland": [
+      "chartreuse"
+    ],
+    "Bupleurum": [
+      "chartreuse"
+    ],
+    "Dianthus": [
+      "chartreuse",
+      "peach"
+    ],
+    "Mums": [
+      "peach"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "blush"
+    ],
+    "Tree fern": [
+      "green"
+    ]
+  },
   "mechanic": "wire"
 }

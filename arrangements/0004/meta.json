@@ -1,15 +1,35 @@
 {
   "date": "2026-01-16",
-  "flowers": [
-    "Acacia",
-    "Baby's breath",
-    "Eucalyptus",
-    "Freesia",
-    "Hydrangeas",
-    "Hypericum berries",
-    "Mums",
-    "Roses",
-    "Ruscus"
-  ],
+  "flowers": {
+    "Acacia": [
+      "sage"
+    ],
+    "Baby's breath": [
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Freesia": [
+      "white"
+    ],
+    "Hydrangeas": [
+      "white"
+    ],
+    "Hypericum berries": [
+      "chartreuse",
+      "white"
+    ],
+    "Mums": [
+      "magenta",
+      "blush"
+    ],
+    "Roses": [
+      "pink"
+    ],
+    "Ruscus": [
+      "green"
+    ]
+  },
   "mechanic": "wire"
 }

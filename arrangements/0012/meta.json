@@ -1,13 +1,27 @@
 {
   "date": "2026-02-17",
-  "flowers": [
-    "Eryngium",
-    "Limonium",
-    "Mums",
-    "Myrtle",
-    "Roses",
-    "Veronica",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Eryngium": [
+      "lavender"
+    ],
+    "Limonium": [
+      "white"
+    ],
+    "Mums": [
+      "pink"
+    ],
+    "Myrtle": [
+      "green"
+    ],
+    "Roses": [
+      "white"
+    ],
+    "Veronica": [
+      "purple"
+    ],
+    "Wax flower": [
+      "blush"
+    ]
+  },
   "mechanic": "foam"
 }

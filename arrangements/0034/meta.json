@@ -1,15 +1,34 @@
 {
   "date": "2026-05-03",
-  "flowers": [
-    "Baby's breath",
-    "Calla lilies",
-    "Dianthus",
-    "Eucalyptus",
-    "Hypericum berries",
-    "Mums",
-    "Pittosporum",
-    "Roses",
-    "Ruscus"
-  ],
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Calla lilies": [
+      "white"
+    ],
+    "Dianthus": [
+      "chartreuse",
+      "white"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Hypericum berries": [
+      "white"
+    ],
+    "Mums": [
+      "white"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "yellow"
+    ],
+    "Ruscus": [
+      "green"
+    ]
+  },
   "mechanic": "wire"
 }

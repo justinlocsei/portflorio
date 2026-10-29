@@ -1,15 +1,33 @@
 {
   "date": "2026-05-15",
-  "flowers": [
-    "Acacia",
-    "Baby's breath",
-    "Dianthus",
-    "Hypericum berries",
-    "Mums",
-    "Pittosporum",
-    "Ranunculus",
-    "Robellini",
-    "Roses"
-  ],
+  "flowers": {
+    "Acacia": [
+      "sage"
+    ],
+    "Baby's breath": [
+      "white"
+    ],
+    "Dianthus": [
+      "red"
+    ],
+    "Hypericum berries": [
+      "red"
+    ],
+    "Mums": [
+      "white"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Ranunculus": [
+      "burgundy"
+    ],
+    "Robellini": [
+      "green"
+    ],
+    "Roses": [
+      "red"
+    ]
+  },
   "mechanic": "foam"
 }

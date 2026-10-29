@@ -1,16 +1,36 @@
 {
   "date": "2026-10-20",
-  "flowers": [
-    "Alstroemeria",
-    "Baby's breath",
-    "Calla lilies",
-    "Eucalyptus",
-    "Hypericum berries",
-    "Mums",
-    "Pittosporum",
-    "Roses",
-    "Stock",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Alstroemeria": [
+      "blush"
+    ],
+    "Baby's breath": [
+      "white"
+    ],
+    "Calla lilies": [
+      "red"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Hypericum berries": [
+      "blush"
+    ],
+    "Mums": [
+      "burgundy"
+    ],
+    "Pittosporum": [
+      "green"
+    ],
+    "Roses": [
+      "pink"
+    ],
+    "Stock": [
+      "blush"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "wire"
 }

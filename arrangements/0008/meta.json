@@ -1,11 +1,21 @@
 {
   "date": "2026-02-02",
-  "flowers": [
-    "Dianthus",
-    "Eucalyptus",
-    "Hypericum berries",
-    "Roses",
-    "Wax flower"
-  ],
+  "flowers": {
+    "Dianthus": [
+      "red"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Hypericum berries": [
+      "red"
+    ],
+    "Roses": [
+      "red"
+    ],
+    "Wax flower": [
+      "white"
+    ]
+  },
   "mechanic": "foam"
 }

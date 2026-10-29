@@ -1,16 +1,37 @@
 {
   "date": "2026-09-27",
-  "flowers": [
-    "Cocculus",
-    "Craspedia",
-    "Dahlias",
-    "Dianthus",
-    "Eucalyptus",
-    "Mums",
-    "Safflower",
-    "Stock",
-    "Tree fern",
-    "Veronica"
-  ],
+  "flowers": {
+    "Cocculus": [
+      "green"
+    ],
+    "Craspedia": [
+      "yellow"
+    ],
+    "Dahlias": [
+      "yellow"
+    ],
+    "Dianthus": [
+      "yellow"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Mums": [
+      "burgundy",
+      "yellow"
+    ],
+    "Safflower": [
+      "orange"
+    ],
+    "Stock": [
+      "white"
+    ],
+    "Tree fern": [
+      "green"
+    ],
+    "Veronica": [
+      "white"
+    ]
+  },
   "mechanic": "wire"
 }

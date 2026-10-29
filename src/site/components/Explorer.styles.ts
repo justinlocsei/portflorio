@@ -2,7 +2,8 @@ import { component } from 'ruscus';
 
 export default component('Explorer')
   .css({
-    display: 'flex'
+    display: 'flex',
+    gap: '2em'
   })
   .elements(e => ({
     lens: e({

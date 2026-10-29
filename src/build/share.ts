@@ -7,10 +7,10 @@ import type { Arrangement } from '../core/types.ts';
 export async function shareArrangement(
   arrangement: Arrangement
 ): Promise<string> {
-  const [first, ...rest] = arrangement.flowers.toSorted();
+  const [first, ...rest] = arrangement.flowers.map(f => f.name);
 
   return listItems(
-    [first?.name ?? '', ...rest.map(f => f.name.toLocaleLowerCase())].filter(
+    [first ?? '', ...rest.map(f => f.toLocaleLowerCase())].filter(
       Boolean
     ),
     'and'

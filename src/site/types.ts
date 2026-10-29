@@ -20,7 +20,15 @@ export type PackedArrangement = [
   date: ISODate,
   id: number,
   mechanic: Mechanic,
-  flowers: number[],
+  flowers: PackedArrangedFlower[],
   image: string,
   thumbnail: string
+];
+
+/**
+ * A compact representation of an arranged flower
+ */
+export type PackedArrangedFlower = [
+  flower: number,
+  color: number
 ];

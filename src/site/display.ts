@@ -11,9 +11,9 @@ export const MECHANIC_LABELS: Record<Mechanic, string> = {
  * Produce a description of an arrangement
  */
 export function describeArrangement(arrangement: Arrangement): string {
-  const flowers = arrangement
-    .flowers
-    .map(f => `${f.color} ${f.name.toLocaleLowerCase()}`);
+  const flowers = arrangement.flowers.flatMap(f => {
+    return f.color.map(c => `${c} ${f.name}`);
+  });
 
   return `A floral arrangement with ${listItems(flowers, 'and')}`;
 }

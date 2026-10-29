@@ -4,6 +4,21 @@ import type { ArrangedFlower } from '../core/types.ts';
 import readline from 'node:readline';
 
 /**
+ * Produce a list of color suggestions for a comma-separated line
+ */
+function completeColors(trimmed: string): string[] {
+  const segments = trimmed.split(',');
+  const prefix = (segments.at(-1) ?? '').trim().toLowerCase();
+
+  const prior = segments.slice(0, -1);
+  const head = prior.length > 0 ? `${prior.join(',')}, ` : '';
+
+  return COLOR_IDS
+    .filter(id => id.startsWith(prefix))
+    .map(id => `${head}${id}`);
+}
+
+/**
  * Interactively build a list of arranged flowers
  */
 export function requestFlowers({
@@ -23,10 +38,11 @@ export function requestFlowers({
   const rl = readline.createInterface({
     completer: (line: string) => {
       const prefix = line.trimStart();
-      const sources = step === 'flower' ? flowerNames : COLOR_IDS;
 
       return [
-        sources.filter(s => s.startsWith(prefix)),
+        step === 'flower'
+          ? flowerNames.filter(s => s.startsWith(prefix))
+          : completeColors(prefix),
         line
       ];
     },

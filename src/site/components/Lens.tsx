@@ -1,5 +1,12 @@
+import { identifiers } from 'ruscus';
+
+import type { DisplayColor } from '../../core/colors.ts';
+import { displayColors } from '../../core/colors.ts';
 import { summarizeFlowers } from '../../core/flowers.ts';
-import type { Flower as FlowerType } from '../../core/types.ts';
+import type {
+  Color as ColorType,
+  Flower as FlowerType
+} from '../../core/types.ts';
 import type { Arrangement, ExplorerView } from '../types.ts';
 import type { Children } from '../ui.ts';
 import C from './Lens.styles.ts';
@@ -11,18 +18,28 @@ type ViewProps = {
 
 export default function Lens({
   arrangements,
-  flowers,
+  flowers: allFlowers,
   setView,
   view
 }: ViewProps & {
   arrangements: Arrangement[];
   flowers: FlowerType[];
 }) {
+  const flowers = summarizeFlowers(arrangements);
+
   return (
     <div className={C.root}>
       <Section title='Flowers'>
         <Flowers
-          all={flowers}
+          all={allFlowers}
+          available={flowers}
+          setView={setView}
+          view={view}
+        />
+      </Section>
+
+      <Section title='Colors'>
+        <Colors
           arrangements={arrangements}
           setView={setView}
           view={view}
@@ -54,15 +71,14 @@ function Section({
 
 function Flowers({
   all,
-  arrangements,
+  available,
   setView,
   view
 }: ViewProps & {
   all: FlowerType[];
-  arrangements: Arrangement[];
+  available: FlowerType[];
 }) {
   const { flowers } = view;
-  const available = summarizeFlowers(arrangements);
 
   const inUse = new Map<string, number>(
     available.map(f => [f.name, f.usedIn.length])
@@ -119,6 +135,78 @@ function Flower({
       </button>
 
       <span className={S.count}>{count}</span>
+    </li>
+  );
+}
+
+function Colors({
+  arrangements,
+  setView,
+  view
+}: ViewProps & {
+  arrangements: Arrangement[];
+}) {
+  const { colors } = view;
+
+  const counts = arrangements.reduce<Record<ColorType, number>>(
+    (counts, arrangement) => {
+      const colors = new Set(arrangement.flowers.flatMap(f => f.colors));
+
+      for (const color of colors) {
+        counts[color] = (counts[color] ?? 0) + 1;
+      }
+      return counts;
+    },
+    {} as Record<ColorType, number>
+  );
+
+  return (
+    <ul className={C.colors}>
+      {displayColors().map(color => {
+        const { id } = color;
+
+        return (
+          <Color
+            count={counts[color.id]}
+            key={color.id}
+            color={color}
+            onToggle={() => {
+              setView({
+                ...view,
+                colors: colors.includes(id)
+                  ? colors.filter(c => c !== id)
+                  : [...colors, id]
+              });
+            }}
+          />
+        );
+      })}
+    </ul>
+  );
+}
+
+function Color({
+  color,
+  count,
+  onToggle
+}: {
+  color: DisplayColor;
+  count: number;
+  onToggle: () => void;
+}) {
+  const S = C.color;
+  const swatch = identifiers(C).swatch;
+
+  return (
+    <li className={S.root} style={{ [swatch]: `#${color.hex}` }}>
+      <button
+        className={S.swatch}
+        onClick={onToggle}
+        title={color.name}
+        type='button'
+      />
+
+      <p className={S.count}>{count}</p>
     </li>
   );
 }

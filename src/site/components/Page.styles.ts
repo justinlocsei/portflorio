@@ -4,6 +4,7 @@ const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
 const removeWhitespace = [
   ...headings,
+  'button',
   'ol',
   'ul'
 ];
@@ -14,8 +15,15 @@ export default component('Page')
 
     body: e()
   }))
-  .nested(s => ({
-    li: s({ listStyle: 'none' }),
+  .global(s => ({
+    button: s({
+      backgroundColor: 'transparent',
+      border: 0
+    }),
+
+    li: s({
+      listStyle: 'none'
+    }),
 
     [headings.join(', ')]: s({
       fontSize: '1em',

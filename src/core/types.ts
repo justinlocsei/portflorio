@@ -6,7 +6,7 @@ declare const UTCDateBrand: unique symbol;
 export type { Color };
 
 /**
- * A flower used in an arrangement
+ * A flower used in a specific arrangement
  */
 export type ArrangedFlower = {
   colors: Color[];
@@ -45,7 +45,7 @@ export type Dimensions = {
 export type EnvironmentVariables = Record<string, string | undefined>;
 
 /**
- * A flower used in an arrangement
+ * Information on a flower's usage across a set of arrangements
  */
 export type Flower = {
   name: string;

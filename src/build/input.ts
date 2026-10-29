@@ -6,7 +6,7 @@ import readline from 'node:readline';
 /**
  * Interactively build a list of arranged flowers
  */
-export function requestArrangedFlowers({
+export function requestFlowers({
   flowerNames,
   input = process.stdin,
   output = process.stdout

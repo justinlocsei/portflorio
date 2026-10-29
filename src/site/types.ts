@@ -1,5 +1,6 @@
 import type {
   ArrangementImages,
+  Color,
   Arrangement as CoreArrangement,
   ISODate,
   Mechanic
@@ -17,6 +18,7 @@ export type Arrangement = CoreArrangement & {
  * The current explorer view
  */
 export type ExplorerView = {
+  colors: Color[];
   flowers: string[];
 };
 

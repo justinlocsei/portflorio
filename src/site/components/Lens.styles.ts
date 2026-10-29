@@ -10,6 +10,16 @@ export default component('Lens')
 
     flowers: e(),
 
-    flower: e()
+    flower: e({
+      display: 'flex',
+      justifyContent: 'space-between'
+    }).children({
+      name: e(),
+
+      count: e()
+    }).variants(s => ({
+      available: s(),
+      unavailable: s()
+    }))
   }))
   .apply();

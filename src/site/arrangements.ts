@@ -1,7 +1,7 @@
 import routes from '../core/routes.ts';
 import { parseDate, tryISODate } from '../core/time.ts';
 import { sortBy } from '../core/utils.ts';
-import { resolveFlowers } from './flowers.ts';
+import { resolveArrangedFlowers } from './flowers.ts';
 import packedArrangements from './generated/arrangements.json' with {
   type: 'json'
 };
@@ -11,13 +11,13 @@ import type { Arrangement, PackedArrangement } from './types.ts';
  * Unpack an arrangement
  */
 function unpackArrangement(packed: PackedArrangement): Arrangement {
-  const [rawDate, id, mechanic, flowerIndexes, full, preview] = packed;
+  const [rawDate, id, mechanic, packedFlowers, full, preview] = packed;
 
   const date = tryISODate(rawDate);
 
   return {
     date: parseDate(date),
-    flowers: resolveFlowers(flowerIndexes),
+    flowers: resolveArrangedFlowers(packedFlowers),
     images: { full, preview },
     mechanic,
     id,

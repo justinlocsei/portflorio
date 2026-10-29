@@ -5,10 +5,7 @@ import { toJSON } from '../core/data.ts';
 import { summarizeFlowers } from '../core/flowers.ts';
 import { getISODate } from '../core/time.ts';
 import { sortBy } from '../core/utils.ts';
-import type {
-  PackedArrangedFlower,
-  PackedArrangement
-} from '../site/types.ts';
+import type { PackedArrangedFlower, PackedArrangement } from '../site/types.ts';
 import paths from './paths.ts';
 import type { ProcessedArrangement } from './types.ts';
 
@@ -56,9 +53,9 @@ export async function generateSiteData(
       a.id,
       a.mechanic,
       a.flowers.flatMap(f =>
-        f.color.map((color): PackedArrangedFlower => [
+        f.colors.map((c): PackedArrangedFlower => [
           packFlower(f.name),
-          packColor(color)
+          packColor(c)
         ])
       ),
       a.images.full,

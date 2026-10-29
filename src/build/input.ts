@@ -87,7 +87,7 @@ export function requestFlowers({
       }
 
       flowers.push({
-        color: colors,
+        colors,
         name: flower
       });
 

@@ -12,7 +12,7 @@ export const MECHANIC_LABELS: Record<Mechanic, string> = {
  */
 export function describeArrangement(arrangement: Arrangement): string {
   const flowers = arrangement.flowers.flatMap(f => {
-    return f.color.map(c => `${c} ${f.name}`);
+    return f.colors.map(c => `${c} ${f.name}`);
   });
 
   return `A floral arrangement with ${listItems(flowers, 'and')}`;

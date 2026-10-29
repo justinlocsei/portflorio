@@ -38,7 +38,7 @@ export function unpackFlowers(
       .from(flowerColors.entries())
       .map(
         ([name, colors]): ArrangedFlower => {
-          return { color: colors.toSorted(), name };
+          return { colors: colors.toSorted(), name };
         }
       ),
     f => f.name

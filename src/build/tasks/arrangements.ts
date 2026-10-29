@@ -12,7 +12,7 @@ import {
 import { showOutput } from '../commands.ts';
 import { loadFlowers } from '../flowers.ts';
 import { findSourceImages } from '../images.ts';
-import { requestLines } from '../input.ts';
+import { requestFlowers } from '../input.ts';
 import paths from '../paths.ts';
 import { shareArrangement } from '../share.ts';
 
@@ -34,9 +34,8 @@ export default C.group('Manage the catalog of arrangements', {
 
       console.log('\nFlowers:');
 
-      const flowers = await requestLines({
-        prompt: '- ',
-        suggestions: await loadFlowers().then(fs => fs.map(f => f.name))
+      const flowers = await requestFlowers({
+        flowerNames: await loadFlowers().then(fs => fs.map(f => f.name))
       });
 
       const arrangement = await addArrangement({

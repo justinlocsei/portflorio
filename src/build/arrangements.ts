@@ -51,9 +51,9 @@ export async function addArrangement({
 
   const meta: ArrangementMetadata = {
     date: customDate ? tryISODate(customDate) : getISODate(),
-    flowers: sortBy(flowers, f => f.name).reduce<StoredFlowers>(
+    flowers: flowers.reduce<StoredFlowers>(
       (previous, f) => {
-        previous[f.name] = f.color;
+        previous[f.name] = f.colors.toSorted();
         return previous;
       },
       {}
@@ -160,7 +160,7 @@ export function pickArrangement<T extends Arrangement>(
 function parseStoredFlowers(stored: StoredFlowers): ArrangedFlower[] {
   const flowers = Object
     .entries(stored)
-    .map(([name, color]): ArrangedFlower => ({ color, name }));
+    .map(([name, colors]): ArrangedFlower => ({ colors, name }));
 
   return sortBy(flowers, f => f.name);
 }

@@ -50,4 +50,4 @@ export type StoredID = string & {
 /**
  * A record of the flowers used in an arrangement
  */
-export type StoredFlowers = Record<string, Color>;
+export type StoredFlowers = Record<string, Color[]>;

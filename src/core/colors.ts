@@ -72,6 +72,23 @@ export type Color = keyof typeof COLORS;
 
 export const COLOR_IDS = Object.keys(COLORS) as Color[];
 
+export const DISPLAY_ORDER: Color[] = [
+  'white',
+  'sage',
+  'blush',
+  'yellow',
+  'chartreuse',
+  'green',
+  'peach',
+  'orange',
+  'red',
+  'burgundy',
+  'pink',
+  'magenta',
+  'purple',
+  'lavender'
+];
+
 /**
  * Report whether a value is a color ID
  */

@@ -1,17 +1,33 @@
-import type { Arrangement, Flower } from './types.ts';
+import type { Arrangement, Color, Flower } from './types.ts';
+
+/**
+ * A flower's usage across a set of arrangements
+ */
+type Usage = {
+  colors: Set<Color>;
+  usedIn: number[];
+};
 
 /**
  * Summarize the flowers used by a set of arrangements
  */
 export function summarizeFlowers(arrangements: Arrangement[]): Flower[] {
-  const usage = new Map<string, number[]>();
+  const usage = new Map<string, Usage>();
 
   for (const arrangement of arrangements) {
     for (const flower of arrangement.flowers) {
-      const usedIn = usage.get(flower.name) ?? [];
+      const entry = usage.get(flower.name) ?? {
+        colors: new Set<Color>(),
+        usedIn: []
+      };
 
-      usedIn.push(arrangement.id);
-      usage.set(flower.name, usedIn);
+      entry.usedIn.push(arrangement.id);
+
+      for (const color of flower.colors) {
+        entry.colors.add(color);
+      }
+
+      usage.set(flower.name, entry);
     }
   }
 
@@ -19,10 +35,14 @@ export function summarizeFlowers(arrangements: Arrangement[]): Flower[] {
     .from(usage.keys())
     .sort()
     .reduce<Flower[]>((flowers, name) => {
-      const usedIn = usage.get(name);
+      const entry = usage.get(name);
 
-      if (usedIn) {
-        flowers.push({ name, usedIn });
+      if (entry) {
+        flowers.push({
+          colors: Array.from(entry.colors).sort(),
+          name,
+          usedIn: entry.usedIn
+        });
       }
 
       return flowers;

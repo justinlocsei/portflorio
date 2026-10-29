@@ -12,6 +12,7 @@ const removeWhitespace = [
 
 export default component('Page')
   .css({
+    fontSize: '1rem',
     lineHeight: 1
   })
   .elements(e => ({
@@ -22,7 +23,8 @@ export default component('Page')
   .global(s => ({
     button: s({
       backgroundColor: 'transparent',
-      border: 0
+      border: 0,
+      fontSize: 'inherit'
     }),
 
     li: s({

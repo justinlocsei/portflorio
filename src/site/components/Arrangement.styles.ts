@@ -1,31 +1,43 @@
 import { component } from 'ruscus';
 
+import { rhythm } from './styles.ts';
+
 export default component('Arrangement')
+  .css({
+    display: 'flex',
+    gap: rhythm(2)
+  })
   .elements(e => ({
-    media: e(),
+    media: e({
+      flex: 'none'
+    }),
 
     image: e(),
 
-    meta: e(),
+    meta: e({
+      flex: 1
+    }),
 
-    details: e({
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginTop: '0.5em'
-    }).children({
-      date: e(),
+    details: e().children({
+      date: e({
+        fontSize: '2em'
+      }),
 
-      mechanic: e()
+      mechanic: e({
+        fontSize: '1.25em',
+        lineHeight: rhythm(2)
+      })
     }),
 
     flowers: e({
-      display: 'flex',
-      columnGap: '1em',
-      flexWrap: 'wrap',
-      marginTop: '1em',
-      rowGap: '0.25em'
+      fontSize: '1.5em',
+      marginTop: rhythm()
     }),
 
-    flower: e()
+    flower: e().nested(s => ({
+      '& + &': s({
+        marginTop: rhythm(1)
+      })
+    }))
   }))
   .apply();

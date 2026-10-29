@@ -1,13 +1,15 @@
 import { component } from 'ruscus';
 
+import { rhythm } from './styles.ts';
+
 export default component('Gallery')
   .elements(e => ({
-    overviews: e({
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(30rem, 1fr))',
-      gap: '1em'
-    }),
+    overviews: e(),
 
-    overview: e()
+    overview: e().nested(s => ({
+      '& + &': s({
+        marginTop: rhythm(4)
+      })
+    }))
   }))
   .apply();

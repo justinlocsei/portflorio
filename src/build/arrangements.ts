@@ -110,14 +110,15 @@ export async function listArrangementIDs(): Promise<StoredID[]> {
 async function loadArrangement(id: number): Promise<StoredArrangement> {
   const stored = getStoragePaths(id);
 
-  const meta: ArrangementMetadata = await JSON.parse(
+  const meta: ArrangementMetadata = JSON.parse(
     await fs.readFile(stored.meta, 'utf8')
   );
 
   return {
-    ...meta,
     date: parseDate(tryISODate(meta.date)),
+    flowers: parseStoredFlowers(meta.flowers),
     id,
+    mechanic: meta.mechanic,
     paths: stored,
     storedID: asStoredID(id)
   };
@@ -151,6 +152,17 @@ export function pickArrangement<T extends Arrangement>(
   }
 
   return found;
+}
+
+/**
+ * Convert stored flowers to arranged flowers
+ */
+function parseStoredFlowers(stored: StoredFlowers): ArrangedFlower[] {
+  const flowers = Object
+    .entries(stored)
+    .map(([name, color]): ArrangedFlower => ({ color, name }));
+
+  return sortBy(flowers, f => f.name);
 }
 
 /**

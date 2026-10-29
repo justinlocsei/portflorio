@@ -22,18 +22,14 @@ export default function Explorer({
   let arrangements = allArrangements;
 
   if (flowers.length) {
-    const names = new Set(flowers);
-
     arrangements = arrangements.filter(a =>
-      a.flowers.some(f => names.has(f.name))
+      flowers.every(flower => a.flowers.some(f => f.name === flower))
     );
   }
 
   if (colors.length) {
-    const ids = new Set(colors);
-
     arrangements = arrangements.filter(a =>
-      a.flowers.some(f => f.colors.some(c => ids.has(c)))
+      colors.every(color => a.flowers.some(f => f.colors.includes(color)))
     );
   }
 

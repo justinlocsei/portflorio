@@ -14,6 +14,13 @@ export type Arrangement = CoreArrangement & {
 };
 
 /**
+ * The current explorer view
+ */
+export type ExplorerView = {
+  flowers: string[];
+};
+
+/**
  * A compact representation of an arrangement
  */
 export type PackedArrangement = [

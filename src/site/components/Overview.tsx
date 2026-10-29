@@ -19,8 +19,8 @@ export default function Overview(
 
         <ul className={C.flowers}>
           {arrangement.flowers.map(flower => (
-            <li className={C.flower} key={flower}>
-              {flower}
+            <li className={C.flower} key={flower.name}>
+              {flower.name}
             </li>
           ))}
         </ul>

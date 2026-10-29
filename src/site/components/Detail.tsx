@@ -13,8 +13,8 @@ export default function Detail(
 
       <div className={C.flowers}>
         {arrangement.flowers.map(flower => (
-          <div className={C.flower} key={flower}>
-            {flower}
+          <div className={C.flower} key={flower.name}>
+            {flower.name}
           </div>
         ))}
       </div>

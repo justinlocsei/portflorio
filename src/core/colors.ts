@@ -15,6 +15,10 @@ export const COLORS = {
     hex: 'B8CF3E',
     name: 'Chartreuse'
   },
+  green: {
+    hex: '2E8F4A',
+    name: 'Green'
+  },
   lavender: {
     hex: 'A89BC4',
     name: 'Lavender'
@@ -38,6 +42,10 @@ export const COLORS = {
   red: {
     hex: 'C7364E',
     name: 'Red'
+  },
+  sage: {
+    hex: '9AADA3',
+    name: 'Sage'
   },
   white: {
     hex: 'F7F5F0',

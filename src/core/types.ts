@@ -3,6 +3,8 @@ import type { Color } from './colors.ts';
 declare const ISODateBrand: unique symbol;
 declare const UTCDateBrand: unique symbol;
 
+export type { Color };
+
 /**
  * A flower used in an arrangement
  */

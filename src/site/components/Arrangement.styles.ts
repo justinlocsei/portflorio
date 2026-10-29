@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-export default component('Overview')
+export default component('Arrangement')
   .elements(e => ({
     media: e(),
 
@@ -8,7 +8,11 @@ export default component('Overview')
 
     meta: e(),
 
-    date: e(),
+    details: e().children({
+      date: e(),
+
+      mechanic: e()
+    }),
 
     flowers: e(),
 

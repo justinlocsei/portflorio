@@ -70,3 +70,20 @@ export const COLOR_IDS = Object.keys(COLORS) as Color[];
 export function isColor(value: string): value is Color {
   return value in COLORS;
 }
+
+/**
+ * Parse a comma-separated list of colors
+ */
+export function parseColors(input: string): Color[] {
+  return input
+    .split(',')
+    .map(part => part.trim().toLowerCase())
+    .filter(Boolean)
+    .reduce<Color[]>((p, part) => {
+      if (isColor(part)) {
+        p.push(part);
+      }
+
+      return p;
+    }, []);
+}

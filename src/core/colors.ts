@@ -11,6 +11,10 @@ export const COLORS = {
     hex: 'EEC4C4',
     name: 'Blush'
   },
+  burgundy: {
+    hex: '72283E',
+    name: 'Burgundy'
+  },
   chartreuse: {
     hex: 'B8CF3E',
     name: 'Chartreuse'
@@ -34,6 +38,10 @@ export const COLORS = {
   peach: {
     hex: 'E9A67A',
     name: 'Peach'
+  },
+  pink: {
+    hex: 'ED4DA6',
+    name: 'Pink'
   },
   purple: {
     hex: '6E5099',

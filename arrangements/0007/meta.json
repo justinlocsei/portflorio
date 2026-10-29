@@ -2,15 +2,13 @@
   "date": "2026-01-24",
   "flowers": [
     "Alstroemeria",
-    "Chamomile",
-    "Eucalyptus",
+    "Dianthus",
     "Mums",
-    "Myrtle",
     "Robellini",
     "Roses",
     "Salal",
     "Statice",
-    "Wax flower"
+    "Stock"
   ],
   "mechanic": "foam"
 }

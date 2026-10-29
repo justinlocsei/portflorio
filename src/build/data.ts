@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 
+import { COLOR_IDS } from '../core/colors.ts';
 import { toJSON } from '../core/data.ts';
 import { summarizeFlowers } from '../core/flowers.ts';
 import { getISODate } from '../core/time.ts';
@@ -11,15 +12,33 @@ import type { ProcessedArrangement } from './types.ts';
 import path from 'node:path';
 
 /**
+ * Create a function to pack values in an array using indexes
+ */
+function createArrayPacker(values: string[]): (value: string) => number {
+  const indexes = new Map(values.map((v, i) => [v, i]));
+
+  return value => {
+    const index = indexes.get(value);
+
+    if (index === undefined) {
+      throw new Error(`Unknown value: ${value}`);
+    }
+
+    return index;
+  };
+}
+
+/**
  * Generate data files used by the site
  */
 export async function generateSiteData(
   arrangements: ProcessedArrangement[]
 ): Promise<void> {
   const root = paths.generated;
-
   const flowerNames = summarizeFlowers(arrangements).map(f => f.name);
-  const flowerIndexes = new Map(flowerNames.map((name, i) => [name, i]));
+
+  const packFlower = createArrayPacker(flowerNames);
+  const packColor = createArrayPacker(COLOR_IDS);
 
   await fs.mkdir(root, { recursive: true });
 
@@ -33,7 +52,7 @@ export async function generateSiteData(
       getISODate(a.date),
       a.id,
       a.mechanic,
-      a.flowers.map(f => flowerIndexes.get(f) ?? 0),
+      a.flowers.map(f => [packFlower(f.name), packColor(f.color)]),
       a.images.full,
       a.images.preview
     ]),

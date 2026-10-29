@@ -11,6 +11,9 @@ const removeWhitespace = [
 ];
 
 export default component('Page')
+  .css({
+    lineHeight: 1
+  })
   .elements(e => ({
     header: e(),
 

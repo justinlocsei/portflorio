@@ -53,3 +53,5 @@ export const COLORS = {
  * An internal ID for a floral color
  */
 export type Color = keyof typeof COLORS;
+
+export const COLOR_IDS = Object.keys(COLORS) as Color[];

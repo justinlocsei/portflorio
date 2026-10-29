@@ -55,3 +55,10 @@ export const COLORS = {
 export type Color = keyof typeof COLORS;
 
 export const COLOR_IDS = Object.keys(COLORS) as Color[];
+
+/**
+ * Report whether a value is a color ID
+ */
+export function isColor(value: string): value is Color {
+  return value in COLORS;
+}

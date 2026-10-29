@@ -72,7 +72,7 @@ export type Color = keyof typeof COLORS;
 
 export const COLOR_IDS = Object.keys(COLORS) as Color[];
 
-export const DISPLAY_ORDER: Color[] = [
+const DISPLAY_ORDER: Color[] = [
   'white',
   'sage',
   'blush',
@@ -88,6 +88,20 @@ export const DISPLAY_ORDER: Color[] = [
   'purple',
   'lavender'
 ];
+
+/**
+ * A color for display
+ */
+export type DisplayColor = Details & {
+  id: Color;
+};
+
+/**
+ * Get all colors for display
+ */
+export function displayColors(): DisplayColor[] {
+  return DISPLAY_ORDER.map(id => ({ ...COLORS[id], id }));
+}
 
 /**
  * Report whether a value is a color ID

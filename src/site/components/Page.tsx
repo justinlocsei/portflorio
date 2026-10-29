@@ -1,4 +1,4 @@
-import type { Children } from '../react.ts';
+import type { Children } from '../ui.ts';
 import Header from './Header.tsx';
 import C from './Page.styles.ts';
 

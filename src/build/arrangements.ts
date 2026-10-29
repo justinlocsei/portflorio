@@ -7,12 +7,14 @@ import type {
   ArrangementImages,
   Mechanic
 } from '../core/types.ts';
+import { sortBy } from '../core/utils.ts';
 import { writeJSON } from './data.ts';
 import paths from './paths.ts';
 import type {
   ArrangementMetadata,
   ArrangementPaths,
   StoredArrangement,
+  StoredFlowers,
   StoredID
 } from './types.ts';
 
@@ -49,7 +51,13 @@ export async function addArrangement({
 
   const meta: ArrangementMetadata = {
     date: customDate ? tryISODate(customDate) : getISODate(),
-    flowers: flowers.toSorted(),
+    flowers: sortBy(flowers, f => f.name).reduce<StoredFlowers>(
+      (previous, f) => {
+        previous[f.name] = f.color;
+        return previous;
+      },
+      {}
+    ),
     mechanic
   };
 

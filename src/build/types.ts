@@ -1,7 +1,7 @@
 import type {
-  ArrangedFlower,
   Arrangement,
   ArrangementImages,
+  Color,
   Mechanic
 } from '../core/types.ts';
 
@@ -12,7 +12,7 @@ declare const StoredIDBrand: unique symbol;
  */
 export type ArrangementMetadata = {
   date: string;
-  flowers: ArrangedFlower[];
+  flowers: StoredFlowers;
   mechanic: Mechanic;
 };
 
@@ -46,3 +46,8 @@ export type StoredArrangement = Arrangement & {
 export type StoredID = string & {
   readonly [StoredIDBrand]: typeof StoredIDBrand;
 };
+
+/**
+ * A record of the flowers used in an arrangement
+ */
+export type StoredFlowers = Record<string, Color>;

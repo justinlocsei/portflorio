@@ -9,7 +9,7 @@ export type { Color };
  * A flower used in an arrangement
  */
 export type ArrangedFlower = {
-  color: Color;
+  color: Color[];
   name: string;
 };
 

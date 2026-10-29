@@ -11,23 +11,38 @@ export default function Explorer({
   arrangements: Arrangement[];
 }) {
   const [view, setView] = useState<ExplorerView>({
+    colors: [],
     flowers: []
   });
 
-  const flowers = summarizeFlowers(allArrangements);
+  const { colors, flowers } = view;
 
-  const arrangements = allArrangements.filter((arrangement) => {
-    return view.flowers.every(flower =>
-      arrangement.flowers.some(f => f.name === flower)
+  const allFlowers = summarizeFlowers(allArrangements);
+
+  let arrangements = allArrangements;
+
+  if (flowers.length) {
+    const names = new Set(flowers);
+
+    arrangements = arrangements.filter(a =>
+      a.flowers.some(f => names.has(f.name))
     );
-  });
+  }
+
+  if (colors.length) {
+    const ids = new Set(colors);
+
+    arrangements = arrangements.filter(a =>
+      a.flowers.some(f => f.colors.some(c => ids.has(c)))
+    );
+  }
 
   return (
     <div className={C.root}>
       <aside className={C.lens}>
         <Lens
           arrangements={arrangements}
-          flowers={flowers}
+          flowers={allFlowers}
           setView={setView}
           view={view}
         />

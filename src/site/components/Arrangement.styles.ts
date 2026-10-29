@@ -8,13 +8,23 @@ export default component('Arrangement')
 
     meta: e(),
 
-    details: e().children({
+    details: e({
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginTop: '0.5em'
+    }).children({
       date: e(),
 
       mechanic: e()
     }),
 
-    flowers: e(),
+    flowers: e({
+      display: 'flex',
+      columnGap: '1em',
+      flexWrap: 'wrap',
+      marginTop: '1em',
+      rowGap: '0.25em'
+    }),
 
     flower: e()
   }))

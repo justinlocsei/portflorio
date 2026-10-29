@@ -1,4 +1,4 @@
-import { COLOR_IDS, isColor } from '../core/colors.ts';
+import { COLOR_IDS, parseColors } from '../core/colors.ts';
 import type { ArrangedFlower } from '../core/types.ts';
 
 import readline from 'node:readline';
@@ -58,15 +58,20 @@ export function requestFlowers({
         return;
       }
 
-      if (!isColor(line)) {
-        output.write(`Color must be in set: ${COLOR_IDS.join(', ')}\n`);
+      const colors = parseColors(line);
+
+      if (colors.length === 0) {
+        output.write(
+          `Colors must be a comma-separated list of: ${COLOR_IDS.join(', ')}\n`
+        );
+
         showPrompt();
 
         return;
       }
 
       flowers.push({
-        color: line,
+        color: colors,
         name: flower
       });
 

@@ -30,6 +30,10 @@ export default component('Page')
     body: e()
   }))
   .global(s => ({
+    '*, *::before, *::after': s({
+      boxSizing: 'border-box'
+    }),
+
     button: s({
       backgroundColor: 'transparent',
       border: 0,

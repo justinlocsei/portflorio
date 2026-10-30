@@ -36,7 +36,11 @@ export default component('Lens')
         justifyContent: 'space-between',
         margin: `0 -${gutter}`,
         padding: `0 ${gutter}`
-      }).children({
+      }).nested(s => ({
+        '& + &': s({
+          borderTop: `1px solid ${colors.borderDark}`
+        })
+      })).children({
         name: e(),
 
         count: e({

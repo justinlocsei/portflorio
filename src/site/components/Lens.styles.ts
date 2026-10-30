@@ -45,7 +45,9 @@ export default component('Lens')
 
         count: e({
           fontSize: '0.9em',
-          fontWeight: 300
+          fontWeight: 300,
+          textAlign: 'center',
+          width: '2em'
         })
       }).variants(s => ({
         available: s(),

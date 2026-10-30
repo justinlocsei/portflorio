@@ -2,9 +2,9 @@ import { listItems } from '../core/text.ts';
 import type { Arrangement, Dimensions, Mechanic } from '../core/types.ts';
 
 const MECHANIC_LABELS: Record<Mechanic, string> = {
-  foam: 'Foam',
+  foam: 'Floral Foam',
   kenzan: 'Kenzan',
-  wire: 'Wire'
+  wire: 'Chicken Wire'
 };
 
 /**

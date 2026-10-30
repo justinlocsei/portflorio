@@ -1,4 +1,6 @@
 import { component } from 'ruscus';
+
+import { colors } from './styles.ts';
 import '@fontsource/bitter/300.css';
 import '@fontsource/bitter/400.css';
 import '@fontsource/bitter/500.css';
@@ -9,12 +11,15 @@ const removeWhitespace = [
   ...headings,
   'body',
   'button',
+  'p',
   'ol',
   'ul'
 ];
 
 export default component('Page')
   .css({
+    backgroundColor: colors.bg,
+    color: colors.text,
     fontFamily: 'Bitter, serif',
     fontSize: '1rem',
     lineHeight: 1
@@ -28,6 +33,7 @@ export default component('Page')
     button: s({
       backgroundColor: 'transparent',
       border: 0,
+      color: 'inherit',
       fontFamily: 'inherit',
       fontSize: 'inherit'
     }),

@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { rhythm } from './styles.ts';
+import { colors, rhythm } from './styles.ts';
 
 export default component('Lens')
   .identifiers({
@@ -9,8 +9,12 @@ export default component('Lens')
   .elements((e, { ids }) => ({
     section: e().children({
       title: e({
-        fontSize: '1.5em',
-        marginBottom: rhythm(1.5)
+        color: colors.accent,
+        fontWeight: 300,
+        fontSize: '1.25em',
+        letterSpacing: '0.05em',
+        marginBottom: rhythm(0.75),
+        textTransform: 'uppercase'
       }),
 
       content: e()
@@ -22,34 +26,55 @@ export default component('Lens')
 
     flowers: e(),
 
-    flower: e({
-      display: 'flex',
-      lineHeight: 2,
-      justifyContent: 'space-between'
-    }).children({
-      name: e(),
+    flower: () => {
+      const gutter = '0.5em';
 
-      count: e()
-    }).variants(s => ({
-      available: s(),
-      unavailable: s()
-    })),
+      return e({
+        borderBottom: `1px solid ${colors.border}`,
+        display: 'flex',
+        lineHeight: 3,
+        justifyContent: 'space-between',
+        margin: `0 -${gutter}`,
+        padding: `0 ${gutter}`
+      }).children({
+        name: e(),
+
+        count: e({
+          fontSize: '0.9em',
+          fontWeight: 300
+        })
+      }).variants(s => ({
+        available: s(),
+
+        unavailable: s({
+          color: colors.muted
+        })
+      }));
+    },
 
     colors: e({
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(3rem, 1fr))',
-      gap: '1em'
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      columnGap: '1em',
+      rowGap: rhythm(1.5)
     }),
 
     color: e().children({
       swatch: e({
         backgroundColor: `var(${ids.swatch})`,
+        borderRadius: '0.5em',
         display: 'block',
-        height: '3em',
-        width: '3em'
+        height: '4em',
+        width: '4em'
       }),
 
-      count: e()
+      count: e({
+        fontSize: '0.9em',
+        fontWeight: 300,
+        marginTop: rhythm(0.5),
+        textAlign: 'center'
+      })
     })
   }))
   .apply();

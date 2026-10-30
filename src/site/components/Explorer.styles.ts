@@ -2,21 +2,27 @@ import { component } from 'ruscus';
 
 import { rhythm } from './styles.ts';
 
+const sidebar = '22rem';
+
 export default component('Explorer')
   .css({
-    display: 'flex',
-    gap: rhythm(4)
+    gap: rhythm(4),
+    position: 'relative'
   })
   .elements(e => ({
     lens: e({
-      flex: '0 0 15rem',
-      padding: `${rhythm(2)} ${rhythm(3)}`
+      bottom: 0,
+      left: 0,
+      top: 0,
+      overflow: 'auto',
+      padding: `${rhythm(2)} ${rhythm(3)}`,
+      position: 'fixed',
+      width: sidebar
     }),
 
     gallery: e({
-      flex: 1,
-      padding: rhythm(2),
-      paddingLeft: 0
+      marginLeft: sidebar,
+      padding: rhythm(2)
     })
   }))
   .apply();

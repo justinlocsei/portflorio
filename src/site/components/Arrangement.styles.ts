@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm } from './styles.ts';
+import { colors, rhythm, weights } from './styles.ts';
 
 export default component('Arrangement')
   .css({
@@ -22,7 +22,7 @@ export default component('Arrangement')
     }),
 
     details: e({
-      fontWeight: 300,
+      fontWeight: weights.light,
       padding: `${rhythm(1)} 0`
     }).children({
       date: e({

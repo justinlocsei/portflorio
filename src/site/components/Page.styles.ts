@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors } from './styles.ts';
+import { colors, weights } from './styles.ts';
 import '@fontsource/bitter/300.css';
 import '@fontsource/bitter/400.css';
 import '@fontsource/bitter/600.css';
@@ -48,7 +48,7 @@ export default component('Page')
 
     [headings.join(', ')]: s({
       fontSize: '1em',
-      fontWeight: 'normal'
+      fontWeight: weights.normal
     }),
 
     [removeWhitespace.join(', ')]: s({

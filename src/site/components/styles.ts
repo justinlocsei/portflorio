@@ -7,6 +7,12 @@ export const colors = {
   text: '#f0ede4'
 };
 
+export const weights = {
+  light: 300,
+  normal: 400,
+  bold: 600
+};
+
 /**
  * Scale the vertical rhythm by the given factor
  */

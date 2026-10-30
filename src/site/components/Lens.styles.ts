@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm } from './styles.ts';
+import { colors, rhythm, weights } from './styles.ts';
 
 export default component('Lens')
   .identifiers({
@@ -10,7 +10,7 @@ export default component('Lens')
     section: e().children({
       title: e({
         color: colors.accent,
-        fontWeight: 300,
+        fontWeight: weights.light,
         fontSize: '1.25em',
         letterSpacing: '0.05em',
         marginBottom: rhythm(0.75),
@@ -45,7 +45,7 @@ export default component('Lens')
 
         count: e({
           fontSize: '0.9em',
-          fontWeight: 300,
+          fontWeight: weights.light,
           textAlign: 'center',
           width: '2em'
         })
@@ -77,7 +77,7 @@ export default component('Lens')
 
       count: e({
         fontSize: '0.9em',
-        fontWeight: 300,
+        fontWeight: weights.light,
         marginTop: rhythm(0.5),
         textAlign: 'center'
       })

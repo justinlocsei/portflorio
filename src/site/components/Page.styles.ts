@@ -3,7 +3,7 @@ import { component } from 'ruscus';
 import { colors } from './styles.ts';
 import '@fontsource/bitter/300.css';
 import '@fontsource/bitter/400.css';
-import '@fontsource/bitter/500.css';
+import '@fontsource/bitter/600.css';
 
 const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 

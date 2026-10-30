@@ -42,7 +42,8 @@ export default component('Arrangement')
       display: 'flex',
       flex: 1,
       flexDirection: 'column',
-      fontSize: '1.25em',
+      fontSize: '1.125em',
+      lineHeight: 1.25,
       justifyContent: 'center'
     }),
 

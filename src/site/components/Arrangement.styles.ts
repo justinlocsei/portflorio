@@ -47,9 +47,31 @@ export default component('Arrangement')
       justifyContent: 'center'
     }),
 
-    flower: e().nested(s => ({
+    flower: e().children({
+      name: e({
+        position: 'relative'
+      })
+    }).nested(s => ({
       '& + &': s({
         marginTop: rhythm(1)
+      })
+    })).variants((s, { els }) => ({
+      selected: s({
+        color: colors.textAccent,
+        fontWeight: weights.bold
+      }).nested({
+        [els.name]: s().nested({
+          '&::before': s({
+            backgroundColor: colors.accent,
+            bottom: 0,
+            content: '""',
+            height: '2px',
+            left: 0,
+            marginBottom: '-0.125em',
+            position: 'absolute',
+            right: 0
+          })
+        })
       })
     }))
   }))

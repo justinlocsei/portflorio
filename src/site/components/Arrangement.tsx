@@ -2,14 +2,15 @@ import { formatDate, getISODate } from '../../core/time.ts';
 import type { ImageID } from '../../core/types.ts';
 import { map } from '../../core/utils.ts';
 import { labelMechanic } from '../display.ts';
-import type { Arrangement as ArrangementType } from '../types.ts';
+import type { Arrangement as ArrangementType, ViewProps } from '../types.ts';
 import C from './Arrangement.styles.ts';
 import Photo from './Photo.tsx';
 
 export default function Arrangement({
   arrangement,
-  type
-}: {
+  type,
+  view
+}: ViewProps & {
   arrangement: ArrangementType;
   type: 'detail' | 'overview';
 }) {
@@ -39,11 +40,20 @@ export default function Arrangement({
         </div>
 
         <ul className={C.flowers}>
-          {arrangement.flowers.map(flower => (
-            <li className={C.flower} key={flower.name}>
-              {flower.name}
-            </li>
-          ))}
+          {arrangement.flowers.map(flower => {
+            const { name } = flower;
+
+            return (
+              <li
+                className={C.flower.root(
+                  view.flowers.includes(name) && 'selected'
+                )}
+                key={name}
+              >
+                <span className={C.flower.name}>{name}</span>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </article>

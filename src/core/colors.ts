@@ -72,7 +72,7 @@ export type Color = keyof typeof COLORS;
 
 export const COLOR_IDS = Object.keys(COLORS) as Color[];
 
-const DISPLAY_ORDER: Color[] = [
+export const DISPLAY_ORDER: Color[] = [
   'white',
   'sage',
   'blush',

@@ -1,3 +1,6 @@
+import type { CSS } from 'ruscus';
+import { css } from 'ruscus';
+
 export const colors = {
   accent: '#a5b39a',
   bg: '#252725',
@@ -18,4 +21,15 @@ export const weights = {
  */
 export function rhythm(factor = 1): string {
   return `${factor}rem`;
+}
+
+/**
+ * Define transitions with shared timing
+ */
+export function transition(
+  ...properties: string[]
+): CSS {
+  return css({
+    transition: properties.map(p => `${p} 150ms ease-out`).join(', ')
+  });
 }

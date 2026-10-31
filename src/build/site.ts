@@ -2,15 +2,13 @@ import fs from 'fs-extra';
 import type { Manifest, ManifestChunk } from 'vite';
 import { build } from 'vite';
 
-import { listRoutes } from '../core/routes.ts';
 import { ROOT_ELEMENT_ID } from '../core/site.ts';
-import type { Arrangement } from '../core/types.ts';
 import { loadArrangements } from './arrangements.ts';
 import { generateSiteData } from './data.ts';
 import { ensureSymlink } from './fs.ts';
 import { buildArrangementImages } from './images.ts';
-import paths, { routeToFile } from './paths.ts';
-import * as configs from './vite.ts';
+import paths from './paths.ts';
+import { client, server } from './vite.ts';
 
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -61,12 +59,10 @@ async function renderPage(
 /**
  * Generate data files used by the site
  */
-async function generateData(): Promise<Arrangement[]> {
+async function generateData(): Promise<void> {
   const arrangements = await buildArrangementImages(await loadArrangements());
 
   await generateSiteData(arrangements);
-
-  return arrangements;
 }
 
 /**
@@ -141,13 +137,13 @@ function extractAssets(entry: ManifestChunk): TemplateVariables {
 export async function buildStaticSite(): Promise<void> {
   await fs.rm(
     paths.dist.root,
-    { force: true, recursive: true }
+    { force: true,
+      recursive: true }
   );
 
-  const arrangements = await generateData();
-
-  await build(configs.client);
-  await build(configs.server);
+  await generateData();
+  await build(client);
+  await build(server);
 
   const manifest = JSON.parse(
     await fs.readFile(
@@ -160,18 +156,16 @@ export async function buildStaticSite(): Promise<void> {
   const tags = extractAssets(entry);
 
   const renderApp = (await import(pathToFileURL(paths.dist.serverBundle).href))
-    .default as ((pathname: string) => string);
+    .default as (() => string);
 
   if (typeof renderApp !== 'function') {
-    throw new Error('Could not load the app rendered');
+    throw new Error('Could not load the app renderer');
   }
 
-  for (const pathname of listRoutes(arrangements)) {
-    await renderPage(
-      { ...tags, content: renderApp(pathname) },
-      routeToFile(pathname, paths.dist.site)
-    );
-  }
+  await renderPage(
+    { ...tags, content: renderApp() },
+    path.join(paths.dist.site, 'index.html')
+  );
 
   console.log(`Site available: ${paths.dist.site}`);
 }

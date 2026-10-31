@@ -11,7 +11,6 @@ import type {
  */
 export type Arrangement = CoreArrangement & {
   images: ArrangementImages;
-  route: string;
 };
 
 /**

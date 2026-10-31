@@ -175,7 +175,7 @@ export default component('Lens')
         return e({
           backgroundColor: `var(${ids.swatch})`,
           border: `1px solid var(${ids.swatch})`,
-          borderRadius: '0.5em',
+          borderRadius: '0.375em',
           display: 'block',
           opacity: 0.9,
           outline: `0 solid var(${ids.swatch})`,

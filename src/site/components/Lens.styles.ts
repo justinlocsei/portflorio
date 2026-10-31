@@ -190,7 +190,7 @@ export default component('Lens')
         fontWeight: weights.light,
         marginTop: rhythm(0.5),
         textAlign: 'center',
-        ...transition('color', 'font-size', 'transform')
+        ...transition('color', 'transform')
       })
     }).variants((s, { els }) => {
       const shift = 2;
@@ -205,7 +205,6 @@ export default component('Lens')
 
           [els.count]: s({
             color: colors.textAccent,
-            fontSize: '1em',
             fontWeight: weights.normal,
             transform: `translateY(${shift}px)`
           })

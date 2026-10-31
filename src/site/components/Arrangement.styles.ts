@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm, weights } from './styles.ts';
+import { colors, rhythm, transition, weights } from './styles.ts';
 
 export default component('Arrangement')
   .identifiers({
@@ -57,26 +57,36 @@ export default component('Arrangement')
       justifyContent: 'space-between'
     }).children({
       colors: () => {
-        const size = rhythm(0.5);
+        const size = rhythm(0.9);
 
         return e({
           display: 'flex'
         }).children({
           color: e({
             backgroundColor: 'transparent',
+            border: `1px solid var(${ids.swatch})`,
             borderRadius: '50%',
+            boxSizing: 'content-box',
             display: 'block',
             opacity: 0.5,
-            outline: `1px solid var(${ids.swatch})`,
-            outlineOffset: '1px',
             height: size,
-            width: size
-          }).variants(s => ({
+            width: size,
+            ...transition('opacity')
+          }).nested(s => ({
+            '& + &': s({
+              marginLeft: '-0.25em'
+            })
+          })).variants(s => ({
+            selectable: s().nested({
+              '&:hover': s({
+                opacity: 1
+              })
+            }),
+
             selected: s({
               backgroundColor: `var(${ids.swatch})`,
-              outlineOffset: 0,
-              outlineWidth: '2px',
-              opacity: 0.75
+              opacity: 0.75,
+              transform: 'scale(1.25)'
             })
           }))
         });

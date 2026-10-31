@@ -56,16 +56,17 @@ export default function Arrangement({
                   {name}
                 </button>
 
-                <span
-                  className={C.flower.colors.root}
-                >
+                <span className={C.flower.colors.root}>
                   {flower.colors.map(c => (
-                    <span
+                    <button
                       className={C.flower.colors.color(
-                        view.colors.has(c) && 'selected'
+                        view.colors.has(c) ? 'selected' : 'selectable'
                       )}
                       key={c}
+                      onClick={() => view.colors.toggle(c)}
                       style={{ [swatch]: `#${COLORS[c].hex}` }}
+                      title={COLORS[c].name}
+                      type='button'
                     />
                   ))}
                 </span>

@@ -7,7 +7,9 @@ export default component('Lens')
     swatch: 'variable'
   })
   .elements((e, { ids }) => ({
-    section: e().children({
+    section: e({
+      position: 'relative'
+    }).children({
       header: () => {
         const pull = '0.825rem';
 
@@ -33,6 +35,24 @@ export default component('Lens')
         });
       },
 
+      clear: () => {
+        const size = '1.375em';
+
+        return e({
+          border: `1px solid ${colors.accent}`,
+          borderRadius: '50%',
+          height: size,
+          fontSize: '0.9em',
+          lineHeight: size,
+          opacity: 0,
+          position: 'absolute',
+          right: '0.375em',
+          top: '0.05em',
+          width: size,
+          ...transition('opacity')
+        });
+      },
+
       content: e()
     }).nested(s => ({
       '& + &': s({
@@ -45,7 +65,17 @@ export default component('Lens')
         })
       }),
 
-      expanded: s()
+      expanded: s(),
+
+      filtered: s().nested({
+        [els.clear]: s({
+          opacity: 0.75
+        }).nested({
+          '&:hover': s({
+            opacity: 1
+          })
+        })
+      })
     })),
 
     flowers: e(),

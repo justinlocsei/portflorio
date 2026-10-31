@@ -30,7 +30,7 @@ export default function Lens({
 
   return (
     <div className={C.root}>
-      <Section title='Flowers'>
+      <Section filtered={view.flowers.length > 0} title='Flowers'>
         <Flowers
           all={allFlowers}
           available={flowers}
@@ -39,7 +39,7 @@ export default function Lens({
         />
       </Section>
 
-      <Section title='Colors'>
+      <Section filtered={view.colors.length > 0} title='Colors'>
         <Colors
           arrangements={arrangements}
           setView={setView}
@@ -52,16 +52,23 @@ export default function Lens({
 
 function Section({
   children,
+  filtered,
   title
 }: {
   children: Children;
+  filtered: boolean;
   title: string;
 }) {
   const S = C.section;
   const [expanded, setExpanded] = useState(true);
 
   return (
-    <section className={S.root(expanded ? 'expanded' : 'collapsed')}>
+    <section
+      className={S.root(
+        expanded ? 'expanded' : 'collapsed',
+        filtered && 'filtered'
+      )}
+    >
       <button
         className={S.header.root}
         onClick={() => setExpanded(!expanded)}
@@ -69,6 +76,14 @@ function Section({
       >
         <span className={S.header.icon}>{expanded ? '‹' : '›'}</span>
         <h2 className={S.header.title}>{title}</h2>
+      </button>
+
+      <button
+        className={S.clear}
+        disabled={!filtered}
+        type='button'
+      >
+        ×
       </button>
 
       <div className={S.content}>

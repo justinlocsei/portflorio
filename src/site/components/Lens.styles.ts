@@ -157,10 +157,10 @@ export default component('Lens')
     },
 
     colors: e({
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
       columnGap: '1em',
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      justifyItems: 'center',
       rowGap: rhythm(1.5)
     }),
 

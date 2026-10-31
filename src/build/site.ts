@@ -137,8 +137,7 @@ function extractAssets(entry: ManifestChunk): TemplateVariables {
 export async function buildStaticSite(): Promise<void> {
   await fs.rm(
     paths.dist.root,
-    { force: true,
-      recursive: true }
+    { force: true, recursive: true }
   );
 
   await generateData();

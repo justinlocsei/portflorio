@@ -162,6 +162,7 @@ export default component('Lens')
       gridTemplateColumns: 'repeat(3, 1fr)',
       justifyItems: 'center',
       margin: `0 -0.25em`,
+      paddingTop: rhythm(1),
       rowGap: rhythm(1.5)
     }),
 

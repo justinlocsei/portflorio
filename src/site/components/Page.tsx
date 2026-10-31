@@ -1,3 +1,7 @@
+import '@fontsource/bitter/300.css';
+import '@fontsource/bitter/400.css';
+import '@fontsource/bitter/600.css';
+
 import type { Children } from '../ui.ts';
 import C from './Page.styles.ts';
 

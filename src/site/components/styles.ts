@@ -7,7 +7,8 @@ export const colors = {
   border: '#41443f',
   borderDark: '#1e201d',
   muted: '#595a4f',
-  text: '#f0ede4'
+  text: '#f0ede4',
+  textAccent: '#fff'
 };
 
 export const weights = {

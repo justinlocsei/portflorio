@@ -168,17 +168,21 @@ export default component('Lens')
     color: e({
       ...transition('opacity')
     }).children({
-      swatch: e({
-        backgroundColor: `var(${ids.swatch})`,
-        border: `1px solid var(${ids.swatch})`,
-        borderRadius: '0.5em',
-        display: 'block',
-        opacity: 0.9,
-        outline: `0 solid var(${ids.swatch})`,
-        height: '4em',
-        width: '4em',
-        ...transition('border-color', 'opacity', 'outline')
-      }),
+      swatch: () => {
+        const size = '4em';
+
+        return e({
+          backgroundColor: `var(${ids.swatch})`,
+          border: `1px solid var(${ids.swatch})`,
+          borderRadius: '0.5em',
+          display: 'block',
+          opacity: 0.9,
+          outline: `0 solid var(${ids.swatch})`,
+          height: size,
+          width: size,
+          ...transition('border-color', 'opacity', 'outline')
+        });
+      },
 
       count: e({
         fontSize: '0.9em',

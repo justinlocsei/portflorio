@@ -96,11 +96,14 @@ function Flowers({
   return (
     <ul className={C.flowers}>
       {all.map(flower => {
-        const count = inUse.get(flower.name);
         const { name } = flower;
+
+        const count = inUse.get(name);
+        const active = flowers.includes(name);
 
         return (
           <Flower
+            active={active}
             available={count !== undefined}
             count={count ?? 0}
             key={name}
@@ -108,7 +111,7 @@ function Flowers({
             onToggle={() => {
               setView({
                 ...view,
-                flowers: flowers.includes(name)
+                flowers: active
                   ? flowers.filter(f => f !== name)
                   : [...flowers, name]
               });
@@ -121,11 +124,13 @@ function Flowers({
 }
 
 function Flower({
+  active,
   available,
   count,
   name,
   onToggle
 }: {
+  active: boolean;
   available: boolean;
   count: number;
   name: string;
@@ -134,17 +139,26 @@ function Flower({
   const S = C.flower;
 
   return (
-    <li className={S.root(available ? 'available' : 'unavailable')}>
+    <li
+      className={S.root(
+        available ? 'available' : 'unavailable',
+        active && 'active'
+      )}
+    >
       <button
-        className={S.name}
+        className={S.toggle}
         disabled={!available}
         onClick={onToggle}
         type='button'
       >
-        {name}
-      </button>
+        <span className={S.name}>
+          {name}
+        </span>
 
-      <span className={S.count}>{count}</span>
+        <span className={S.count}>
+          {count}
+        </span>
+      </button>
     </li>
   );
 }

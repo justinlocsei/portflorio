@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm, weights } from './styles.ts';
+import { colors, rhythm, transition, weights } from './styles.ts';
 
 export default component('Lens')
   .identifiers({
@@ -56,15 +56,20 @@ export default component('Lens')
       return e({
         borderBottom: `1px solid ${colors.border}`,
         display: 'flex',
-        lineHeight: 3,
         justifyContent: 'space-between',
         margin: `0 -${gutter}`,
-        padding: `0 ${gutter}`
-      }).nested(s => ({
-        '& + &': s({
-          borderTop: `1px solid ${colors.borderDark}`
-        })
-      })).children({
+        position: 'relative',
+        ...transition('color')
+      }).children({
+        toggle: e({
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          lineHeight: 3,
+          padding: `0 ${gutter}`,
+          width: '100%'
+        }),
+
         name: e(),
 
         count: e({
@@ -73,8 +78,47 @@ export default component('Lens')
           textAlign: 'center',
           width: '2em'
         })
-      }).variants(s => ({
-        available: s(),
+      }).nested(s => ({
+        '& + &': s({
+          boxShadow: `inset 0 1px 0 0 ${colors.borderDark}`
+        }),
+
+        '&::before': s({
+          color: colors.accent,
+          content: '"›"',
+          fontWeight: weights.light,
+          left: `-${gutter}`,
+          opacity: 0,
+          position: 'absolute',
+          top: '50%',
+          transform: 'translateY(-55%)',
+          ...transition('font-size', 'margin', 'opacity')
+        })
+      })).variants((s, { els }) => ({
+        active: s({
+          color: colors.textAccent
+        }).nested({
+          '&::before': s({
+            fontSize: '1.25em',
+            fontWeight: weights.bold,
+            marginLeft: '-0.125em',
+            opacity: 1
+          }),
+
+          [els.count]: s({
+            fontWeight: weights.normal
+          })
+        }),
+
+        available: s().nested({
+          '&:hover': s({
+            color: colors.textAccent
+          }).nested({
+            '&::before': s({
+              opacity: 1
+            })
+          })
+        }),
 
         unavailable: s({
           color: colors.muted

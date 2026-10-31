@@ -48,7 +48,13 @@ export default function Arrangement({
                 )}
                 key={name}
               >
-                <span className={C.flower.name}>{name}</span>
+                <button
+                  className={C.flower.name}
+                  onClick={() => view.flowers.toggle(name)}
+                  type='button'
+                >
+                  {name}
+                </button>
 
                 <span
                   className={C.flower.colors.root}

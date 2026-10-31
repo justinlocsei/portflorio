@@ -1,3 +1,6 @@
+import { identifiers } from 'ruscus';
+
+import { COLORS } from '../../core/colors.ts';
 import { formatDate, getISODate } from '../../core/time.ts';
 import type { ImageID } from '../../core/types.ts';
 import { map } from '../../core/utils.ts';
@@ -18,6 +21,8 @@ export default function Arrangement({
     detail: 'full',
     overview: 'preview'
   });
+
+  const { swatch } = identifiers(C);
 
   return (
     <article className={C.root}>
@@ -41,7 +46,7 @@ export default function Arrangement({
 
         <ul className={C.flowers}>
           {arrangement.flowers.map(flower => {
-            const { name } = flower;
+            const { colors, name } = flower;
 
             return (
               <li
@@ -51,6 +56,18 @@ export default function Arrangement({
                 key={name}
               >
                 <span className={C.flower.name}>{name}</span>
+
+                <span
+                  className={C.flower.colors.root}
+                >
+                  {colors.slice(0, 2).map(c => (
+                    <span
+                      className={C.flower.colors.color}
+                      key={c}
+                      style={{ [swatch]: `#${COLORS[c].hex}` }}
+                    />
+                  ))}
+                </span>
               </li>
             );
           })}

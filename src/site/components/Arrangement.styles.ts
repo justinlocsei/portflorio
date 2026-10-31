@@ -3,11 +3,14 @@ import { component } from 'ruscus';
 import { colors, rhythm, weights } from './styles.ts';
 
 export default component('Arrangement')
+  .identifiers({
+    swatch: 'variable'
+  })
   .css({
     display: 'flex',
     gap: rhythm(3)
   })
-  .elements(e => ({
+  .elements((e, { ids }) => ({
     media: e({
       flex: 'none'
     }),
@@ -47,7 +50,31 @@ export default component('Arrangement')
       justifyContent: 'center'
     }),
 
-    flower: e().children({
+    flower: e({
+      alignItems: 'center',
+      display: 'flex',
+      gap: '0.5em',
+      justifyContent: 'space-between'
+    }).children({
+      colors: () => {
+        const size = rhythm(0.5);
+
+        return e({
+          display: 'flex',
+          opacity: 0.5
+        }).children({
+          color: e({
+            backgroundColor: 'transparent',
+            borderRadius: '50%',
+            display: 'block',
+            outline: `1px solid var(${ids.swatch})`,
+            outlineOffset: '1px',
+            height: size,
+            width: size
+          })
+        });
+      },
+
       name: e({
         position: 'relative'
       })

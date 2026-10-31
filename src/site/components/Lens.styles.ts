@@ -161,6 +161,7 @@ export default component('Lens')
       display: 'grid',
       gridTemplateColumns: 'repeat(3, 1fr)',
       justifyItems: 'center',
+      margin: `0 -0.25em`,
       rowGap: rhythm(1.5)
     }),
 

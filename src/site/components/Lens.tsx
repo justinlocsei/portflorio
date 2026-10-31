@@ -9,6 +9,7 @@ import type {
 } from '../../core/types.ts';
 import type { Arrangement, ExplorerView } from '../types.ts';
 import type { Children } from '../ui.ts';
+import { useState } from '../ui.ts';
 import C from './Lens.styles.ts';
 
 type ViewProps = {
@@ -57,10 +58,18 @@ function Section({
   title: string;
 }) {
   const S = C.section;
+  const [expanded, setExpanded] = useState(true);
 
   return (
-    <section className={S.root}>
-      <h2 className={S.title}>{title}</h2>
+    <section className={S.root(expanded ? 'expanded' : 'collapsed')}>
+      <button
+        className={S.header.root}
+        onClick={() => setExpanded(!expanded)}
+        type='button'
+      >
+        <span className={S.header.icon}>{expanded ? '‹' : '›'}</span>
+        <h2 className={S.header.title}>{title}</h2>
+      </button>
 
       <div className={S.content}>
         {children}
@@ -128,6 +137,7 @@ function Flower({
     <li className={S.root(available ? 'available' : 'unavailable')}>
       <button
         className={S.name}
+        disabled={!available}
         onClick={onToggle}
         type='button'
       >

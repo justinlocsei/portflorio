@@ -8,20 +8,44 @@ export default component('Lens')
   })
   .elements((e, { ids }) => ({
     section: e().children({
-      title: e({
-        color: colors.accent,
-        fontWeight: weights.light,
-        fontSize: '1.25em',
-        letterSpacing: '0.05em',
-        marginBottom: rhythm(0.75),
-        textTransform: 'uppercase'
-      }),
+      header: () => {
+        const pull = '0.825rem';
+
+        return e({
+          alignItems: 'center',
+          display: 'flex',
+          gap: '0.5em',
+          marginBottom: rhythm(0.75),
+          marginLeft: `-${pull}`
+        }).children({
+          title: e({
+            color: colors.accent,
+            fontWeight: weights.light,
+            fontSize: '1.25em',
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase'
+          }),
+
+          icon: e({
+            fontWeight: weights.bold,
+            transform: 'rotate(90deg)'
+          })
+        });
+      },
 
       content: e()
     }).nested(s => ({
       '& + &': s({
         marginTop: rhythm(2)
       })
+    })).variants((s, { els }) => ({
+      collapsed: s().nested({
+        [els.content]: s({
+          display: 'none'
+        })
+      }),
+
+      expanded: s()
     })),
 
     flowers: e(),

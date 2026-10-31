@@ -39,18 +39,4 @@ export function getPaths() {
   };
 }
 
-/**
- * Convert a route to its HTML file
- */
-export function routeToFile(
-  route: string,
-  root: string
-): string {
-  return path.join(
-    root,
-    ...route.split('/'),
-    'index.html'
-  );
-}
-
 export default getPaths();

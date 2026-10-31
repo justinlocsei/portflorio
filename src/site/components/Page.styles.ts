@@ -37,7 +37,8 @@ export default component('Page')
       color: 'inherit',
       cursor: 'pointer',
       fontFamily: 'inherit',
-      fontSize: 'inherit'
+      fontSize: 'inherit',
+      fontWeight: 'inherit'
     }).nested({
       '&:disabled': s({
         cursor: 'default'

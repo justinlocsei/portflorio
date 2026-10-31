@@ -46,7 +46,10 @@ export default function Explorer({
       </aside>
 
       <main className={C.gallery}>
-        <Gallery arrangements={arrangements} />
+        <Gallery
+          {...viewProps}
+          arrangements={arrangements}
+        />
       </main>
     </div>
   );

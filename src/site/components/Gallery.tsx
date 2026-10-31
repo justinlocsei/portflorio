@@ -1,10 +1,12 @@
-import type { Arrangement as ArrangementType } from '../types.ts';
+import type { Arrangement as ArrangementType, ViewProps } from '../types.ts';
 import Arrangement from './Arrangement.tsx';
 import C from './Gallery.styles.ts';
 
 export default function Gallery({
-  arrangements
-}: {
+  arrangements,
+  setView,
+  view
+}: ViewProps & {
   arrangements: ArrangementType[];
 }) {
   return (
@@ -12,7 +14,12 @@ export default function Gallery({
       <ul className={C.overviews}>
         {arrangements.map(arrangement => (
           <li className={C.overview} key={arrangement.id}>
-            <Arrangement arrangement={arrangement} type='overview' />
+            <Arrangement
+              arrangement={arrangement}
+              setView={setView}
+              type='overview'
+              view={view}
+            />
           </li>
         ))}
       </ul>

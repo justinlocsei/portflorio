@@ -131,7 +131,7 @@ export default component('Lens')
           '&::before': s({
             fontSize: '1.25em',
             fontWeight: weights.bold,
-            marginLeft: '-0.125em',
+            marginLeft: '-0.05em',
             opacity: 1
           }),
 

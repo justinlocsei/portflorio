@@ -35,8 +35,13 @@ export default component('Page')
       backgroundColor: 'transparent',
       border: 0,
       color: 'inherit',
+      cursor: 'pointer',
       fontFamily: 'inherit',
       fontSize: 'inherit'
+    }).nested({
+      '&:disabled': s({
+        cursor: 'default'
+      })
     }),
 
     li: s({

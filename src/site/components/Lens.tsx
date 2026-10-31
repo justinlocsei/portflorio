@@ -7,15 +7,10 @@ import type {
   Color as ColorType,
   Flower as FlowerType
 } from '../../core/types.ts';
-import type { Arrangement, ExplorerView } from '../types.ts';
+import type { Arrangement, ViewProps } from '../types.ts';
 import type { Children } from '../ui.ts';
 import { useState } from '../ui.ts';
 import C from './Lens.styles.ts';
-
-type ViewProps = {
-  setView: (view: ExplorerView) => void;
-  view: ExplorerView;
-};
 
 export default function Lens({
   arrangements,

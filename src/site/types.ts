@@ -41,3 +41,11 @@ export type PackedArrangedFlower = [
   flower: number,
   color: number
 ];
+
+/**
+ * Props shared by components that interact with the explorer view
+ */
+export type ViewProps = {
+  setView: (view: ExplorerView) => void;
+  view: ExplorerView;
+};

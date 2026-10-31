@@ -60,7 +60,7 @@ function Section({
   title: string;
 }) {
   const S = C.section;
-  const [expanded, setExpanded] = useState(title !== 'Flowers');
+  const [expanded, setExpanded] = useState(true);
 
   return (
     <section

@@ -60,18 +60,25 @@ export default component('Arrangement')
         const size = rhythm(0.5);
 
         return e({
-          display: 'flex',
-          opacity: 0.5
+          display: 'flex'
         }).children({
           color: e({
             backgroundColor: 'transparent',
             borderRadius: '50%',
             display: 'block',
+            opacity: 0.5,
             outline: `1px solid var(${ids.swatch})`,
             outlineOffset: '1px',
             height: size,
             width: size
-          })
+          }).variants(s => ({
+            selected: s({
+              backgroundColor: `var(${ids.swatch})`,
+              outlineOffset: 0,
+              outlineWidth: '2px',
+              opacity: 0.75
+            })
+          }))
         });
       },
 

@@ -23,6 +23,7 @@ export default function Arrangement({
   });
 
   const { swatch } = identifiers(C);
+  const colors = new Set(view.colors);
 
   return (
     <article className={C.root}>
@@ -46,12 +47,13 @@ export default function Arrangement({
 
         <ul className={C.flowers}>
           {arrangement.flowers.map(flower => {
-            const { colors, name } = flower;
+            const { name } = flower;
 
             return (
               <li
                 className={C.flower.root(
-                  view.flowers.includes(name) && 'selected'
+                  (view.flowers.includes(name)
+                    || flower.colors.some(c => colors.has(c))) && 'selected'
                 )}
                 key={name}
               >
@@ -60,9 +62,11 @@ export default function Arrangement({
                 <span
                   className={C.flower.colors.root}
                 >
-                  {colors.slice(0, 2).map(c => (
+                  {flower.colors.map(c => (
                     <span
-                      className={C.flower.colors.color}
+                      className={C.flower.colors.color(
+                        colors.has(c) && 'selected'
+                      )}
                       key={c}
                       style={{ [swatch]: `#${COLORS[c].hex}` }}
                     />

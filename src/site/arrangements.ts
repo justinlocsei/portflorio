@@ -1,4 +1,3 @@
-import routes from '../core/routes.ts';
 import { parseDate, tryISODate } from '../core/time.ts';
 import { sortBy } from '../core/utils.ts';
 import { unpackFlowers } from './flowers.ts';
@@ -18,10 +17,9 @@ function unpackArrangement(packed: PackedArrangement): Arrangement {
   return {
     date: parseDate(date),
     flowers: unpackFlowers(packedFlowers),
-    images: { full, preview },
-    mechanic,
     id,
-    route: routes.arrangement(id)
+    images: { full, preview },
+    mechanic
   };
 }
 
@@ -37,10 +35,3 @@ function loadArrangements(): Arrangement[] {
 }
 
 export const arrangements = loadArrangements();
-
-/**
- * Select an arrangement
- */
-export function selectArrangement(id: number): Arrangement | undefined {
-  return arrangements.find(a => a.id === id);
-}

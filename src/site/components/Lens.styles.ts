@@ -164,21 +164,57 @@ export default component('Lens')
       rowGap: rhythm(1.5)
     }),
 
-    color: e().children({
+    color: e({
+      ...transition('opacity')
+    }).children({
       swatch: e({
         backgroundColor: `var(${ids.swatch})`,
+        border: `1px solid var(${ids.swatch})`,
         borderRadius: '0.5em',
         display: 'block',
+        opacity: 0.9,
+        outline: `0 solid var(${ids.swatch})`,
         height: '4em',
-        width: '4em'
+        width: '4em',
+        ...transition('border-color', 'opacity', 'outline')
       }),
 
       count: e({
         fontSize: '0.9em',
         fontWeight: weights.light,
         marginTop: rhythm(0.5),
-        textAlign: 'center'
+        textAlign: 'center',
+        ...transition('color', 'font-size', 'transform')
       })
+    }).variants((s, { els }) => {
+      const shift = 2;
+
+      return {
+        active: s().nested({
+          [els.swatch]: s({
+            borderColor: 'rgba(0, 0, 0, 0.75)',
+            opacity: 1,
+            outlineWidth: `${shift}px`
+          }),
+
+          [els.count]: s({
+            color: colors.textAccent,
+            fontSize: '1em',
+            fontWeight: weights.normal,
+            transform: `translateY(${shift}px)`
+          })
+        }),
+
+        available: s().nested({
+          [`${els.swatch}:hover`]: s({
+            opacity: 1
+          })
+        }),
+
+        unavailable: s({
+          opacity: 0.25
+        })
+      };
     })
   }))
   .apply();

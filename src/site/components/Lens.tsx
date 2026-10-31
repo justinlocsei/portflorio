@@ -60,7 +60,7 @@ function Section({
   title: string;
 }) {
   const S = C.section;
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(title !== 'Flowers');
 
   return (
     <section
@@ -203,16 +203,18 @@ function Colors({
     <ul className={C.colors}>
       {displayColors().map(color => {
         const { id } = color;
+        const active = colors.includes(id);
 
         return (
           <Color
-            count={counts[color.id]}
+            active={active}
+            count={counts[color.id] ?? 0}
             key={color.id}
             color={color}
             onToggle={() => {
               setView({
                 ...view,
-                colors: colors.includes(id)
+                colors: active
                   ? colors.filter(c => c !== id)
                   : [...colors, id]
               });
@@ -225,21 +227,32 @@ function Colors({
 }
 
 function Color({
+  active,
   color,
   count,
   onToggle
 }: {
+  active: boolean;
   color: DisplayColor;
   count: number;
   onToggle: () => void;
 }) {
   const S = C.color;
+
   const swatch = identifiers(C).swatch;
+  const available = count > 0;
 
   return (
-    <li className={S.root} style={{ [swatch]: `#${color.hex}` }}>
+    <li
+      className={S.root(
+        available ? 'available' : 'unavailable',
+        active && 'active'
+      )}
+      style={{ [swatch]: `#${color.hex}` }}
+    >
       <button
         className={S.swatch}
+        disabled={!available}
         onClick={onToggle}
         title={color.name}
         type='button'

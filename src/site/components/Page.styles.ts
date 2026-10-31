@@ -14,13 +14,6 @@ const removeWhitespace = [
 ];
 
 export default component('Page')
-  .css({
-    backgroundColor: colors.bg,
-    color: colors.text,
-    fontFamily: 'Bitter, serif',
-    fontSize: '1rem',
-    lineHeight: 1
-  })
   .elements(e => ({
     header: e(),
 
@@ -43,6 +36,14 @@ export default component('Page')
       '&:disabled': s({
         cursor: 'default'
       })
+    }),
+
+    html: s({
+      backgroundColor: colors.bg,
+      color: colors.text,
+      fontFamily: 'Bitter, serif',
+      fontSize: '1rem',
+      lineHeight: 1
     }),
 
     li: s({

@@ -25,7 +25,11 @@ export default function Lens({
 
   return (
     <div className={C.root}>
-      <Section filtered={view.flowers.length > 0} title='Flowers'>
+      <Section
+        filtered={view.flowers.length > 0}
+        onClear={() => setView({ ...view, flowers: [] })}
+        title='Flowers'
+      >
         <Flowers
           all={allFlowers}
           available={flowers}
@@ -34,7 +38,11 @@ export default function Lens({
         />
       </Section>
 
-      <Section filtered={view.colors.length > 0} title='Colors'>
+      <Section
+        filtered={view.colors.length > 0}
+        onClear={() => setView({ ...view, colors: [] })}
+        title='Colors'
+      >
         <Colors
           arrangements={arrangements}
           setView={setView}
@@ -48,10 +56,12 @@ export default function Lens({
 function Section({
   children,
   filtered,
+  onClear,
   title
 }: {
   children: Children;
   filtered: boolean;
+  onClear: () => void;
   title: string;
 }) {
   const S = C.section;
@@ -76,6 +86,7 @@ function Section({
       <button
         className={S.clear}
         disabled={!filtered}
+        onClick={onClear}
         type='button'
       >
         ×

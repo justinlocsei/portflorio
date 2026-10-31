@@ -4,7 +4,6 @@ import C from './Gallery.styles.ts';
 
 export default function Gallery({
   arrangements,
-  setView,
   view
 }: ViewProps & {
   arrangements: ArrangementType[];
@@ -16,7 +15,6 @@ export default function Gallery({
           <li className={C.overview} key={arrangement.id}>
             <Arrangement
               arrangement={arrangement}
-              setView={setView}
               type='overview'
               view={view}
             />

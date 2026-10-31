@@ -43,9 +43,27 @@ export type PackedArrangedFlower = [
 ];
 
 /**
+ * A filter in the explorer view
+ */
+export type ViewFilter<T extends string> = {
+  active: boolean;
+  add: (...items: T[]) => void;
+  clear: () => void;
+  has: (item: T) => boolean;
+  remove: (...items: T[]) => void;
+  toggle: (...items: T[]) => void;
+};
+
+/**
+ * A manager for the explorer view
+ */
+export type ViewManager = {
+  [K in keyof ExplorerView]: ViewFilter<ExplorerView[K][number]>;
+};
+
+/**
  * Props shared by components that interact with the explorer view
  */
 export type ViewProps = {
-  setView: (view: ExplorerView) => void;
-  view: ExplorerView;
+  view: ViewManager;
 };

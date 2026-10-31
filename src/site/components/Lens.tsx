@@ -15,7 +15,6 @@ import C from './Lens.styles.ts';
 export default function Lens({
   arrangements,
   flowers: allFlowers,
-  setView,
   view
 }: ViewProps & {
   arrangements: Arrangement[];
@@ -26,26 +25,24 @@ export default function Lens({
   return (
     <div className={C.root}>
       <Section
-        filtered={view.flowers.length > 0}
-        onClear={() => setView({ ...view, flowers: [] })}
+        filtered={view.flowers.active}
+        onClear={view.flowers.clear}
         title='Flowers'
       >
         <Flowers
           all={allFlowers}
           available={flowers}
-          setView={setView}
           view={view}
         />
       </Section>
 
       <Section
-        filtered={view.colors.length > 0}
-        onClear={() => setView({ ...view, colors: [] })}
+        filtered={view.colors.active}
+        onClear={view.colors.clear}
         title='Colors'
       >
         <Colors
           arrangements={arrangements}
-          setView={setView}
           view={view}
         />
       </Section>
@@ -102,7 +99,6 @@ function Section({
 function Flowers({
   all,
   available,
-  setView,
   view
 }: ViewProps & {
   all: FlowerType[];
@@ -120,7 +116,7 @@ function Flowers({
         const { name } = flower;
 
         const count = inUse.get(name);
-        const active = flowers.includes(name);
+        const active = flowers.has(name);
 
         return (
           <Flower
@@ -130,12 +126,7 @@ function Flowers({
             key={name}
             name={name}
             onToggle={() => {
-              setView({
-                ...view,
-                flowers: active
-                  ? flowers.filter(f => f !== name)
-                  : [...flowers, name]
-              });
+              view.flowers.toggle(name);
             }}
           />
         );
@@ -186,7 +177,6 @@ function Flower({
 
 function Colors({
   arrangements,
-  setView,
   view
 }: ViewProps & {
   arrangements: Arrangement[];
@@ -209,7 +199,7 @@ function Colors({
     <ul className={C.colors}>
       {displayColors().map(color => {
         const { id } = color;
-        const active = colors.includes(id);
+        const active = colors.has(id);
 
         return (
           <Color
@@ -217,14 +207,7 @@ function Colors({
             count={counts[color.id] ?? 0}
             key={color.id}
             color={color}
-            onToggle={() => {
-              setView({
-                ...view,
-                colors: active
-                  ? colors.filter(c => c !== id)
-                  : [...colors, id]
-              });
-            }}
+            onToggle={() => view.colors.toggle(id)}
           />
         );
       })}

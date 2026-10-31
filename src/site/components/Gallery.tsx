@@ -13,11 +13,7 @@ export default function Gallery({
       <ul className={C.overviews}>
         {arrangements.map(arrangement => (
           <li className={C.overview} key={arrangement.id}>
-            <Arrangement
-              arrangement={arrangement}
-              type='overview'
-              view={view}
-            />
+            <Arrangement arrangement={arrangement} view={view} />
           </li>
         ))}
       </ul>

@@ -2,8 +2,6 @@ import { identifiers } from 'ruscus';
 
 import { COLORS } from '../../core/colors.ts';
 import { formatDate, getISODate } from '../../core/time.ts';
-import type { ImageID } from '../../core/types.ts';
-import { map } from '../../core/utils.ts';
 import { labelMechanic } from '../display.ts';
 import type { Arrangement as ArrangementType, ViewProps } from '../types.ts';
 import C from './Arrangement.styles.ts';
@@ -11,24 +9,17 @@ import Photo from './Photo.tsx';
 
 export default function Arrangement({
   arrangement,
-  type,
   view
 }: ViewProps & {
   arrangement: ArrangementType;
-  type: 'detail' | 'overview';
 }) {
-  const photo = map(type).to<ImageID>({
-    detail: 'full',
-    overview: 'preview'
-  });
-
   const { swatch } = identifiers(C);
 
   return (
     <article className={C.root}>
-      <a className={C.media} href={arrangement.route}>
-        <Photo arrangement={arrangement} type={photo} />
-      </a>
+      <div className={C.media}>
+        <Photo arrangement={arrangement} type='preview' />
+      </div>
 
       <div className={C.meta}>
         <div className={C.details.root}>

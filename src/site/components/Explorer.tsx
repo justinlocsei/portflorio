@@ -1,5 +1,5 @@
 import { summarizeFlowers } from '../../core/flowers.ts';
-import type { Arrangement, ExplorerView } from '../types.ts';
+import type { Arrangement, ExplorerView, ViewProps } from '../types.ts';
 import { useState } from '../ui.ts';
 import C from './Explorer.styles.ts';
 import Gallery from './Gallery.tsx';
@@ -33,14 +33,15 @@ export default function Explorer({
     );
   }
 
+  const viewProps: ViewProps = { setView, view };
+
   return (
     <div className={C.root}>
       <aside className={C.lens}>
         <Lens
+          {...viewProps}
           arrangements={arrangements}
           flowers={allFlowers}
-          setView={setView}
-          view={view}
         />
       </aside>
 

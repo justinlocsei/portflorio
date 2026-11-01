@@ -1,6 +1,15 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm, sansSerif, transition, weights } from './styles.ts';
+import {
+  colors,
+  focusable,
+  rhythm,
+  sansSerif,
+  transition,
+  weights
+} from './styles.ts';
+
+const focusBG = 'rgba(255, 255, 255, 0.075)';
 
 export default component('Lens')
   .identifiers({
@@ -31,7 +40,7 @@ export default component('Lens')
           gap: '0.5em',
           marginBottom: rhythm(0.75),
           marginLeft: `-${pull}`
-        }).children({
+        }).is(focusable()).children({
           title: e({
             color: colors.accent,
             fontWeight: weights.light,
@@ -42,9 +51,17 @@ export default component('Lens')
 
           icon: e({
             fontWeight: weights.bold,
-            transform: 'rotate(90deg)'
+            transform: 'rotate(90deg)',
+            textDecoration: 'none !important'
           })
-        });
+        }).nested((s, { els }) => ({
+          '&:focus-visible': s().nested({
+            [els.title]: s({
+              textDecoration: 'underline',
+              textUnderlineOffset: '0.25em'
+            })
+          })
+        }));
       },
 
       clear: () => {
@@ -62,7 +79,10 @@ export default component('Lens')
           top: '0.05em',
           width: size,
           ...transition('opacity')
-        });
+        }).is(focusable({
+          backgroundColor: focusBG,
+          opacity: '1 !important'
+        }));
       },
 
       content: e()
@@ -110,7 +130,9 @@ export default component('Lens')
           lineHeight: 3,
           padding: `0 ${gutter}`,
           width: '100%'
-        }),
+        }).is(focusable({
+          backgroundColor: focusBG
+        })),
 
         name: e(),
 
@@ -198,7 +220,11 @@ export default component('Lens')
             height: size,
             width: size,
             ...transition('border-color', 'opacity', 'outline')
-          });
+          }).nested(s => ({
+            '&:focus-visible': s({
+              boxShadow: `0 0 0 2px inset ${colors.bg}`
+            })
+          }));
         },
 
         count: () => {

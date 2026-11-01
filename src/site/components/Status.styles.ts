@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm, sansSerif, transition } from './styles.ts';
+import { colors, focusable, rhythm, sansSerif, transition } from './styles.ts';
 
 export default component('Status')
   .is(sansSerif)
@@ -74,7 +74,14 @@ export default component('Status')
     }),
 
     mode: e().children({
-      select: e()
+      select: e({
+        display: 'block',
+        ...transition('color')
+      }).is(focusable({
+        color: colors.textAccent,
+        borderBottom: `1px solid ${colors.accent}`,
+        paddingBottom: '0.25em'
+      }))
     }).variants(s => ({
       selected: s({
         borderBottom: `2px solid ${colors.accent}`,
@@ -82,7 +89,11 @@ export default component('Status')
         paddingBottom: '0.25em'
       }),
 
-      selectable: s()
+      selectable: s().nested({
+        '&:hover': s({
+          color: colors.textAccent
+        })
+      })
     }))
   }))
   .apply();

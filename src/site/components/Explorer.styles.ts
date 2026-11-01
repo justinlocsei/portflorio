@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm } from './styles.ts';
+import { rhythm } from './styles.ts';
 
 const sidebarWidth = '22rem';
 const statusHeight = rhythm(6);

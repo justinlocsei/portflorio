@@ -11,6 +11,7 @@ import { useState } from '../ui.ts';
 import C from './Explorer.styles.ts';
 import Gallery from './Gallery.tsx';
 import Lens from './Lens.tsx';
+import Photo from './Photo.tsx';
 import Status from './Status.tsx';
 
 const DEFAULT_VIEW: View = {
@@ -26,6 +27,7 @@ export default function Explorer({
   const [mode, setMode] = useState<ViewMode>('list');
   const [view, setView] = useState<View>({ ...DEFAULT_VIEW });
 
+  const { arrangement } = view;
   const allFlowers = summarizeFlowers(allArrangements);
   const arrangements = filterArrangements(allArrangements, view);
 
@@ -63,6 +65,24 @@ export default function Explorer({
           totalArrangements={allArrangements.length}
         />
       </footer>
+
+      {arrangement && (
+        <div className={C.arrangement.root}>
+          <div className={C.arrangement.image}>
+            <div className={C.arrangement.photo}>
+              <Photo arrangement={arrangement} type='full' />
+            </div>
+
+            <button
+              className={C.arrangement.close}
+              onClick={() => setView({ ...view, arrangement: undefined })}
+              type='button'
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

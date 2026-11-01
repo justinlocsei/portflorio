@@ -1,7 +1,7 @@
 import { identifiers } from 'ruscus';
 
 import type { DisplayColor } from '../../core/colors.ts';
-import { displayColors } from '../../core/colors.ts';
+import { COLORS, displayColors } from '../../core/colors.ts';
 import { summarizeFlowers } from '../../core/flowers.ts';
 import type {
   Color as ColorType,
@@ -246,7 +246,8 @@ function Color({
     <li
       className={S.root(
         available ? 'available' : 'unavailable',
-        active && 'active'
+        active && 'active',
+        COLORS[color.id].lightness
       )}
       style={{ [swatch]: `#${color.hex}` }}
     >

@@ -7,7 +7,7 @@ import type {
   ViewManager,
   ViewMode
 } from '../types.ts';
-import { useEffect, useState } from '../ui.ts';
+import { useEffect, useRef, useState } from '../ui.ts';
 import C from './Explorer.styles.ts';
 import Gallery from './Gallery.tsx';
 import Lens from './Lens.tsx';
@@ -28,8 +28,25 @@ export default function Explorer({
   const [view, setView] = useState<View>({ ...DEFAULT_VIEW });
 
   const { arrangement } = view;
+  const closeRef = useRef<HTMLButtonElement>(null);
   const allFlowers = summarizeFlowers(allArrangements);
   const arrangements = filterArrangements(allArrangements, view);
+
+  useEffect(() => {
+    if (!arrangement) {
+      return;
+    }
+
+    const previouslyFocused = document.activeElement;
+
+    closeRef.current?.focus();
+
+    return () => {
+      if (previouslyFocused instanceof HTMLElement) {
+        previouslyFocused.focus();
+      }
+    };
+  }, [arrangement?.id]);
 
   useEffect(() => {
     if (!arrangement) {
@@ -103,7 +120,11 @@ export default function Explorer({
       </main>
 
       {arrangement && (
-        <div className={C.arrangement.root}>
+        <div
+          aria-modal='true'
+          className={C.arrangement.root}
+          role='dialog'
+        >
           <div className={C.arrangement.image}>
             <div className={C.arrangement.photo}>
               <Photo arrangement={arrangement} type='full' />
@@ -111,7 +132,9 @@ export default function Explorer({
 
             <button
               className={C.arrangement.close}
-              onClick={() => setView({ ...view, arrangement: undefined })}
+              onClick={() =>
+                setView(current => ({ ...current, arrangement: undefined }))}
+              ref={closeRef}
               type='button'
             >
               Close

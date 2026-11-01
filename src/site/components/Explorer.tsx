@@ -1,7 +1,7 @@
 import { summarizeFlowers } from '../../core/flowers.ts';
 import type {
   Arrangement,
-  ExplorerView,
+  View,
   ViewFilter,
   ViewManager,
   ViewMode
@@ -12,7 +12,7 @@ import Gallery from './Gallery.tsx';
 import Lens from './Lens.tsx';
 import Status from './Status.tsx';
 
-const DEFAULT_VIEW: ExplorerView = {
+const DEFAULT_VIEW: View = {
   colors: [],
   flowers: []
 };
@@ -23,7 +23,7 @@ export default function Explorer({
   arrangements: Arrangement[];
 }) {
   const [mode, setMode] = useState<ViewMode>('list');
-  const [view, setView] = useState<ExplorerView>({ ...DEFAULT_VIEW });
+  const [view, setView] = useState<View>({ ...DEFAULT_VIEW });
 
   const allFlowers = summarizeFlowers(allArrangements);
   const arrangements = filterArrangements(allArrangements, view);
@@ -66,7 +66,7 @@ export default function Explorer({
 
 function filterArrangements(
   all: Arrangement[],
-  { colors, flowers }: ExplorerView
+  { colors, flowers }: View
 ): Arrangement[] {
   let arrangements = all;
 
@@ -86,9 +86,9 @@ function filterArrangements(
 }
 
 function createViewFilter<T extends string>(
-  view: ExplorerView,
-  setView: (view: ExplorerView) => void,
-  key: keyof ExplorerView
+  view: View,
+  setView: (view: View) => void,
+  key: keyof View
 ): ViewFilter<T> {
   const set = new Set(view[key] as string[]);
 

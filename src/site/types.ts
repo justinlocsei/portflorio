@@ -14,14 +14,6 @@ export type Arrangement = CoreArrangement & {
 };
 
 /**
- * The current explorer view
- */
-export type ExplorerView = {
-  colors: Color[];
-  flowers: string[];
-};
-
-/**
  * A compact representation of an arrangement
  */
 export type PackedArrangement = [
@@ -42,6 +34,14 @@ export type PackedArrangedFlower = [
 ];
 
 /**
+ * The current view
+ */
+export type View = {
+  colors: Color[];
+  flowers: string[];
+};
+
+/**
  * A filter in the explorer view
  */
 export type ViewFilter<T extends string> = {
@@ -57,7 +57,7 @@ export type ViewFilter<T extends string> = {
  * A manager for the explorer view
  */
 export type ViewManager = {
-  [K in keyof ExplorerView]: ViewFilter<ExplorerView[K][number]>;
+  [K in keyof View]: ViewFilter<View[K][number]>;
 };
 
 /**

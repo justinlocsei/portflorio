@@ -61,6 +61,11 @@ export type ViewManager = {
 };
 
 /**
+ * A mode for viewing arrangements
+ */
+export type ViewMode = 'grid' | 'list';
+
+/**
  * Props shared by components that interact with the explorer view
  */
 export type ViewProps = {

@@ -1,4 +1,9 @@
 /**
+ * Select a value from a union
+ */
+export type Select<T, U extends T> = Extract<T, U>;
+
+/**
  * Produce a narrower type from a subset of an object's properties
  */
 export type Subset<T extends object, K extends keyof T> = Pick<T, K>;

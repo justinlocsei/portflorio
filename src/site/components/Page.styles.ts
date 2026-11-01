@@ -44,7 +44,8 @@ export default component('Page')
       color: colors.text,
       fontFamily: 'Bitter, serif',
       fontSize: '1rem',
-      lineHeight: 1
+      lineHeight: 1,
+      scrollbarGutter: 'stable'
     }),
 
     li: s({

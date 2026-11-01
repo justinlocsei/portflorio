@@ -9,9 +9,11 @@ import C from './Gallery.styles.ts';
 export default function Gallery({
   arrangements,
   mode,
+  onRequestArrangement,
   view
 }: ViewProps & {
   arrangements: ArrangementType[];
+  onRequestArrangement: (arrangement: ArrangementType) => void;
   mode: ViewMode;
 }) {
   return (
@@ -19,7 +21,13 @@ export default function Gallery({
       <ul className={C.overviews}>
         {arrangements.map(arrangement => (
           <li className={C.overview} key={arrangement.id}>
-            <Arrangement arrangement={arrangement} mode={mode} view={view} />
+            <Arrangement
+              arrangement={arrangement}
+              mode={mode}
+              onSelect={() =>
+                onRequestArrangement(arrangement)}
+              view={view}
+            />
           </li>
         ))}
       </ul>

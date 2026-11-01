@@ -14,18 +14,20 @@ import Photo from './Photo.tsx';
 export default function Arrangement({
   arrangement,
   mode,
+  onSelect,
   view
 }: ViewProps & {
   arrangement: ArrangementType;
   mode: ViewMode;
+  onSelect: () => void;
 }) {
   const { swatch } = identifiers(C);
 
   return (
     <article className={C.root(mode === 'grid' && 'grid')}>
-      <div className={C.media}>
+      <button className={C.media} onClick={onSelect} type='button'>
         <Photo arrangement={arrangement} type='preview' />
-      </div>
+      </button>
 
       <div className={C.meta}>
         <div className={C.details.root}>

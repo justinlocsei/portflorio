@@ -48,6 +48,8 @@ export default function Explorer({
         <Gallery
           arrangements={arrangements}
           mode={mode}
+          onRequestArrangement={arrangement =>
+            setView({ ...view, arrangement })}
           view={manager}
         />
       </main>

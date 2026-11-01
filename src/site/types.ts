@@ -1,3 +1,4 @@
+import type { Select } from '../core/types/utils.ts';
 import type {
   ArrangementImages,
   Color,
@@ -42,6 +43,11 @@ export type View = {
 };
 
 /**
+ * The ID of a view filter
+ */
+type ViewFilterID = Select<keyof View, 'colors' | 'flowers'>;
+
+/**
  * A filter in the explorer view
  */
 export type ViewFilter<T extends string> = {
@@ -57,7 +63,7 @@ export type ViewFilter<T extends string> = {
  * A manager for the explorer view
  */
 export type ViewManager = {
-  [K in keyof View]: ViewFilter<View[K][number]>;
+  [K in ViewFilterID]: ViewFilter<View[K][number]>;
 };
 
 /**

@@ -7,7 +7,7 @@ import type {
   ViewManager,
   ViewMode
 } from '../types.ts';
-import { useState } from '../ui.ts';
+import { useEffect, useState } from '../ui.ts';
 import C from './Explorer.styles.ts';
 import Gallery from './Gallery.tsx';
 import Lens from './Lens.tsx';
@@ -30,6 +30,24 @@ export default function Explorer({
   const { arrangement } = view;
   const allFlowers = summarizeFlowers(allArrangements);
   const arrangements = filterArrangements(allArrangements, view);
+
+  useEffect(() => {
+    if (!arrangement) {
+      return;
+    }
+
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = documentElement.style.overflow;
+
+    body.style.overflow = 'hidden';
+    documentElement.style.overflow = 'hidden';
+
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, [arrangement?.id]);
 
   const manager: ViewManager = {
     colors: createViewFilter(view, setView, 'colors'),

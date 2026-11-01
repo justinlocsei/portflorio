@@ -1,66 +1,86 @@
 /**
+ * The lightness of a color
+ */
+type Lightness = 'dark' | 'light';
+
+/**
  * Details on a color
  */
 type Details = {
   hex: string;
+  lightness: Lightness;
   name: string;
 };
 
 export const COLORS = {
   blush: {
     hex: 'EEC4C4',
+    lightness: 'light',
     name: 'Blush'
   },
   burgundy: {
     hex: '72283E',
+    lightness: 'dark',
     name: 'Burgundy'
   },
   chartreuse: {
     hex: 'B8CF3E',
+    lightness: 'light',
     name: 'Chartreuse'
   },
   green: {
     hex: '2E8F4A',
+    lightness: 'light',
     name: 'Green'
   },
   lavender: {
     hex: 'A89BC4',
+    lightness: 'light',
     name: 'Lavender'
   },
   magenta: {
     hex: 'D0428C',
+    lightness: 'light',
     name: 'Magenta'
   },
   orange: {
     hex: 'E86F2A',
+    lightness: 'light',
     name: 'Orange'
   },
   peach: {
     hex: 'E9A67A',
+    lightness: 'light',
     name: 'Peach'
   },
   pink: {
     hex: 'ED4DA6',
+    lightness: 'light',
     name: 'Pink'
   },
   purple: {
     hex: '6E5099',
+    lightness: 'dark',
     name: 'Purple'
   },
   red: {
     hex: 'C7364E',
+    lightness: 'dark',
     name: 'Red'
   },
   sage: {
     hex: '9AADA3',
+    lightness: 'light',
     name: 'Sage'
   },
   white: {
     hex: 'F7F5F0',
+    lightness: 'light',
     name: 'White'
   },
   yellow: {
     hex: 'EFC030',
+    lightness: 'light',
     name: 'Yellow'
   }
 } satisfies Record<string, Details>;

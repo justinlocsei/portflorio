@@ -89,9 +89,11 @@ export default function Explorer({
     flowers: createViewFilter(view, setView, 'flowers')
   };
 
+  const inert = arrangement !== undefined;
+
   return (
     <div className={C.root}>
-      <aside className={C.lens}>
+      <aside className={C.lens} inert={inert}>
         <Lens
           arrangements={arrangements}
           flowers={allFlowers}
@@ -99,7 +101,7 @@ export default function Explorer({
         />
       </aside>
 
-      <footer className={C.status}>
+      <footer className={C.status} inert={inert}>
         <Status
           arrangements={arrangements.length}
           mode={mode}
@@ -109,7 +111,7 @@ export default function Explorer({
         />
       </footer>
 
-      <main className={C.gallery}>
+      <main className={C.gallery} inert={inert}>
         <Gallery
           arrangements={arrangements}
           mode={mode}

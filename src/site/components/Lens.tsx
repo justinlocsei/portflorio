@@ -22,17 +22,23 @@ export default function Lens({
   flowers: FlowerType[];
 }) {
   const flowers = summarizeFlowers(arrangements);
+  const filtered = view.flowers.active || view.colors.active;
 
   return (
     <div className={C.root}>
-      <h1 className={C.title.root}>
-        <img
-          alt='Portflorio'
-          className={C.title.image}
-          height={24}
-          src={logo}
-          width={250}
-        />
+      <h1 className={C.title.root(filtered && 'linked')}>
+        <a
+          className={C.title.link}
+          href={filtered ? '/' : undefined}
+        >
+          <img
+            alt='Portflorio'
+            className={C.title.image}
+            height={24}
+            src={logo}
+            width={250}
+          />
+        </a>
       </h1>
 
       <Section

@@ -20,13 +20,32 @@ export default component('Lens')
       paddingBottom: rhythm(3),
       paddingTop: rhythm(1.25)
     }).children({
+      link: e({
+        display: 'block'
+      }),
+
       image: e({
         display: 'block',
         margin: '0 auto',
         maxWidth: '100%',
-        opacity: 0.9
+        opacity: 0.9,
+        ...transition('opacity')
       })
-    }),
+    }).variants((s, { els }) => ({
+      linked: s().nested({
+        [`${els.link}:hover`]: s().nested({
+          [els.image]: s({
+            opacity: 1
+          })
+        }),
+
+        [`${els.link}:focus-visible`]: s({
+          backgroundColor: focusBG,
+          outline: `4px solid ${focusBG}`,
+          outlineOffset: 0
+        })
+      })
+    })),
 
     section: e({
       position: 'relative'

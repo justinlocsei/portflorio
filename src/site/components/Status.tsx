@@ -20,19 +20,23 @@ const MODE_LABELS: Record<ViewMode, string> = {
 export default function Status({
   arrangements,
   mode: currentMode,
+  onClear,
   onSelectMode,
   totalArrangements
 }: {
   arrangements: number;
   mode: ViewMode;
+  onClear: () => void;
   onSelectMode: ModeSelector;
   totalArrangements: number;
 }) {
+  const filtered = arrangements < totalArrangements;
+
   return (
     <div className={C.root}>
       <Section type='count'>
         <p className={C.counts.root}>
-          {arrangements < totalArrangements && (
+          {filtered && (
             <>
               <span className={C.counts.visible}>
                 {arrangements}
@@ -45,6 +49,16 @@ export default function Status({
           <span className={C.counts.count}>
             {totalArrangements}
           </span>
+
+          {filtered && (
+            <button
+              className={C.counts.reset}
+              onClick={onClear}
+              type='button'
+            >
+              All
+            </button>
+          )}
         </p>
       </Section>
 

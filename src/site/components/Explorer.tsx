@@ -12,17 +12,18 @@ import Gallery from './Gallery.tsx';
 import Lens from './Lens.tsx';
 import Status from './Status.tsx';
 
+const DEFAULT_VIEW: ExplorerView = {
+  colors: [],
+  flowers: []
+};
+
 export default function Explorer({
   arrangements: allArrangements
 }: {
   arrangements: Arrangement[];
 }) {
   const [mode, setMode] = useState<ViewMode>('list');
-
-  const [view, setView] = useState<ExplorerView>({
-    colors: [],
-    flowers: []
-  });
+  const [view, setView] = useState<ExplorerView>({ ...DEFAULT_VIEW });
 
   const allFlowers = summarizeFlowers(allArrangements);
   const arrangements = filterArrangements(allArrangements, view);
@@ -54,6 +55,7 @@ export default function Explorer({
         <Status
           arrangements={arrangements.length}
           mode={mode}
+          onClear={() => setView(DEFAULT_VIEW)}
           onSelectMode={setMode}
           totalArrangements={allArrangements.length}
         />

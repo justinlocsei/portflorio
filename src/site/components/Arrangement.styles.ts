@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm, transition, weights } from './styles.ts';
+import { colors, rhythm, sansSerif, transition, weights } from './styles.ts';
 
 export default component('Arrangement')
   .identifiers({
@@ -35,10 +35,11 @@ export default component('Arrangement')
       mechanic: e({
         color: colors.accent,
         fontSize: '0.9em',
+        fontWeight: weights.light,
         letterSpacing: '0.075em',
         lineHeight: rhythm(2),
         textTransform: 'uppercase'
-      })
+      }).is(sansSerif)
     }),
 
     flowers: e({

@@ -35,7 +35,7 @@ export default component('Lens')
           title: e({
             color: colors.accent,
             fontWeight: weights.light,
-            fontSize: '1em',
+            fontSize: '1.125em',
             letterSpacing: '0.05em',
             textTransform: 'uppercase'
           }).is(sansSerif),

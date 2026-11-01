@@ -7,6 +7,18 @@ export default component('Lens')
     swatch: 'variable'
   })
   .elements((e, { ids }) => ({
+    title: e({
+      paddingBottom: rhythm(3),
+      paddingTop: rhythm(1.25)
+    }).children({
+      image: e({
+        display: 'block',
+        margin: '0 auto',
+        maxWidth: '100%',
+        opacity: 0.9
+      })
+    }),
+
     section: e({
       position: 'relative'
     }).children({
@@ -24,8 +36,7 @@ export default component('Lens')
             color: colors.accent,
             fontWeight: weights.light,
             fontSize: '1.25em',
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase'
+            letterSpacing: '0.05em'
           }),
 
           icon: e({

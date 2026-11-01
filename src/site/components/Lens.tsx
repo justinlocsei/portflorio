@@ -7,6 +7,7 @@ import type {
   Color as ColorType,
   Flower as FlowerType
 } from '../../core/types.ts';
+import logo from '../images/logo.svg';
 import type { Arrangement, ViewProps } from '../types.ts';
 import type { Children } from '../ui.ts';
 import { useState } from '../ui.ts';
@@ -24,6 +25,16 @@ export default function Lens({
 
   return (
     <div className={C.root}>
+      <h1 className={C.title.root}>
+        <img
+          alt='Portflorio'
+          className={C.title.image}
+          height={24}
+          src={logo}
+          width={250}
+        />
+      </h1>
+
       <Section
         filtered={view.flowers.active}
         onClear={view.flowers.clear}

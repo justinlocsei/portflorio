@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm, transition, weights } from './styles.ts';
+import { colors, rhythm, sansSerif, transition, weights } from './styles.ts';
 
 export default component('Lens')
   .identifiers({
@@ -35,9 +35,10 @@ export default component('Lens')
           title: e({
             color: colors.accent,
             fontWeight: weights.light,
-            fontSize: '1.25em',
-            letterSpacing: '0.05em'
-          }),
+            fontSize: '1em',
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase'
+          }).is(sansSerif),
 
           icon: e({
             fontWeight: weights.bold,

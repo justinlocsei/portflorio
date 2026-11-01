@@ -46,16 +46,6 @@ export default function Explorer({
         />
       </aside>
 
-      <main className={C.gallery}>
-        <Gallery
-          arrangements={arrangements}
-          mode={mode}
-          onRequestArrangement={arrangement =>
-            setView({ ...view, arrangement })}
-          view={manager}
-        />
-      </main>
-
       <footer className={C.status}>
         <Status
           arrangements={arrangements.length}
@@ -65,6 +55,16 @@ export default function Explorer({
           totalArrangements={allArrangements.length}
         />
       </footer>
+
+      <main className={C.gallery}>
+        <Gallery
+          arrangements={arrangements}
+          mode={mode}
+          onRequestArrangement={arrangement =>
+            setView({ ...view, arrangement })}
+          view={manager}
+        />
+      </main>
 
       {arrangement && (
         <div className={C.arrangement.root}>

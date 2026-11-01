@@ -120,4 +120,13 @@ export default component('Arrangement')
       })
     }))
   }))
+  .variants((s, { els }) => ({
+    grid: s({
+      display: 'block'
+    }).nested({
+      [els.meta]: s({
+        display: 'none'
+      })
+    })
+  }))
   .apply();

@@ -45,6 +45,7 @@ export default function Explorer({
       <main className={C.gallery}>
         <Gallery
           arrangements={arrangements}
+          mode={mode}
           view={manager}
         />
       </main>

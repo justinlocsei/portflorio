@@ -3,20 +3,26 @@ import { identifiers } from 'ruscus';
 import { COLORS } from '../../core/colors.ts';
 import { formatDate, getISODate } from '../../core/time.ts';
 import { labelMechanic } from '../display.ts';
-import type { Arrangement as ArrangementType, ViewProps } from '../types.ts';
+import type {
+  Arrangement as ArrangementType,
+  ViewMode,
+  ViewProps
+} from '../types.ts';
 import C from './Arrangement.styles.ts';
 import Photo from './Photo.tsx';
 
 export default function Arrangement({
   arrangement,
+  mode,
   view
 }: ViewProps & {
   arrangement: ArrangementType;
+  mode: ViewMode;
 }) {
   const { swatch } = identifiers(C);
 
   return (
-    <article className={C.root}>
+    <article className={C.root(mode === 'grid' && 'grid')}>
       <div className={C.media}>
         <Photo arrangement={arrangement} type='preview' />
       </div>

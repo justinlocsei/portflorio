@@ -40,7 +40,7 @@ export const COLORS = {
   },
   magenta: {
     hex: 'D0428C',
-    lightness: 'light',
+    lightness: 'dark',
     name: 'Magenta'
   },
   orange: {

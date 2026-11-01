@@ -49,6 +49,24 @@ export default function Explorer({
     };
   }, [arrangement?.id]);
 
+  useEffect(() => {
+    if (!arrangement) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setView(current => ({ ...current, arrangement: undefined }));
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [arrangement?.id]);
+
   const manager: ViewManager = {
     colors: createViewFilter(view, setView, 'colors'),
     flowers: createViewFilter(view, setView, 'flowers')

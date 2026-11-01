@@ -38,6 +38,7 @@ export type PackedArrangedFlower = [
  * The current view
  */
 export type View = {
+  arrangement?: Arrangement;
   colors: Color[];
   flowers: string[];
 };

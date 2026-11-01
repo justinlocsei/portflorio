@@ -1,5 +1,5 @@
 import type { CSS } from 'ruscus';
-import { css } from 'ruscus';
+import { css, trait } from 'ruscus';
 
 export const colors = {
   accent: '#a5b39a',
@@ -16,6 +16,13 @@ export const weights = {
   normal: 400,
   bold: 600
 };
+
+export const sansSerif = trait(s =>
+  s({
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 300
+  })
+);
 
 /**
  * Scale the vertical rhythm by the given factor

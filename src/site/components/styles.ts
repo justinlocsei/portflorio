@@ -25,6 +25,24 @@ export const sansSerif = trait(s =>
 );
 
 /**
+ * Define focus styles for an element
+ */
+export function focusable(styles: CSS = {}) {
+  return trait(s =>
+    s().nested({
+      '&:focus:not(:focus-visible)': s({
+        outline: 'none'
+      }),
+
+      '&:focus-visible': s({
+        outline: 'none',
+        ...styles
+      })
+    })
+  );
+}
+
+/**
  * Scale the vertical rhythm by the given factor
  */
 export function rhythm(factor = 1): string {

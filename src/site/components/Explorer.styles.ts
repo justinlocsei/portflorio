@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm, sansSerif, transition } from './styles.ts';
+import { colors, focusable, rhythm, sansSerif, transition } from './styles.ts';
 
 const sidebarWidth = '22rem';
 const statusHeight = rhythm(6);
@@ -68,7 +68,12 @@ export default component('Explorer')
         right: '1em',
         top: '1em',
         ...transition('opacity')
-      }).is(sansSerif).nested(s => ({
+      }).is(
+        sansSerif,
+        focusable({
+          outline: `2px solid ${colors.accent}`
+        })
+      ).nested(s => ({
         '&:hover': s({
           opacity: 1
         })

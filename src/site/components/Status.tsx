@@ -111,6 +111,7 @@ function Mode({
     <li className={S.root(current ? 'selected' : 'selectable')}>
       <button
         className={S.select}
+        disabled={current}
         onClick={() => onSelect(mode)}
         type='button'
       >

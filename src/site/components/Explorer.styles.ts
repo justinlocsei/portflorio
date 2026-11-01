@@ -25,7 +25,8 @@ export default component('Explorer')
 
     gallery: e({
       marginLeft: sidebarWidth,
-      padding: rhythm(2)
+      padding: rhythm(2),
+      paddingTop: rhythm(3)
     }),
 
     status: e({

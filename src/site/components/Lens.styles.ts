@@ -166,60 +166,79 @@ export default component('Lens')
       rowGap: rhythm(1.5)
     }),
 
-    color: e({
-      ...transition('opacity')
-    }).children({
-      swatch: () => {
-        const size = '4em';
+    color: () => {
+      const radius = '0.375rem';
 
-        return e({
-          backgroundColor: `var(${ids.swatch})`,
-          border: `1px solid var(${ids.swatch})`,
-          borderRadius: '0.375em',
-          display: 'block',
-          opacity: 0.9,
-          outline: `0 solid var(${ids.swatch})`,
-          height: size,
-          width: size,
-          ...transition('border-color', 'opacity', 'outline')
-        });
-      },
+      return e({
+        position: 'relative',
+        ...transition('opacity')
+      }).children({
+        swatch: () => {
+          const size = '4.25em';
 
-      count: e({
-        fontSize: '0.9em',
-        fontWeight: weights.light,
-        marginTop: rhythm(0.5),
-        textAlign: 'center',
-        ...transition('color', 'transform')
-      })
-    }).variants((s, { els }) => {
-      const shift = 2;
+          return e({
+            backgroundColor: `var(${ids.swatch})`,
+            border: `1px solid var(${ids.swatch})`,
+            borderRadius: radius,
+            display: 'block',
+            opacity: 0.9,
+            outline: `0 solid var(${ids.swatch})`,
+            height: size,
+            width: size,
+            ...transition('border-color', 'opacity', 'outline')
+          });
+        },
 
-      return {
-        active: s().nested({
-          [els.swatch]: s({
-            borderColor: 'rgba(0, 0, 0, 0.75)',
-            opacity: 1,
-            outlineWidth: `${shift}px`
+        count: () => {
+          return e({
+            backgroundColor: colors.bg,
+            borderRadius: radius,
+            bottom: '1px',
+            display: 'flex',
+            flexDirection: 'column',
+            fontSize: '0.8em',
+            fontWeight: weights.light,
+            justifyContent: 'center',
+            padding: '0.5em',
+            pointerEvents: 'none',
+            position: 'absolute',
+            right: '1px',
+            textAlign: 'center',
+            width: '2.25em',
+            ...transition('color', 'transform')
+          });
+        }
+      }).variants((s, { els }) => {
+        const transform = 'scale(1.025)';
+
+        return {
+          active: s().nested({
+            [els.swatch]: s({
+              borderColor: 'rgba(0, 0, 0, 0.75)',
+              opacity: 1,
+              outlineWidth: '2px',
+              transform
+            }),
+
+            [els.count]: s({
+              color: colors.textAccent,
+              fontWeight: weights.bold,
+              transform: 'translate(-1px, -1px)'
+            })
           }),
 
-          [els.count]: s({
-            color: colors.textAccent,
-            fontWeight: weights.normal,
-            transform: `translateY(${shift}px)`
-          })
-        }),
+          available: s().nested({
+            [`${els.swatch}:hover`]: s({
+              opacity: 0.95,
+              transform
+            })
+          }),
 
-        available: s().nested({
-          [`${els.swatch}:hover`]: s({
-            opacity: 1
+          unavailable: s({
+            opacity: 0.25
           })
-        }),
-
-        unavailable: s({
-          opacity: 0.25
-        })
-      };
-    })
+        };
+      });
+    }
   }))
   .apply();

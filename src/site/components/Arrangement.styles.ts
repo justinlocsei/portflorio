@@ -1,6 +1,13 @@
 import { component } from 'ruscus';
 
-import { colors, rhythm, sansSerif, transition, weights } from './styles.ts';
+import {
+  colors,
+  focusable,
+  rhythm,
+  sansSerif,
+  transition,
+  weights
+} from './styles.ts';
 
 export default component('Arrangement')
   .identifiers({
@@ -13,7 +20,9 @@ export default component('Arrangement')
   .elements((e, { ids }) => ({
     media: e({
       flex: 'none'
-    }),
+    }).is(focusable({
+      outline: `2px solid ${colors.accent}`
+    })),
 
     image: e(),
 
@@ -73,7 +82,10 @@ export default component('Arrangement')
             height: size,
             width: size,
             ...transition('opacity')
-          }).nested(s => ({
+          }).is(focusable({
+            opacity: 1,
+            transform: 'scale(1.3)'
+          })).nested(s => ({
             '& + &': s({
               marginLeft: '-0.25em'
             })
@@ -96,9 +108,20 @@ export default component('Arrangement')
       name: e({
         position: 'relative',
         ...transition('color')
-      }).nested(s => ({
+      }).is(focusable()).nested(s => ({
         '&:hover': s({
           color: colors.textAccent
+        }),
+
+        '&:focus-visible::after': s({
+          backgroundColor: colors.accent,
+          bottom: 0,
+          content: '""',
+          height: '3px',
+          left: 0,
+          marginBottom: '-0.125em',
+          position: 'absolute',
+          right: 0
         })
       }))
     }).nested(s => ({

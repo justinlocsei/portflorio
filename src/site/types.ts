@@ -45,7 +45,7 @@ export type View = {
 /**
  * The ID of a view filter
  */
-type ViewFilterID = Select<keyof View, 'colors' | 'flowers'>;
+export type ViewFilterID = Select<keyof View, 'colors' | 'flowers'>;
 
 /**
  * A filter in the explorer view

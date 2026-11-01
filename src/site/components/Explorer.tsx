@@ -3,6 +3,7 @@ import type {
   Arrangement,
   View,
   ViewFilter,
+  ViewFilterID,
   ViewManager,
   ViewMode
 } from '../types.ts';
@@ -88,7 +89,7 @@ function filterArrangements(
 function createViewFilter<T extends string>(
   view: View,
   setView: (view: View) => void,
-  key: keyof View
+  key: ViewFilterID
 ): ViewFilter<T> {
   const set = new Set(view[key] as string[]);
 

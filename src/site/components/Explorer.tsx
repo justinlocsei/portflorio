@@ -3,18 +3,22 @@ import type {
   Arrangement,
   ExplorerView,
   ViewFilter,
-  ViewManager
+  ViewManager,
+  ViewMode
 } from '../types.ts';
 import { useState } from '../ui.ts';
 import C from './Explorer.styles.ts';
 import Gallery from './Gallery.tsx';
 import Lens from './Lens.tsx';
+import Status from './Status.tsx';
 
 export default function Explorer({
   arrangements: allArrangements
 }: {
   arrangements: Arrangement[];
 }) {
+  const [mode, setMode] = useState<ViewMode>('list');
+
   const [view, setView] = useState<ExplorerView>({
     colors: [],
     flowers: []
@@ -44,6 +48,15 @@ export default function Explorer({
           view={manager}
         />
       </main>
+
+      <footer className={C.status}>
+        <Status
+          arrangements={arrangements.length}
+          mode={mode}
+          onSelectMode={setMode}
+          totalArrangements={allArrangements.length}
+        />
+      </footer>
     </div>
   );
 }

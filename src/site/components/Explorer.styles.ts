@@ -1,8 +1,10 @@
 import { component } from 'ruscus';
 
-import { rhythm } from './styles.ts';
+import { colors, rhythm } from './styles.ts';
 
-const sidebar = '22rem';
+const sidebarWidth = '22rem';
+const statusHeight = rhythm(6);
+const gutter = rhythm(3);
 
 export default component('Explorer')
   .css({
@@ -11,18 +13,31 @@ export default component('Explorer')
   })
   .elements(e => ({
     lens: e({
-      bottom: 0,
+      bottom: statusHeight,
       left: 0,
       top: 0,
       overflow: 'auto',
-      padding: `${rhythm(2)} ${rhythm(3)}`,
+      padding: `${rhythm(2)} ${gutter}`,
       position: 'fixed',
-      width: sidebar
+      width: sidebarWidth
     }),
 
     gallery: e({
-      marginLeft: sidebar,
+      marginLeft: sidebarWidth,
       padding: rhythm(2)
+    }),
+
+    status: e({
+      bottom: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      fontSize: '0.9rem',
+      height: statusHeight,
+      justifyContent: 'center',
+      left: 0,
+      padding: `${rhythm(0.5)} ${gutter}`,
+      position: 'fixed',
+      width: sidebarWidth
     })
   }))
   .apply();

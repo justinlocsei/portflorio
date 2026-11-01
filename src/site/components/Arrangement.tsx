@@ -49,11 +49,7 @@ export default function Arrangement({
 
             return (
               <li
-                className={C.flower.root(
-                  (view.flowers.has(name)
-                    || flower.colors.some(c => view.colors.has(c)))
-                    && 'selected'
-                )}
+                className={C.flower.root(view.flowers.has(name) && 'selected')}
                 key={name}
               >
                 <button

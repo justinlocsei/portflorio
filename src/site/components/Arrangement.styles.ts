@@ -94,8 +94,13 @@ export default component('Arrangement')
       },
 
       name: e({
-        position: 'relative'
-      })
+        position: 'relative',
+        ...transition('color')
+      }).nested(s => ({
+        '&:hover': s({
+          color: colors.textAccent
+        })
+      }))
     }).nested(s => ({
       '& + &': s({
         marginTop: rhythm(1)

@@ -19,7 +19,7 @@ export default component('Arrangement')
   })
   .elements((e, { ids }) => ({
     media: e({
-      flex: 'none'
+      flex: 4
     }).is(focusable({
       outline: `2px solid ${colors.accent}`
     })),
@@ -38,7 +38,8 @@ export default component('Arrangement')
       padding: `${rhythm(1)} 0`
     }).children({
       date: e({
-        fontSize: '1.75em'
+        fontSize: '1.75em',
+        lineHeight: 1.25
       }),
 
       mechanic: e({
@@ -46,7 +47,7 @@ export default component('Arrangement')
         fontSize: '0.9em',
         fontWeight: weights.light,
         letterSpacing: '0.075em',
-        lineHeight: rhythm(2),
+        marginTop: rhythm(0.5),
         textTransform: 'uppercase'
       }).is(sansSerif)
     }),
@@ -57,7 +58,8 @@ export default component('Arrangement')
       flexDirection: 'column',
       fontSize: '1.125em',
       lineHeight: 1.25,
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginTop: rhythm()
     }),
 
     flower: e({

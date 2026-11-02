@@ -25,9 +25,9 @@ export const sansSerif = trait(s =>
 );
 
 export const views = queries({
-  compact: '@media (min-width: 1200px)',
-  feed: '@media (min-width: 1000px)',
-  stacked: '@media (min-width: 400px)'
+  compact: '@media (max-width: 1200px)',
+  feed: '@media (max-width: 1000px)',
+  stacked: '@media (max-width: 400px)'
 });
 
 /**

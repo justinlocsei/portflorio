@@ -133,7 +133,11 @@ export default function Explorer({
         >
           <div className={C.arrangement.image}>
             <div className={C.arrangement.photo}>
-              <Photo arrangement={arrangement} type='full' />
+              <Photo
+                arrangement={arrangement}
+                loading='eager'
+                type='full'
+              />
             </div>
 
             <button

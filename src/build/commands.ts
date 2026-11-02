@@ -1,3 +1,5 @@
+import { OperationalError } from 'larkspur';
+
 import type { EnvironmentVariables } from '../core/types.ts';
 import { REPO_ROOT } from './paths.ts';
 
@@ -34,7 +36,7 @@ function run(
   const label = [command, ...args].join(' ');
 
   if (result.error) {
-    throw new Error(`Failed to run command: ${label}`, result.error);
+    throw new OperationalError(`Failed to run command: ${label}`, result.error);
   }
 
   const output = result
@@ -43,7 +45,7 @@ function run(
     .join('\n');
 
   if (result.status !== 0) {
-    throw new Error(
+    throw new OperationalError(
       `${label} exited with code ${result.status ?? 'unknown'}\n${output}`
     );
   }

@@ -81,6 +81,9 @@ function Section({
   const S = C.section;
   const [expanded, setExpanded] = useState(true);
 
+  const contentId = useId();
+  const clearLabel = `Clear ${title.toLocaleLowerCase()}`;
+
   return (
     <section
       className={S.root(
@@ -89,6 +92,8 @@ function Section({
       )}
     >
       <button
+        aria-controls={contentId}
+        aria-expanded={expanded}
         className={S.header.root}
         onClick={() => setExpanded(!expanded)}
         type='button'
@@ -98,15 +103,17 @@ function Section({
       </button>
 
       <button
+        aria-label={clearLabel}
         className={S.clear}
         disabled={!filtered}
         onClick={onClear}
+        title={clearLabel}
         type='button'
       >
         ×
       </button>
 
-      <div className={S.content}>
+      <div className={S.content} id={contentId}>
         {children}
       </div>
     </section>

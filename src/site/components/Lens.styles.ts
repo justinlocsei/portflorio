@@ -62,42 +62,45 @@ export default component('Lens')
     section: e({
       position: 'relative'
     }).children({
-      header: () => {
-        const pull = '0.825rem';
-        const iconSize = '0.65rem';
+      header: e().children({
+        title: () => {
+          const pull = '0.825rem';
+          const iconSize = '0.65rem';
 
-        return e({
-          marginBottom: rhythm(0.75),
-          marginLeft: `-${pull}`,
-          paddingLeft: pull,
-          position: 'relative'
-        }).is(focusable()).children({
-          title: e({
+          return e({
             color: colors.accent,
             fontWeight: weights.light,
             fontSize: '1.125em',
             letterSpacing: '0.05em',
+            marginBottom: rhythm(0.75),
+            marginLeft: `-${pull}`,
+            paddingLeft: pull,
+            position: 'relative',
             textTransform: 'uppercase'
-          }).is(sansSerif)
-        }).nested((s, { els }) => ({
-          '&::before': s({
-            ...icon(chevronIcon),
-            content: '""',
-            height: iconSize,
-            left: '-0.25em',
-            position: 'absolute',
-            top: `calc(50% - ${iconSize} / 2)`,
-            width: iconSize
-          }),
-
-          '&:focus-visible': s().nested({
-            [els.title]: s({
-              textDecoration: 'underline',
-              textUnderlineOffset: '0.25em'
+          }).is(sansSerif).nested(s => ({
+            '&::before': s({
+              ...icon(chevronIcon),
+              content: '""',
+              height: iconSize,
+              left: '-0.25em',
+              position: 'absolute',
+              top: `calc(50% - ${iconSize} / 2)`,
+              width: iconSize
             })
+          }));
+        },
+
+        toggle: e({
+          display: 'block',
+          textAlign: 'left',
+          width: '100%'
+        }).is(focusable({}, s => ({
+          '&:focus-visible': s({
+            textDecoration: 'underline',
+            textUnderlineOffset: '0.25em'
           })
-        }));
-      },
+        })))
+      }),
 
       clear: () => {
         const size = '1.375em';
@@ -132,7 +135,7 @@ export default component('Lens')
       }),
 
       expanded: s().nested({
-        [`${els.header.root}::before`]: s({
+        [`${els.header.title}::before`]: s({
           transform: 'rotate(180deg)'
         })
       }),

@@ -90,24 +90,28 @@ function Section({
   const [expanded, setExpanded] = useState(true);
 
   const contentId = useId();
+  const headingId = useId();
   const clearLabel = `Clear ${title.toLocaleLowerCase()}`;
 
   return (
     <section
+      aria-labelledby={headingId}
       className={S.root(
         expanded ? 'expanded' : 'collapsed',
         filtered && 'filtered'
       )}
     >
-      <button
-        aria-controls={contentId}
-        aria-expanded={expanded}
-        className={S.header.root}
-        onClick={() => setExpanded(!expanded)}
-        type='button'
-      >
-        <h2 className={S.header.title}>{title}</h2>
-      </button>
+      <h2 className={S.header.title} id={headingId}>
+        <button
+          aria-controls={contentId}
+          aria-expanded={expanded}
+          className={S.header.toggle}
+          onClick={() => setExpanded(!expanded)}
+          type='button'
+        >
+          {title}
+        </button>
+      </h2>
 
       <button
         aria-label={clearLabel}

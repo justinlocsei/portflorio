@@ -103,7 +103,7 @@ export default component('Lens')
           opacity: 0,
           position: 'absolute',
           right: '0.375em',
-          top: '-0.125em',
+          top: '-0.2em',
           width: size,
           ...transition('opacity')
         }).is(focusable({

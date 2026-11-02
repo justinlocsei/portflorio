@@ -1,5 +1,6 @@
 import type { ViewMode } from '../types.ts';
 import type { Children } from '../ui.ts';
+import { useId } from '../ui.ts';
 import C from './Status.styles.ts';
 
 type ModeSelector = (mode: ViewMode) => void;
@@ -31,6 +32,7 @@ export default function Status({
   totalArrangements: number;
 }) {
   const filtered = arrangements < totalArrangements;
+  const modeLegendId = useId();
 
   return (
     <div className={C.root}>
@@ -67,8 +69,8 @@ export default function Status({
         </p>
       </Section>
 
-      <Section type='mode'>
-        <ul className={C.modes}>
+      <Section legendId={modeLegendId} type='mode'>
+        <ul aria-labelledby={modeLegendId} className={C.modes}>
           {MODES.map(mode => (
             <Mode
               current={mode === currentMode}
@@ -85,16 +87,20 @@ export default function Status({
 
 function Section({
   children,
+  legendId,
   type
 }: {
   children: Children;
+  legendId?: string;
   type: typeof SECTIONS[number];
 }) {
   const S = C.section;
 
   return (
     <div className={S.root(type)}>
-      <div className={S.title}>{SECTION_LABELS[type]}</div>
+      <div className={S.title} id={legendId}>
+        {SECTION_LABELS[type]}
+      </div>
 
       <div className={S.content}>{children}</div>
     </div>
@@ -115,6 +121,7 @@ function Mode({
   return (
     <li className={S.root(current ? 'selected' : 'selectable')}>
       <button
+        aria-pressed={current}
         className={S.select}
         disabled={current}
         onClick={() => onSelect(mode)}

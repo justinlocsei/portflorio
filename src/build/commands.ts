@@ -18,12 +18,20 @@ type CommandOptions = {
 };
 
 /**
+ * Options for running a command
+ */
+type RunBehavior = {
+  silent?: boolean;
+};
+
+/**
  * Run a command
  */
 function run(
   command: string,
   args: string[],
-  options: SpawnSyncOptions = {}
+  options: SpawnSyncOptions = {},
+  { silent = false }: RunBehavior = {}
 ): string {
   const spawnOptions: SpawnSyncOptionsWithStringEncoding = {
     ...options,
@@ -36,7 +44,9 @@ function run(
   const label = [command, ...args].join(' ');
 
   if (result.error) {
-    throw new OperationalError(`Failed to run command: ${label}`, result.error);
+    throw silent
+      ? OperationalError.silent()
+      : new OperationalError(`Failed to run command: ${label}`, result.error);
   }
 
   const output = result
@@ -45,9 +55,11 @@ function run(
     .join('\n');
 
   if (result.status !== 0) {
-    throw new OperationalError(
-      `${label} exited with code ${result.status ?? 'unknown'}\n${output}`
-    );
+    throw silent
+      ? OperationalError.silent()
+      : new OperationalError(
+        `${label} exited with code ${result.status ?? 'unknown'}\n${output}`
+      );
   }
 
   return output;
@@ -70,9 +82,10 @@ export function captureOutput(
 export function showOutput(
   command: string,
   args: string[] = [],
-  options?: CommandOptions
+  options?: CommandOptions,
+  behavior?: RunBehavior
 ): void {
-  run(command, args, { ...options, stdio: 'inherit' });
+  run(command, args, { ...options, stdio: 'inherit' }, behavior);
 }
 
 /**
@@ -83,5 +96,10 @@ export function npx(
   args: string[] = [],
   options: Pick<CommandOptions, 'env'> = {}
 ): void {
-  showOutput('npm', ['exec', '--', npmBin, ...args], options);
+  showOutput(
+    'npm',
+    ['exec', '--', npmBin, ...args],
+    options,
+    { silent: true }
+  );
 }

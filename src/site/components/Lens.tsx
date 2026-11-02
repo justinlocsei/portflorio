@@ -188,11 +188,11 @@ function Flower({
         onClick={onToggle}
         type='button'
       >
-        <span aria-hidden='true' className={S.name}>
+        <span className={S.name}>
           {name}
         </span>
 
-        <span aria-hidden='true' className={S.count}>
+        <span className={S.count}>
           {count}
         </span>
       </button>
@@ -266,6 +266,8 @@ function Color({
       style={{ [swatch]: `#${color.hex}` }}
     >
       <button
+        aria-label={`Filter by ${color.name}`}
+        aria-pressed={active}
         className={S.swatch}
         disabled={!available}
         onClick={onToggle}

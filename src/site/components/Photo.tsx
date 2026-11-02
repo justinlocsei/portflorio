@@ -6,9 +6,11 @@ import C from './Photo.styles.ts';
 
 export default function Photo({
   arrangement,
+  loading = 'lazy',
   type
 }: {
   arrangement: Arrangement;
+  loading?: 'eager' | 'lazy';
   type: ImageID;
 }) {
   const image = arrangement.images[type];
@@ -20,7 +22,7 @@ export default function Photo({
       className={C.root}
       decoding='async'
       height={size.height}
-      loading='lazy'
+      loading={loading}
       src={image}
       width={size.width}
     />

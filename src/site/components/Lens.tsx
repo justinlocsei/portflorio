@@ -117,9 +117,7 @@ function Section({
         onClick={onClear}
         title={clearLabel}
         type='button'
-      >
-        ×
-      </button>
+      />
 
       <div className={S.content} id={contentId}>
         {children}

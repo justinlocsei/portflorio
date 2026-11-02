@@ -1,5 +1,6 @@
-import { component } from 'ruscus';
+import { component, css } from 'ruscus';
 
+import closeIcon from '../images/icons/close.svg?url';
 import {
   colors,
   focusable,
@@ -10,6 +11,14 @@ import {
 } from './styles.ts';
 
 const focusBG = 'rgba(255, 255, 255, 0.075)';
+
+const icon = (url: string, size = 'contain') =>
+  css({
+    backgroundImage: `url("${url}")`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: size
+  });
 
 export default component('Lens')
   .identifiers({
@@ -87,11 +96,10 @@ export default component('Lens')
         const size = '1.375em';
 
         return e({
+          ...icon(closeIcon, '70%'),
           border: `1px solid ${colors.accent}`,
           borderRadius: '50%',
           height: size,
-          fontSize: '0.9em',
-          lineHeight: size,
           opacity: 0,
           position: 'absolute',
           right: '0.375em',

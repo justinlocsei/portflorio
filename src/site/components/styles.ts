@@ -1,5 +1,5 @@
 import type { CSS, NestedStyles, StyleFragmentBuilder } from 'ruscus';
-import { css, trait } from 'ruscus';
+import { css, queries, trait } from 'ruscus';
 
 export const colors = {
   accent: '#a5b39a',
@@ -23,6 +23,12 @@ export const sansSerif = trait(s =>
     fontWeight: 300
   })
 );
+
+export const views = queries({
+  compact: '@media (min-width: 1200px)',
+  feed: '@media (min-width: 1000px)',
+  stacked: '@media (min-width: 400px)'
+});
 
 /**
  * Define focus styles for an element

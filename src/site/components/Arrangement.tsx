@@ -8,6 +8,7 @@ import type {
   ViewMode,
   ViewProps
 } from '../types.ts';
+import { useId } from '../ui.ts';
 import C from './Arrangement.styles.ts';
 import Photo from './Photo.tsx';
 
@@ -22,11 +23,15 @@ export default function Arrangement({
   onSelect: () => void;
 }) {
   const { swatch } = identifiers(C);
+  const titleId = useId();
 
   return (
-    <article className={C.root(mode === 'grid' && 'grid')}>
+    <article
+      aria-labelledby={titleId}
+      className={C.root(mode === 'grid' && 'grid')}
+    >
       <button
-        aria-label={`View arrangment: ${labelArrangement(arrangement)}`}
+        aria-label={`View arrangement: ${labelArrangement(arrangement)}`}
         className={C.media}
         onClick={onSelect}
         type='button'
@@ -35,20 +40,19 @@ export default function Arrangement({
       </button>
 
       <div className={C.meta}>
-        <div className={C.details.root}>
-          <time
-            className={C.details.date}
-            dateTime={getISODate(arrangement.date)}
-          >
-            {formatDate(arrangement.date)}
-          </time>
+        <header className={C.details.root}>
+          <h3 className={C.details.date}>
+            <time dateTime={getISODate(arrangement.date)} id={titleId}>
+              {formatDate(arrangement.date)}
+            </time>
+          </h3>
 
-          <div className={C.details.mechanic}>
+          <p className={C.details.mechanic}>
             {labelMechanic(arrangement.mechanic)}
-          </div>
-        </div>
+          </p>
+        </header>
 
-        <ul className={C.flowers}>
+        <ul aria-label='Flowers in this arrangement' className={C.flowers}>
           {arrangement.flowers.map(flower => {
             const { name } = flower;
             const flowerActive = view.flowers.has(name);

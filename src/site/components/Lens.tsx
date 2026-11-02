@@ -22,24 +22,10 @@ export default function Lens({
   flowers: FlowerType[];
 }) {
   const flowers = summarizeFlowers(arrangements);
-  const filtered = view.flowers.active || view.colors.active;
 
   return (
     <div className={C.root}>
-      <h1 className={C.title.root(filtered && 'linked')}>
-        <a
-          className={C.title.link}
-          href={filtered ? '/' : undefined}
-        >
-          <img
-            alt='Portflorio'
-            className={C.title.image}
-            height={24}
-            src={logo}
-            width={250}
-          />
-        </a>
-      </h1>
+      <Title filtered={view.flowers.active || view.colors.active} />
 
       <Section
         filtered={view.flowers.active}
@@ -64,6 +50,28 @@ export default function Lens({
         />
       </Section>
     </div>
+  );
+}
+
+function Title({ filtered }: { filtered: boolean }) {
+  const S = C.title;
+
+  const logo = (
+    <img
+      alt='Portflorio'
+      className={S.image}
+      height={24}
+      src={logoImage}
+      width={250}
+    />
+  );
+
+  return (
+    <h1 className={S.root(filtered && 'linked')}>
+      {filtered
+        ? <a className={S.link} href='/'>{logo}</a>
+        : <span className={S.link}>{logo}</span>}
+    </h1>
   );
 }
 

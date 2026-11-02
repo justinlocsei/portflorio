@@ -108,12 +108,8 @@ export default component('Arrangement')
       name: e({
         position: 'relative',
         ...transition('color')
-      }).is(focusable()).nested(s => ({
-        '&:hover': s({
-          color: colors.textAccent
-        }),
-
-        '&:focus-visible::after': s({
+      }).is(focusable({}, s => ({
+        '&::after': s({
           backgroundColor: colors.accent,
           bottom: 0,
           content: '""',
@@ -122,6 +118,10 @@ export default component('Arrangement')
           marginBottom: '-0.125em',
           position: 'absolute',
           right: 0
+        })
+      }))).nested(s => ({
+        '&:hover': s({
+          color: colors.textAccent
         })
       }))
     }).nested(s => ({

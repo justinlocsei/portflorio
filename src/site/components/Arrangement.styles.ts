@@ -6,6 +6,7 @@ import {
   rhythm,
   sansSerif,
   transition,
+  views,
   weights
 } from './styles.ts';
 
@@ -159,4 +160,13 @@ export default component('Arrangement')
       })
     })
   }))
+  .global((s, { els }) =>
+    views({
+      compact: {
+        [els.details.root]: s({
+          paddingTop: 0
+        })
+      }
+    })
+  )
   .apply();

@@ -10,10 +10,10 @@ import {
 } from './styles.ts';
 
 const statusHeight = rhythm(6);
-const gutter = rhythm(3);
 
 export default component('Explorer')
   .identifiers({
+    sidebarGutter: 'variable',
     sidebarWidth: 'variable'
   })
   .css({
@@ -21,7 +21,8 @@ export default component('Explorer')
     zIndex: 1
   })
   .elements((e, { ids }) => {
-    const sidebar = `var(${ids.sidebarWidth})`;
+    const sidebarGutter = `var(${ids.sidebarGutter})`;
+    const sidebarWidth = `var(${ids.sidebarWidth})`;
 
     return {
       lens: e({
@@ -29,13 +30,13 @@ export default component('Explorer')
         left: 0,
         top: 0,
         overflow: 'auto',
-        padding: `${rhythm(2)} ${gutter}`,
+        padding: `${rhythm(2)} ${sidebarGutter}`,
         position: 'fixed',
-        width: sidebar
+        width: sidebarWidth
       }),
 
       gallery: e({
-        marginLeft: sidebar,
+        marginLeft: sidebarWidth,
         padding: rhythm(2),
         paddingTop: rhythm(3)
       }),
@@ -48,9 +49,9 @@ export default component('Explorer')
         height: statusHeight,
         justifyContent: 'center',
         left: 0,
-        padding: `${rhythm(0.5)} ${gutter}`,
+        padding: `${rhythm(0.5)} ${sidebarGutter}`,
         position: 'fixed',
-        width: sidebar
+        width: sidebarWidth
       }),
 
       arrangement: e({
@@ -95,6 +96,7 @@ export default component('Explorer')
   })
   .nested((s, { ids }) => ({
     '&': s({
+      [`${ids.sidebarGutter}`]: rhythm(3),
       [`${ids.sidebarWidth}`]: '22rem'
     })
   }))
@@ -102,11 +104,12 @@ export default component('Explorer')
     views({
       compact: {
         [els.root]: s({
+          [`${ids.sidebarGutter}`]: rhythm(2),
           [`${ids.sidebarWidth}`]: '18rem'
         }),
 
         [els.gallery]: s({
-          paddingLeft: 0
+          paddingLeft: '1rem'
         })
       }
     })

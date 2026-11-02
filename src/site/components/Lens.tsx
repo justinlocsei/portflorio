@@ -182,16 +182,17 @@ function Flower({
       )}
     >
       <button
+        aria-pressed={active}
         className={S.toggle}
         disabled={!available}
         onClick={onToggle}
         type='button'
       >
-        <span className={S.name}>
+        <span aria-hidden='true' className={S.name}>
           {name}
         </span>
 
-        <span className={S.count}>
+        <span aria-hidden='true' className={S.count}>
           {count}
         </span>
       </button>

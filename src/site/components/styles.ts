@@ -1,4 +1,4 @@
-import type { CSS } from 'ruscus';
+import type { CSS, NestedStyles, StyleFragmentBuilder } from 'ruscus';
 import { css, trait } from 'ruscus';
 
 export const colors = {
@@ -27,19 +27,24 @@ export const sansSerif = trait(s =>
 /**
  * Define focus styles for an element
  */
-export function focusable(styles: CSS = {}) {
-  return trait(s =>
-    s().nested({
+export function focusable(
+  styles: CSS = {},
+  nested?: (s: StyleFragmentBuilder) => NestedStyles
+) {
+  return trait(s => {
+    const focus = s({
+      outline: 'none',
+      ...styles
+    });
+
+    return s().nested({
       '&:focus:not(:focus-visible)': s({
         outline: 'none'
       }),
 
-      '&:focus-visible': s({
-        outline: 'none',
-        ...styles
-      })
-    })
-  );
+      '&:focus-visible': nested ? focus.nested(nested(s)) : focus
+    });
+  });
 }
 
 /**

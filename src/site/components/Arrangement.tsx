@@ -2,7 +2,7 @@ import { identifiers } from 'ruscus';
 
 import { COLORS } from '../../core/colors.ts';
 import { formatDate, getISODate } from '../../core/time.ts';
-import { labelMechanic } from '../display.ts';
+import { labelArrangement, labelColor, labelMechanic } from '../display.ts';
 import type {
   Arrangement as ArrangementType,
   ViewMode,
@@ -25,7 +25,12 @@ export default function Arrangement({
 
   return (
     <article className={C.root(mode === 'grid' && 'grid')}>
-      <button className={C.media} onClick={onSelect} type='button'>
+      <button
+        aria-label={`View arrangment: ${labelArrangement(arrangement)}`}
+        className={C.media}
+        onClick={onSelect}
+        type='button'
+      >
         <Photo arrangement={arrangement} type='preview' />
       </button>
 
@@ -46,13 +51,16 @@ export default function Arrangement({
         <ul className={C.flowers}>
           {arrangement.flowers.map(flower => {
             const { name } = flower;
+            const flowerActive = view.flowers.has(name);
 
             return (
               <li
-                className={C.flower.root(view.flowers.has(name) && 'selected')}
+                className={C.flower.root(flowerActive && 'selected')}
                 key={name}
               >
                 <button
+                  aria-label={`Filter by ${name.toLocaleLowerCase()}`}
+                  aria-pressed={flowerActive}
                   className={C.flower.name}
                   onClick={() => view.flowers.toggle(name)}
                   type='button'
@@ -61,18 +69,25 @@ export default function Arrangement({
                 </button>
 
                 <span className={C.flower.colors.root}>
-                  {flower.colors.map(c => (
-                    <button
-                      className={C.flower.colors.color(
-                        view.colors.has(c) ? 'selected' : 'selectable'
-                      )}
-                      key={c}
-                      onClick={() => view.colors.toggle(c)}
-                      style={{ [swatch]: `#${COLORS[c].hex}` }}
-                      title={COLORS[c].name}
-                      type='button'
-                    />
-                  ))}
+                  {flower.colors.map(c => {
+                    const colorActive = view.colors.has(c);
+
+                    return (
+                      <button
+                        aria-label={`Filter by ${
+                          labelColor(c).toLocaleLowerCase()
+                        }`}
+                        aria-pressed={colorActive}
+                        className={C.flower.colors.color(
+                          colorActive ? 'selected' : 'selectable'
+                        )}
+                        key={c}
+                        onClick={() => view.colors.toggle(c)}
+                        style={{ [swatch]: `#${COLORS[c].hex}` }}
+                        type='button'
+                      />
+                    );
+                  })}
                 </span>
               </li>
             );

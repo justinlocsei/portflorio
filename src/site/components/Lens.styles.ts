@@ -1,6 +1,7 @@
 import { component, css } from 'ruscus';
 
 import angleIcon from '../images/icons/angle.svg?url';
+import checkIcon from '../images/icons/check.svg?url';
 import chevronIcon from '../images/icons/chevron.svg?url';
 import closeIcon from '../images/icons/close.svg?url';
 import {
@@ -265,18 +266,15 @@ export default component('Lens')
 
             return {
               '&::before': s({
+                ...icon(checkIcon, '60%'),
                 backgroundColor: colors.bg,
                 borderRadius: '50%',
-                color: colors.text,
-                content: '"✔"',
+                content: '""',
                 display: 'none',
-                fontSize: '0.6em',
-                lineHeight: size,
                 left: '50%',
                 top: `${(sizeRems - checkSizeRems) / 2}rem`,
                 opacity: 0.825,
                 position: 'absolute',
-                textAlign: 'center',
                 transform: 'translateX(-50%)',
                 height: size,
                 width: size

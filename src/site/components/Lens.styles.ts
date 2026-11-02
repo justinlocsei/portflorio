@@ -1,5 +1,6 @@
 import { component, css } from 'ruscus';
 
+import angleIcon from '../images/icons/angle.svg?url';
 import chevronIcon from '../images/icons/chevron.svg?url';
 import closeIcon from '../images/icons/close.svg?url';
 import {
@@ -150,6 +151,7 @@ export default component('Lens')
 
     flower: () => {
       const gutter = '0.5em';
+      const iconSize = '0.75rem';
 
       return e({
         borderBottom: `1px solid ${colors.border}`,
@@ -184,25 +186,25 @@ export default component('Lens')
         }),
 
         '&::before': s({
-          color: colors.accent,
-          content: '"›"',
-          fontWeight: weights.light,
+          ...icon(angleIcon),
+          content: '""',
+          height: iconSize,
           left: `-${gutter}`,
           opacity: 0,
           position: 'absolute',
           top: '50%',
-          transform: 'translateY(-55%)',
-          ...transition('font-size', 'margin', 'opacity')
+          transform: 'translateY(-50%)',
+          width: iconSize,
+          ...transition('margin', 'opacity', 'transform')
         })
       })).variants((s, { els }) => ({
         active: s({
           color: colors.textAccent
         }).nested({
           '&::before': s({
-            fontSize: '1.25em',
-            fontWeight: weights.bold,
-            marginLeft: '-0.05em',
-            opacity: 1
+            marginLeft: '-0.25em',
+            opacity: 1,
+            transform: 'translateY(-50%) scale(1.75)'
           }),
 
           [els.count]: s({
@@ -215,7 +217,7 @@ export default component('Lens')
             color: colors.textAccent
           }).nested({
             '&::before': s({
-              opacity: 1
+              opacity: 0.75
             })
           })
         }),

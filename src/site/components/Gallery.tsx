@@ -18,7 +18,7 @@ export default function Gallery({
 }) {
   return (
     <div className={C.root(mode)}>
-      <ul aria-label='Arrangements' className={C.overviews}>
+      <ul className={C.overviews}>
         {arrangements.map(arrangement => (
           <li className={C.overview} key={arrangement.id}>
             <Arrangement

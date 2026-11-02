@@ -93,7 +93,7 @@ export default function Explorer({
 
   return (
     <div className={C.root}>
-      <aside className={C.lens} inert={inert}>
+      <aside aria-label='Filters' className={C.lens} inert={inert}>
         <Lens
           arrangements={arrangements}
           flowers={allFlowers}
@@ -111,7 +111,7 @@ export default function Explorer({
         />
       </footer>
 
-      <main className={C.gallery} inert={inert}>
+      <main aria-label='Arrangements' className={C.gallery} inert={inert}>
         <Gallery
           arrangements={arrangements}
           mode={mode}

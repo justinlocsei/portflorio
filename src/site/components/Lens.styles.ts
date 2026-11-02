@@ -203,9 +203,9 @@ export default component('Lens')
           color: colors.textAccent
         }).nested({
           '&::before': s({
-            marginLeft: '-0.25em',
+            marginLeft: '-0.1em',
             opacity: 1,
-            transform: 'translateY(-50%) scale(1.75)'
+            transform: 'translateY(-50%) scale(1.5)'
           }),
 
           [els.count]: s({

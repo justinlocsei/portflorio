@@ -1,5 +1,6 @@
 import { component, css } from 'ruscus';
 
+import chevronIcon from '../images/icons/chevron.svg?url';
 import closeIcon from '../images/icons/close.svg?url';
 import {
   colors,
@@ -61,13 +62,13 @@ export default component('Lens')
     }).children({
       header: () => {
         const pull = '0.825rem';
+        const iconSize = '0.65rem';
 
         return e({
-          alignItems: 'center',
-          display: 'flex',
-          gap: '0.5em',
           marginBottom: rhythm(0.75),
-          marginLeft: `-${pull}`
+          marginLeft: `-${pull}`,
+          paddingLeft: pull,
+          position: 'relative'
         }).is(focusable()).children({
           title: e({
             color: colors.accent,
@@ -75,14 +76,18 @@ export default component('Lens')
             fontSize: '1.125em',
             letterSpacing: '0.05em',
             textTransform: 'uppercase'
-          }).is(sansSerif),
-
-          icon: e({
-            fontWeight: weights.bold,
-            transform: 'rotate(90deg)',
-            textDecoration: 'none !important'
-          })
+          }).is(sansSerif)
         }).nested((s, { els }) => ({
+          '&::before': s({
+            ...icon(chevronIcon),
+            content: '""',
+            height: iconSize,
+            left: '-0.25em',
+            position: 'absolute',
+            top: `calc(50% - ${iconSize} / 2)`,
+            width: iconSize
+          }),
+
           '&:focus-visible': s().nested({
             [els.title]: s({
               textDecoration: 'underline',
@@ -124,7 +129,11 @@ export default component('Lens')
         })
       }),
 
-      expanded: s(),
+      expanded: s().nested({
+        [`${els.header.root}::before`]: s({
+          transform: 'rotate(180deg)'
+        })
+      }),
 
       filtered: s().nested({
         [els.clear]: s({

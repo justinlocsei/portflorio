@@ -106,7 +106,6 @@ function Section({
         onClick={() => setExpanded(!expanded)}
         type='button'
       >
-        <span className={S.header.icon}>{expanded ? '‹' : '›'}</span>
         <h2 className={S.header.title}>{title}</h2>
       </button>
 

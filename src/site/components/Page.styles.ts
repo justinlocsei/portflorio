@@ -32,7 +32,8 @@ export default component('Page')
       fontFamily: 'inherit',
       fontSize: 'inherit',
       fontWeight: 'inherit',
-      lineHeight: 'inherit'
+      lineHeight: 'inherit',
+      textAlign: 'left'
     }).nested({
       '&:disabled': s({
         cursor: 'default'

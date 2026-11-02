@@ -1,6 +1,12 @@
 import { COLORS } from '../core/colors.ts';
 import { listItems } from '../core/text.ts';
-import type { Arrangement, Dimensions, Mechanic } from '../core/types.ts';
+import { formatDate } from '../core/time.ts';
+import type {
+  Arrangement,
+  Color,
+  Dimensions,
+  Mechanic
+} from '../core/types.ts';
 
 const MECHANIC_LABELS: Record<Mechanic, string> = {
   foam: 'Floral Foam',
@@ -26,6 +32,16 @@ export function describeArrangement(arrangement: Arrangement): string {
   });
 
   return `A floral arrangement with ${listItems(flowers, 'and')}`;
+}
+
+/**
+ * Produce a short label for an arrangement
+ */
+export function labelArrangement(arrangement: Arrangement): string {
+  return [
+    formatDate(arrangement.date),
+    labelMechanic(arrangement.mechanic)
+  ].join(' / ');
 }
 
 /**

@@ -101,7 +101,11 @@ export default function Explorer({
         />
       </aside>
 
-      <footer className={C.status} inert={inert}>
+      <section
+        aria-label='View options'
+        className={C.status}
+        inert={inert}
+      >
         <Status
           arrangements={arrangements.length}
           mode={mode}
@@ -109,7 +113,7 @@ export default function Explorer({
           onSelectMode={setMode}
           totalArrangements={allArrangements.length}
         />
-      </footer>
+      </section>
 
       <main aria-label='Arrangements' className={C.gallery} inert={inert}>
         <Gallery

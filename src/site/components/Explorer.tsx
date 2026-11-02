@@ -1,4 +1,5 @@
 import { summarizeFlowers } from '../../core/flowers.ts';
+import { labelArrangement } from '../display.ts';
 import type {
   Arrangement,
   View,
@@ -127,6 +128,7 @@ export default function Explorer({
 
       {arrangement && (
         <div
+          aria-label={labelArrangement(arrangement)}
           aria-modal='true'
           className={C.arrangement.root}
           role='dialog'

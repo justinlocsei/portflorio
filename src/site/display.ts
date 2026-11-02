@@ -1,3 +1,4 @@
+import { COLORS } from '../core/colors.ts';
 import { listItems } from '../core/text.ts';
 import type { Arrangement, Dimensions, Mechanic } from '../core/types.ts';
 
@@ -8,11 +9,20 @@ const MECHANIC_LABELS: Record<Mechanic, string> = {
 };
 
 /**
+ * Produce a readable label for a color
+ */
+export function labelColor(id: Color): string {
+  return COLORS[id].name;
+}
+
+/**
  * Produce a description of an arrangement
  */
 export function describeArrangement(arrangement: Arrangement): string {
   const flowers = arrangement.flowers.flatMap(f => {
-    return f.colors.map(c => `${c} ${f.name.toLocaleLowerCase()}`);
+    return f.colors.map(c =>
+      `${labelColor(c).toLocaleLowerCase()} ${f.name.toLocaleLowerCase()}`
+    );
   });
 
   return `A floral arrangement with ${listItems(flowers, 'and')}`;

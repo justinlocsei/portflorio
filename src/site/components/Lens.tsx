@@ -7,10 +7,10 @@ import type {
   Color as ColorType,
   Flower as FlowerType
 } from '../../core/types.ts';
-import logo from '../images/logo.svg';
+import logoImage from '../images/logo.svg';
 import type { Arrangement, ViewProps } from '../types.ts';
 import type { Children } from '../ui.ts';
-import { useState } from '../ui.ts';
+import { useId, useState } from '../ui.ts';
 import C from './Lens.styles.ts';
 
 export default function Lens({

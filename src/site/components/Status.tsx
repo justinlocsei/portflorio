@@ -35,7 +35,11 @@ export default function Status({
   return (
     <div className={C.root}>
       <Section type='count'>
-        <p className={C.counts.root}>
+        <p
+          aria-atomic='true'
+          aria-live='polite'
+          className={C.counts.root}
+        >
           {filtered && (
             <>
               <span className={C.counts.visible}>
@@ -52,6 +56,7 @@ export default function Status({
 
           {filtered && (
             <button
+              aria-label='Show all arrangements'
               className={C.counts.reset}
               onClick={onClear}
               type='button'

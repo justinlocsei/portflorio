@@ -1,5 +1,7 @@
 import { component } from 'ruscus';
 
+import { IMAGE_DIMENSIONS } from '../../core/site.ts';
+import { scaleBy } from '../display.ts';
 import {
   colors,
   focusable,
@@ -10,17 +12,24 @@ import {
   weights
 } from './styles.ts';
 
+const previewWidth = `${scaleBy(IMAGE_DIMENSIONS.preview, 0.5).width}.px`;
+
 export default component('Arrangement')
   .identifiers({
     swatch: 'variable'
   })
   .css({
+    alignItems: 'flex-start',
     display: 'flex',
     gap: rhythm(3)
   })
   .elements((e, { ids }) => ({
     media: e({
-      flex: 4
+      display: 'block',
+      flex: `0 1 ${previewWidth}`,
+      maxWidth: previewWidth,
+      minWidth: 0,
+      padding: 0
     }).is(focusable({
       outline: `2px solid ${colors.accent}`
     })),
@@ -29,9 +38,10 @@ export default component('Arrangement')
 
     meta: e({
       display: 'flex',
-      flex: 1,
+      flex: '1 1 auto',
       flexDirection: 'column',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      minWidth: '14rem'
     }),
 
     details: e({
@@ -163,14 +173,6 @@ export default component('Arrangement')
   .global((s, { els, ids }) =>
     views({
       compact: {
-        [els.root()]: s({
-          alignItems: 'start'
-        }),
-
-        [els.media]: s({
-          flex: 3
-        }),
-
         [els.details.root]: s({
           paddingTop: 0
         })

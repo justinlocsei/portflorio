@@ -5,6 +5,7 @@ import type {
 } from '../types.ts';
 import Arrangement from './Arrangement.tsx';
 import C from './Gallery.styles.ts';
+import Logo from './Logo.tsx';
 
 export default function Gallery({
   arrangements,
@@ -18,6 +19,10 @@ export default function Gallery({
 }) {
   return (
     <div className={C.root(mode)}>
+      <h2 className={C.logo.root}>
+        <Logo className={C.logo.image} />
+      </h2>
+
       <ul className={C.overviews}>
         {arrangements.map(arrangement => (
           <li className={C.overview} key={arrangement.id}>

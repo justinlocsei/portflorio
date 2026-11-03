@@ -4,6 +4,17 @@ import { rhythm, views } from './styles.ts';
 
 export default component('Gallery')
   .elements(e => ({
+    logo: e({
+      display: 'none',
+      marginBottom: rhythm(3),
+      opacity: 0.9
+    }).children({
+      image: e({
+        margin: '0 auto',
+        width: '20em'
+      })
+    }),
+
     overviews: e(),
 
     overview: e()
@@ -32,6 +43,10 @@ export default component('Gallery')
           [els.overviews]: s({
             justifyContent: 'center'
           })
+        }),
+
+        [els.logo.root]: s({
+          display: 'block'
         })
       },
 

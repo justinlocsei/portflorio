@@ -19,7 +19,7 @@ export const COLORS = {
     name: 'Blush'
   },
   burgundy: {
-    hex: '72283E',
+    hex: '460506',
     lightness: 'dark',
     name: 'Burgundy'
   },
@@ -29,7 +29,7 @@ export const COLORS = {
     name: 'Chartreuse'
   },
   green: {
-    hex: '2E8F4A',
+    hex: '184601',
     lightness: 'light',
     name: 'Green'
   },
@@ -39,7 +39,7 @@ export const COLORS = {
     name: 'Lavender'
   },
   magenta: {
-    hex: 'D0428C',
+    hex: 'AF38AE',
     lightness: 'dark',
     name: 'Magenta'
   },
@@ -49,22 +49,22 @@ export const COLORS = {
     name: 'Orange'
   },
   peach: {
-    hex: 'E9A67A',
+    hex: 'E1BAA1',
     lightness: 'light',
     name: 'Peach'
   },
   pink: {
-    hex: 'ED4DA6',
+    hex: 'EB7BB9',
     lightness: 'light',
     name: 'Pink'
   },
   purple: {
-    hex: '6E5099',
+    hex: '58358A',
     lightness: 'dark',
     name: 'Purple'
   },
   red: {
-    hex: 'C7364E',
+    hex: '8F0218',
     lightness: 'dark',
     name: 'Red'
   },

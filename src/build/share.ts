@@ -1,4 +1,4 @@
-import { listItems } from '../core/text.ts';
+import { listItems, sentenceCase } from '../core/text.ts';
 import type { Arrangement } from '../core/types.ts';
 
 /**
@@ -7,12 +7,7 @@ import type { Arrangement } from '../core/types.ts';
 export function shareArrangement(
   arrangement: Arrangement
 ): string {
-  const [first, ...rest] = arrangement.flowers.map(f => f.name);
-
-  return listItems(
-    [first ?? '', ...rest.map(f => f.toLocaleLowerCase())].filter(
-      Boolean
-    ),
-    'and'
+  return sentenceCase(
+    listItems(arrangement.flowers.map(f => f.name), 'and')
   );
 }

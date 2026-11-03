@@ -18,7 +18,7 @@
     "@fontsource/poppins": "^5.3.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "ruscus": "^0.0.7"
+    "ruscus": "^0.0.8"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.9",

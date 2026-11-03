@@ -15,15 +15,12 @@ import {
 const previewWidth = `${scaleBy(IMAGE_DIMENSIONS.preview, 0.5).width}.px`;
 
 export default component('Arrangement')
-  .identifiers({
-    swatch: 'variable'
-  })
   .css({
     alignItems: 'flex-start',
     display: 'flex',
     gap: rhythm(3)
   })
-  .elements((e, { ids }) => ({
+  .elements(e => ({
     media: e({
       display: 'block',
       flex: `0 1 ${previewWidth}`,
@@ -79,44 +76,15 @@ export default component('Arrangement')
       gap: '0.5em',
       justifyContent: 'space-between'
     }).children({
-      colors: () => {
-        const size = rhythm(0.9);
+      colors: e({
+        display: 'flex'
+      }),
 
-        return e({
-          display: 'flex'
-        }).children({
-          color: e({
-            backgroundColor: 'transparent',
-            border: `1px solid var(${ids.swatch})`,
-            borderRadius: '50%',
-            boxSizing: 'content-box',
-            display: 'block',
-            opacity: 0.5,
-            height: size,
-            width: size,
-            ...transition('opacity')
-          }).is(focusable({
-            opacity: 1,
-            transform: 'scale(1.3)'
-          })).nested(s => ({
-            '& + &': s({
-              marginLeft: '-0.25em'
-            })
-          })).variants(s => ({
-            selectable: s().nested({
-              '&:hover': s({
-                opacity: 1
-              })
-            }),
-
-            selected: s({
-              backgroundColor: `var(${ids.swatch})`,
-              opacity: 0.75,
-              transform: 'scale(1.25)'
-            })
-          }))
-        });
-      },
+      color: e().nested(s => ({
+        '& + &': s({
+          marginLeft: '-0.25em'
+        })
+      })),
 
       name: e({
         position: 'relative',
@@ -170,7 +138,7 @@ export default component('Arrangement')
       })
     })
   }))
-  .global((s, { els, ids }) =>
+  .global((s, { els }) =>
     views({
       compact: {
         [els.details.root]: s({
@@ -196,11 +164,6 @@ export default component('Arrangement')
 
         [els.meta]: s({
           marginTop: rhythm(2)
-        }),
-
-        [els.flower.colors.color()]: s({
-          backgroundColor: `var(${ids.swatch})`,
-          opacity: 0.25
         })
       }
     })

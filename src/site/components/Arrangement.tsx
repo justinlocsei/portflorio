@@ -1,6 +1,3 @@
-import { identifiers } from 'ruscus';
-
-import { COLORS } from '../../core/colors.ts';
 import { formatDate, getISODate } from '../../core/time.ts';
 import { labelMechanic } from '../display.ts';
 import type {
@@ -10,6 +7,7 @@ import type {
 } from '../types.ts';
 import { useId } from '../ui.ts';
 import C from './Arrangement.styles.ts';
+import Color from './Color.tsx';
 import Photo from './Photo.tsx';
 
 export default function Arrangement({
@@ -22,7 +20,6 @@ export default function Arrangement({
   mode: ViewMode;
   onSelect: () => void;
 }) {
-  const { swatch } = identifiers(C);
   const titleId = useId();
 
   return (
@@ -69,23 +66,18 @@ export default function Arrangement({
                   {name}
                 </button>
 
-                <span className={C.flower.colors.root}>
-                  {flower.colors.map(c => {
-                    const colorActive = view.colors.has(c);
-
-                    return (
-                      <button
-                        className={C.flower.colors.color(
-                          colorActive ? 'selected' : 'selectable'
-                        )}
-                        key={c}
-                        onClick={() => view.colors.toggle(c)}
-                        style={{ [swatch]: `#${COLORS[c].hex}` }}
-                        type='button'
+                <ul className={C.flower.colors}>
+                  {flower.colors.map(color => (
+                    <li className={C.flower.color} key={color}>
+                      <Color
+                        active={view.colors.has(color)}
+                        id={color}
+                        onClick={() =>
+                          view.colors.toggle(color)}
                       />
-                    );
-                  })}
-                </span>
+                    </li>
+                  ))}
+                </ul>
               </li>
             );
           })}

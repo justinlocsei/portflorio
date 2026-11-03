@@ -27,6 +27,10 @@ export default component('Color')
   .nested((s, { ids }) => ({
     '&': s({
       borderColor: `var(${ids.color})`
+    }),
+
+    '&:hover': s({
+      opacity: 1
     })
   }))
   .variants((s, { ids }) => ({
@@ -36,12 +40,6 @@ export default component('Color')
         s({ [ids.color]: `#${color.hex}` })
       ])
     ) as Record<Color, StyleFragment>,
-
-    selectable: s().nested({
-      '&:hover': s({
-        opacity: 1
-      })
-    }),
 
     selected: s({
       backgroundColor: `var(${ids.color})`,

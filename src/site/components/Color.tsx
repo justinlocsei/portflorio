@@ -13,7 +13,7 @@ export default function Color({
 }) {
   return (
     <button
-      className={C.root(active ? 'selected' : 'selectable', id)}
+      className={C.root(active && 'selected', id)}
       onClick={onClick}
       title={labelColor(id)}
       type='button'

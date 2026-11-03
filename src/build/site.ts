@@ -155,7 +155,7 @@ function extractAssets(
       ...extractCSS(entry, manifest).map(h =>
         `<link rel="stylesheet" crossorigin href="/${h}">`
       )
-    ].join('\n'),
+    ].map(l => `    ${l}`).join('\n'),
     scripts: `<script type="module" crossorigin src="/${entry.file}"></script>`
   };
 }

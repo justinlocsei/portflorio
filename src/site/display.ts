@@ -1,5 +1,5 @@
 import { COLORS } from '../core/colors.ts';
-import { listItems } from '../core/text.ts';
+import { listItems, sentenceCase } from '../core/text.ts';
 import { formatDate } from '../core/time.ts';
 import type {
   Arrangement,
@@ -24,14 +24,17 @@ export function labelColor(id: Color): string {
 /**
  * Produce a description of an arrangement
  */
-export function describeArrangement(arrangement: Arrangement): string {
+export function describeArrangement(
+  arrangement: Arrangement,
+  { colors }: { colors: boolean }
+): string {
   const flowers = arrangement.flowers.flatMap(f => {
-    return f.colors.map(c =>
-      `${labelColor(c).toLocaleLowerCase()} ${f.name.toLocaleLowerCase()}`
-    );
+    return colors
+      ? f.colors.map(c => `${labelColor(c)} ${f.name}`)
+      : [f.name];
   });
 
-  return `A floral arrangement with ${listItems(flowers, 'and')}`;
+  return sentenceCase(listItems(flowers, 'and'));
 }
 
 /**

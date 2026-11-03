@@ -20,7 +20,7 @@ export const COLORS = {
     name: 'Chartreuse'
   },
   green: {
-    hex: '184601',
+    hex: '077d10',
     name: 'Green'
   },
   lavender: {

@@ -257,6 +257,7 @@ export default component('Lens')
             backgroundColor: `var(${ids.swatch})`,
             border: `1px solid var(${ids.swatch})`,
             borderRadius: radius,
+            boxShadow: '0 2px 2px 2px rgba(0, 0, 0, 0.125)',
             display: 'block',
             height: size,
             width: size,

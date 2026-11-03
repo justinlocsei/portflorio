@@ -2,7 +2,7 @@ import { identifiers } from 'ruscus';
 
 import { COLORS } from '../../core/colors.ts';
 import { formatDate, getISODate } from '../../core/time.ts';
-import { labelArrangement, labelColor, labelMechanic } from '../display.ts';
+import { labelMechanic } from '../display.ts';
 import type {
   Arrangement as ArrangementType,
   ViewMode,
@@ -31,7 +31,6 @@ export default function Arrangement({
       className={C.root(mode === 'grid' && 'grid')}
     >
       <button
-        aria-label={`View arrangement: ${labelArrangement(arrangement)}`}
         className={C.media}
         onClick={onSelect}
         type='button'
@@ -52,7 +51,7 @@ export default function Arrangement({
           </p>
         </header>
 
-        <ul aria-label='Flowers in this arrangement' className={C.flowers}>
+        <ul className={C.flowers}>
           {arrangement.flowers.map(flower => {
             const { name } = flower;
             const flowerActive = view.flowers.has(name);
@@ -63,8 +62,6 @@ export default function Arrangement({
                 key={name}
               >
                 <button
-                  aria-label={`Filter by ${name.toLocaleLowerCase()}`}
-                  aria-pressed={flowerActive}
                   className={C.flower.name}
                   onClick={() => view.flowers.toggle(name)}
                   type='button'
@@ -78,10 +75,6 @@ export default function Arrangement({
 
                     return (
                       <button
-                        aria-label={`Filter by ${
-                          labelColor(c).toLocaleLowerCase()
-                        }`}
-                        aria-pressed={colorActive}
                         className={C.flower.colors.color(
                           colorActive ? 'selected' : 'selectable'
                         )}

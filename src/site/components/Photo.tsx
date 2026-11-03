@@ -18,7 +18,7 @@ export default function Photo({
 
   return (
     <img
-      alt={describeArrangement(arrangement)}
+      alt={describeArrangement(arrangement, { colors: type === 'full' })}
       className={C.root}
       decoding='async'
       height={size.height}

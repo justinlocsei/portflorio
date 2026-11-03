@@ -6,6 +6,7 @@ export default component('Photo')
     boxShadow: '0 0.25em 2em rgb(0 0 0 / 40%)',
     display: 'block',
     height: 'auto',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    width: '100%'
   })
   .apply();

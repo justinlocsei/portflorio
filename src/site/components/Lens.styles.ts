@@ -321,10 +321,6 @@ export default component('Lens')
             })
           }),
 
-          dark: s(),
-
-          light: s(),
-
           unavailable: s({
             opacity: 0.25
           })

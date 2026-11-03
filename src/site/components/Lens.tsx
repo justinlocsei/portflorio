@@ -7,11 +7,11 @@ import type {
   Color as ColorType,
   Flower as FlowerType
 } from '../../core/types.ts';
-import logoImage from '../images/logo.svg';
 import type { Arrangement, ViewProps } from '../types.ts';
 import type { Children } from '../ui.ts';
 import { useId, useState } from '../ui.ts';
 import C from './Lens.styles.ts';
+import Logo from './Logo.tsx';
 
 export default function Lens({
   arrangements,
@@ -56,15 +56,7 @@ export default function Lens({
 function Title({ filtered }: { filtered: boolean }) {
   const S = C.title;
 
-  const logo = (
-    <img
-      alt='Portflorio'
-      className={S.image}
-      height={24}
-      src={logoImage}
-      width={250}
-    />
-  );
+  const logo = <Logo className={S.image} />;
 
   return (
     <h1 className={S.root(filtered && 'linked')}>

@@ -37,9 +37,7 @@ export default component('Lens')
       }),
 
       image: e({
-        display: 'block',
         margin: '0 auto',
-        maxWidth: '100%',
         opacity: 0.9,
         ...transition('opacity')
       })

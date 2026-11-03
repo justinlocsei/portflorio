@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { assert, describe, it } from 'vitest';
 
 import { summarizeFlowers } from './flowers.ts';
 import type { Arrangement } from './types.ts';
@@ -19,7 +19,7 @@ describe('summarizeFlowers', () => {
       }
     ] as Arrangement[];
 
-    expect(summarizeFlowers(arrangements)).toEqual([
+    assert.deepEqual(summarizeFlowers(arrangements), [
       {
         name: 'Dahlia',
         colors: ['burgundy', 'red'],

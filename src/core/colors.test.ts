@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { assert, describe, it } from 'vitest';
 
 import {
   COLOR_IDS,
@@ -12,24 +12,25 @@ import {
 describe('isColor', () => {
   it('accepts every defined color id', () => {
     for (const id of COLOR_IDS) {
-      expect(isColor(id)).toBe(true);
+      assert.isTrue(isColor(id));
     }
   });
 
   it('rejects unknown strings', () => {
-    expect(isColor('')).toBe(false);
-    expect(isColor('nope')).toBe(false);
-    expect(isColor('Blush')).toBe(false);
+    assert.isFalse(isColor(''));
+    assert.isFalse(isColor('nope'));
+    assert.isFalse(isColor('Blush'));
   });
 });
 
 describe('displayColors', () => {
   it('returns one entry per display order id', () => {
-    expect(displayColors()).toHaveLength(DISPLAY_ORDER.length);
+    assert.lengthOf(displayColors(), DISPLAY_ORDER.length);
   });
 
   it('adds an ID to each color', () => {
-    expect(displayColors()).toEqual(
+    assert.deepEqual(
+      displayColors(),
       DISPLAY_ORDER.map(id => ({
         id,
         hex: COLORS[id].hex,
@@ -41,17 +42,17 @@ describe('displayColors', () => {
 
 describe('parseColors', () => {
   it('returns no colors for empty input', () => {
-    expect(parseColors('')).toEqual([]);
-    expect(parseColors(', ,')).toEqual([]);
+    assert.deepEqual(parseColors(''), []);
+    assert.deepEqual(parseColors(', ,'), []);
   });
 
   it('parses a single color', () => {
-    expect(parseColors('blush')).toEqual(['blush']);
-    expect(parseColors('  Blush  ')).toEqual(['blush']);
+    assert.deepEqual(parseColors('blush'), ['blush']);
+    assert.deepEqual(parseColors('  Blush  '), ['blush']);
   });
 
   it('parses multiple colors', () => {
-    expect(parseColors('blush, red,sage')).toEqual([
+    assert.deepEqual(parseColors('blush, red,sage'), [
       'blush',
       'red',
       'sage'
@@ -59,7 +60,7 @@ describe('parseColors', () => {
   });
 
   it('ignores unknown color names', () => {
-    expect(parseColors('blush, chartreuse, unknown, red')).toEqual([
+    assert.deepEqual(parseColors('blush, chartreuse, unknown, red'), [
       'blush',
       'chartreuse',
       'red'
@@ -67,6 +68,10 @@ describe('parseColors', () => {
   });
 
   it('preserves order including duplicates', () => {
-    expect(parseColors('red, blush, red')).toEqual(['red', 'blush', 'red']);
+    assert.deepEqual(parseColors('red, blush, red'), [
+      'red',
+      'blush',
+      'red'
+    ]);
   });
 });

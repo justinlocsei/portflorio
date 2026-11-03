@@ -24,10 +24,11 @@ export default function Gallery({
       </h2>
 
       <ul className={C.overviews}>
-        {arrangements.map(arrangement => (
+        {arrangements.map((arrangement, index) => (
           <li className={C.overview} key={arrangement.id}>
             <Arrangement
               arrangement={arrangement}
+              index={index}
               mode={mode}
               onSelect={() =>
                 onRequestArrangement(arrangement)}

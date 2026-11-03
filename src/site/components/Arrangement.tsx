@@ -12,11 +12,13 @@ import Photo from './Photo.tsx';
 
 export default function Arrangement({
   arrangement,
+  index,
   mode,
   onSelect,
   view
 }: ViewProps & {
   arrangement: ArrangementType;
+  index: number;
   mode: ViewMode;
   onSelect: () => void;
 }) {
@@ -32,7 +34,12 @@ export default function Arrangement({
         onClick={onSelect}
         type='button'
       >
-        <Photo arrangement={arrangement} type='preview' />
+        <Photo
+          arrangement={arrangement}
+          prioritize={index === 0}
+          loading={index < 2 ? 'eager' : 'lazy'}
+          type='preview'
+        />
       </button>
 
       <div className={C.meta}>

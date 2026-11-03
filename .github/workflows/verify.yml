@@ -1,0 +1,23 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check Code
+    uses: ./.github/workflows/run-task.yml
+    with:
+      task: check
+
+  test:
+    name: Test
+    needs: check
+    uses: ./.github/workflows/run-task.yml
+    with:
+      task: test

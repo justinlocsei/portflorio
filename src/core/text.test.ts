@@ -1,6 +1,6 @@
 import { assert, describe, it } from 'vitest';
 
-import { listItems } from './text.ts';
+import { listItems, sentenceCase } from './text.ts';
 
 describe('listItems', () => {
   it('supports an empty list', () => {
@@ -26,5 +26,15 @@ describe('listItems', () => {
       listItems(['alfa', 'bravo', 'charlie', 'delta'], 'or'),
       'alfa, bravo, charlie, or delta'
     );
+  });
+});
+
+describe('sentenceCase', () => {
+  it('supports an empty string', () => {
+    assert.equal(sentenceCase(''), '');
+  });
+
+  it('converts a string to sentence case', () => {
+    assert.equal(sentenceCase('alfa BRavo'), 'Alfa bravo');
   });
 });

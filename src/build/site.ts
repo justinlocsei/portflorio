@@ -59,7 +59,7 @@ async function renderPage(
 /**
  * Generate data files used by the site
  */
-async function generateData(): Promise<void> {
+export async function generateData(): Promise<void> {
   const arrangements = await buildArrangementImages(await loadArrangements());
 
   await generateSiteData(arrangements);

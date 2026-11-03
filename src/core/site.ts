@@ -8,7 +8,7 @@ export const IMAGE_DIMENSIONS: ArrangementImages<Dimensions> = {
     width: 3000
   },
   preview: {
-    height: 1000,
-    width: 1500
+    height: 984,
+    width: 1476
   }
 };

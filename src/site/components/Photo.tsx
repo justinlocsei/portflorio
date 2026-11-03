@@ -7,10 +7,12 @@ import C from './Photo.styles.ts';
 export default function Photo({
   arrangement,
   loading = 'lazy',
+  prioritize = false,
   type
 }: {
   arrangement: Arrangement;
   loading?: 'eager' | 'lazy';
+  prioritize?: boolean;
   type: ImageID;
 }) {
   const image = arrangement.images[type];
@@ -21,6 +23,7 @@ export default function Photo({
       alt={describeArrangement(arrangement, { colors: type === 'full' })}
       className={C.root}
       decoding='async'
+      fetchPriority={prioritize ? 'high' : 'auto'}
       height={size.height}
       loading={loading}
       src={image}

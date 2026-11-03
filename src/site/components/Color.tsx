@@ -1,4 +1,5 @@
 import type { Color as ColorType } from '../../core/types.ts';
+import { labelColor } from '../display.ts';
 import C from './Color.styles.ts';
 
 export default function Color({
@@ -14,6 +15,7 @@ export default function Color({
     <button
       className={C.root(active ? 'selected' : 'selectable', id)}
       onClick={onClick}
+      title={labelColor(id)}
       type='button'
     />
   );

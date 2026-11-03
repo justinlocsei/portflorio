@@ -3,103 +3,28 @@ import { OperationalError } from 'larkspur';
 import type { EnvironmentVariables } from '../core/types.ts';
 import { REPO_ROOT } from './paths.ts';
 
-import type {
-  SpawnSyncOptions,
-  SpawnSyncOptionsWithStringEncoding
-} from 'node:child_process';
 import { spawnSync } from 'node:child_process';
 
 /**
- * Options for running a command
- */
-type CommandOptions = {
-  cwd?: string;
-  env?: EnvironmentVariables;
-};
-
-/**
- * Options for running a command
- */
-type RunBehavior = {
-  silent?: boolean;
-};
-
-/**
- * Run a command
- */
-function run(
-  command: string,
-  args: string[],
-  options: SpawnSyncOptions = {},
-  { silent = false }: RunBehavior = {}
-): string {
-  const spawnOptions: SpawnSyncOptionsWithStringEncoding = {
-    ...options,
-    cwd: options.cwd ?? REPO_ROOT,
-    encoding: 'utf8',
-    env: { ...process.env, ...options.env }
-  };
-
-  const result = spawnSync(command, args, spawnOptions);
-  const label = [command, ...args].join(' ');
-
-  if (result.error) {
-    throw silent
-      ? OperationalError.silent()
-      : new OperationalError(`Failed to run command: ${label}`, result.error);
-  }
-
-  const output = result
-    .output
-    .filter(Boolean)
-    .join('\n');
-
-  if (result.status !== 0) {
-    throw silent
-      ? OperationalError.silent()
-      : new OperationalError(
-        `${label} exited with code ${result.status ?? 'unknown'}\n${output}`
-      );
-  }
-
-  return output;
-}
-
-/**
- * Run a command and capture its output
- */
-export function captureOutput(
-  command: string,
-  args: string[] = [],
-  options?: CommandOptions
-): string {
-  return run(command, args, { ...options, stdio: 'pipe' });
-}
-
-/**
- * Run a command and show its output
- */
-export function showOutput(
-  command: string,
-  args: string[] = [],
-  options?: CommandOptions,
-  behavior?: RunBehavior
-): void {
-  run(command, args, { ...options, stdio: 'inherit' }, behavior);
-}
-
-/**
- * Run a command from node_modules via npm exec
+ * Run an npm executable
  */
 export function npx(
   npmBin: string,
   args: string[] = [],
-  options: Pick<CommandOptions, 'env'> = {}
+  options: { env?: EnvironmentVariables } = {}
 ): void {
-  showOutput(
+  const result = spawnSync(
     'npm',
     ['exec', '--', npmBin, ...args],
-    options,
-    { silent: true }
+    {
+      cwd: REPO_ROOT,
+      encoding: 'utf8',
+      env: { ...process.env, ...options.env },
+      stdio: 'inherit'
+    }
   );
+
+  if (result.error || result.status !== 0) {
+    throw OperationalError.silent();
+  }
 }

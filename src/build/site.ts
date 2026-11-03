@@ -118,15 +118,22 @@ function extractEntryChunk(
 /**
  * Extract assets used by a chunk
  */
-function extractAssets(entry: ManifestChunk): TemplateVariables {
+function extractAssets(
+  entry: ManifestChunk,
+  manifest: Manifest
+): TemplateVariables {
   const { css = [] } = entry;
 
-  const head = css
-    .map((href) => `<link rel="stylesheet" crossorigin href="/${href}">`)
-    .join('\n');
+  const preload = (entry.imports ?? [])
+    .map(id => manifest[id]?.file)
+    .filter(Boolean)
+    .map(f => `<link rel="modulepreload" crossorigin href="/${f}">`);
 
   return {
-    head,
+    head: [
+      ...preload,
+      ...css.map(h => `<link rel="stylesheet" crossorigin href="/${h}">`)
+    ].join('\n'),
     scripts: `<script type="module" crossorigin src="/${entry.file}"></script>`
   };
 }
@@ -152,7 +159,7 @@ export async function buildStaticSite(): Promise<void> {
   ) as Manifest;
 
   const entry = extractEntryChunk(manifest, paths.site, paths.entry.client);
-  const tags = extractAssets(entry);
+  const tags = extractAssets(entry, manifest);
 
   const renderApp = (await import(pathToFileURL(paths.dist.serverBundle).href))
     .default as (() => string);

@@ -24,5 +24,8 @@ jobs:
         with:
           node-version: 24
 
+      - name: Generate site data
+        run: ./bin/portflorio site prepare
+
       - name: Run portflorio ${{ inputs.task }}
         run: ./bin/portflorio ${{ inputs.task }}

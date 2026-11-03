@@ -33,7 +33,8 @@
     "tsdown": "^0.23.0",
     "typescript": "^6.0.3",
     "vite": "^8.3.5",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "wrangler": "^4.157.0"
   },
   "allowScripts": {
     "dprint@0.64.3": true,

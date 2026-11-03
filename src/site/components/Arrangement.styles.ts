@@ -12,7 +12,7 @@ import {
   weights
 } from './styles.ts';
 
-const previewWidth = `${scaleBy(IMAGE_DIMENSIONS.preview, 0.5).width}.px`;
+const previewWidth = `${scaleBy(IMAGE_DIMENSIONS.preview, 0.5).width}px`;
 
 export default component('Arrangement')
   .css({

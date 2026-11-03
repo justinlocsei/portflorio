@@ -1,6 +1,6 @@
 import { component } from 'ruscus';
 
-import { rhythm } from './styles.ts';
+import { rhythm, views } from './styles.ts';
 
 export default component('Gallery')
   .elements(e => ({
@@ -17,11 +17,32 @@ export default component('Gallery')
 
     grid: s().nested({
       [els.overviews]: s({
+        columnGap: '5%',
         display: 'grid',
-        gap: rhythm(2),
         gridTemplateColumns: 'repeat(auto-fill, 30%)',
-        justifyContent: 'start'
+        justifyContent: 'start',
+        rowGap: rhythm(2)
       })
     })
   }))
+  .global((s, { els }) =>
+    views({
+      feed: {
+        [els.root('grid')]: s().nested({
+          [els.overviews]: s({
+            justifyContent: 'center'
+          })
+        })
+      },
+
+      stacked: {
+        [els.root('grid')]: s().nested({
+          [els.overviews]: s({
+            columnGap: '4%',
+            gridTemplateColumns: 'repeat(auto-fill, 48%)'
+          })
+        })
+      }
+    })
+  )
   .apply();

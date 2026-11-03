@@ -1,6 +1,14 @@
 import { component } from 'ruscus';
 
-import { colors, focusable, rhythm, sansSerif, transition } from './styles.ts';
+import {
+  colors,
+  feedGutter,
+  focusable,
+  rhythm,
+  sansSerif,
+  transition,
+  views
+} from './styles.ts';
 
 export default component('Status')
   .is(sansSerif)
@@ -99,4 +107,30 @@ export default component('Status')
       })
     }))
   }))
+  .global((s, { els }) =>
+    views({
+      feed: {
+        [els.root]: s({
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: `${rhythm(0.75)} ${feedGutter}`
+        }),
+
+        [els.section.root()]: s({
+          gap: '0',
+          marginTop: '0 !important'
+        }),
+
+        [els.section.title]: s({
+          display: 'none'
+        }),
+
+        [els.counts.reset]: s({
+          left: '100%',
+          marginLeft: '2em',
+          right: 'auto'
+        })
+      }
+    })
+  )
   .apply();

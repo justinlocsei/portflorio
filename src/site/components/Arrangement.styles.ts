@@ -160,11 +160,45 @@ export default component('Arrangement')
       })
     })
   }))
-  .global((s, { els }) =>
+  .global((s, { els, ids }) =>
     views({
       compact: {
+        [els.root()]: s({
+          alignItems: 'start'
+        }),
+
+        [els.media]: s({
+          flex: 3
+        }),
+
         [els.details.root]: s({
           paddingTop: 0
+        })
+      },
+
+      feed: {
+        [els.meta]: s({
+          fontSize: '0.9em'
+        })
+      },
+
+      stacked: {
+        [els.root()]: s({
+          display: 'block'
+        }),
+
+        [els.media]: s({
+          display: 'block',
+          margin: '0 auto'
+        }),
+
+        [els.meta]: s({
+          marginTop: rhythm(2)
+        }),
+
+        [els.flower.colors.color()]: s({
+          backgroundColor: `var(${ids.swatch})`,
+          opacity: 0.25
         })
       }
     })

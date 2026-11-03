@@ -27,8 +27,10 @@ export const sansSerif = trait(s =>
 export const views = queries({
   compact: '@media (max-width: 1200px)',
   feed: '@media (max-width: 1080px)',
-  stacked: '@media (max-width: 400px)'
+  stacked: '@media (max-width: 750px)'
 });
+
+export const feedGutter = rhythm(2);
 
 /**
  * Define focus styles for an element

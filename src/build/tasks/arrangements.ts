@@ -71,7 +71,7 @@ export default C.group('Manage the catalog of arrangements', {
         tryStoredID(flags.id)
       );
 
-      console.log(await shareArrangement(arrangement));
+      console.log(shareArrangement(arrangement));
     }
   )
 });

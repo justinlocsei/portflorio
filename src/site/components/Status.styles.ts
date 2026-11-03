@@ -84,28 +84,43 @@ export default component('Status')
       gap: '1em'
     }),
 
-    mode: e().children({
-      select: e({
-        display: 'block',
-        ...transition('color')
-      }).is(focusable({
-        color: colors.textAccent,
-        borderBottom: `1px solid ${colors.accent}`,
-        paddingBottom: '0.25em'
-      }))
-    }).variants(s => ({
-      selected: s({
-        borderBottom: `2px solid ${colors.accent}`,
-        color: colors.textAccent,
-        paddingBottom: '0.25em'
-      }),
-
-      selectable: s().nested({
-        '&:hover': s({
+    mode: () => {
+      return e().children({
+        select: e({
+          display: 'block',
+          position: 'relative',
+          ...transition('color')
+        }).is(focusable({ color: colors.textAccent })).nested(s => ({
+          '&::before': s({
+            backgroundColor: colors.accent,
+            bottom: '-0.375em',
+            content: '""',
+            height: 0,
+            left: 0,
+            position: 'absolute',
+            right: 0
+          })
+        }))
+      }).variants((s, { els }) => ({
+        selected: s({
           color: colors.textAccent
+        }).nested({
+          [`${els.select}::before`]: s({
+            height: '2px'
+          })
+        }),
+
+        selectable: s().nested({
+          '&:hover': s({
+            color: colors.textAccent
+          }),
+
+          [`${els.select}:focus-visible::before`]: s({
+            height: '1px'
+          })
         })
-      })
-    }))
+      }));
+    }
   }))
   .global((s, { els }) =>
     views({

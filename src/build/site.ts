@@ -116,14 +116,34 @@ function extractEntryChunk(
 }
 
 /**
+ * Extract all CSS associated with a chunk
+ */
+function extractCSS(
+  chunk: ManifestChunk,
+  manifest: Manifest
+): string[] {
+  const sheets: string[] = [];
+
+  for (const id of chunk.imports ?? []) {
+    const imported = manifest[id];
+
+    if (imported) {
+      sheets.push(...extractCSS(imported, manifest));
+    }
+  }
+
+  sheets.push(...(chunk.css ?? []));
+
+  return sheets;
+}
+
+/**
  * Extract assets used by a chunk
  */
 function extractAssets(
   entry: ManifestChunk,
   manifest: Manifest
 ): TemplateVariables {
-  const { css = [] } = entry;
-
   const preload = (entry.imports ?? [])
     .map(id => manifest[id]?.file)
     .filter(Boolean)
@@ -132,7 +152,9 @@ function extractAssets(
   return {
     head: [
       ...preload,
-      ...css.map(h => `<link rel="stylesheet" crossorigin href="/${h}">`)
+      ...extractCSS(entry, manifest).map(h =>
+        `<link rel="stylesheet" crossorigin href="/${h}">`
+      )
     ].join('\n'),
     scripts: `<script type="module" crossorigin src="/${entry.file}"></script>`
   };

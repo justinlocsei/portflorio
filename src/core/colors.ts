@@ -8,7 +8,7 @@ type Details = {
 
 export const COLORS = {
   blush: {
-    hex: 'EEC4C4',
+    hex: 'eec4c4',
     name: 'Blush'
   },
   burgundy: {
@@ -16,7 +16,7 @@ export const COLORS = {
     name: 'Burgundy'
   },
   chartreuse: {
-    hex: 'B8CF3E',
+    hex: 'b8cf3e',
     name: 'Chartreuse'
   },
   green: {
@@ -24,43 +24,43 @@ export const COLORS = {
     name: 'Green'
   },
   lavender: {
-    hex: 'A89BC4',
+    hex: 'a89bc4',
     name: 'Lavender'
   },
   magenta: {
-    hex: 'AF38AE',
+    hex: 'af38ae',
     name: 'Magenta'
   },
   orange: {
-    hex: 'E86F2A',
+    hex: 'e86f2a',
     name: 'Orange'
   },
   peach: {
-    hex: 'E1BAA1',
+    hex: 'e1baa1',
     name: 'Peach'
   },
   pink: {
-    hex: 'EB7BB9',
+    hex: 'eb7bb9',
     name: 'Pink'
   },
   purple: {
-    hex: '58358A',
+    hex: '58358a',
     name: 'Purple'
   },
   red: {
-    hex: '8F0218',
+    hex: '8f0218',
     name: 'Red'
   },
   sage: {
-    hex: '9AADA3',
+    hex: '9aada3',
     name: 'Sage'
   },
   white: {
-    hex: 'F7F5F0',
+    hex: 'f7f5f0',
     name: 'White'
   },
   yellow: {
-    hex: 'EFC030',
+    hex: 'efc030',
     name: 'Yellow'
   }
 } satisfies Record<string, Details>;

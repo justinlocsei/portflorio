@@ -1,3 +1,9 @@
+/*
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
 

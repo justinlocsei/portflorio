@@ -205,7 +205,7 @@ export default component('Lens')
         }).nested({
           '&::before': s({
             marginLeft: '-0.1em',
-            opacity: 1,
+            opacity: '1 !important',
             transform: 'translateY(-50%) scale(1.5)'
           }),
 

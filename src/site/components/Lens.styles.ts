@@ -201,7 +201,8 @@ export default component('Lens')
         })
       })).variants((s, { els }) => ({
         active: s({
-          color: colors.textAccent
+          color: colors.textAccent,
+          fontWeight: weights.bold
         }).nested({
           '&::before': s({
             marginLeft: '-0.1em',
@@ -210,7 +211,7 @@ export default component('Lens')
           }),
 
           [els.count]: s({
-            fontWeight: weights.normal
+            fontWeight: weights.bold
           })
         }),
 

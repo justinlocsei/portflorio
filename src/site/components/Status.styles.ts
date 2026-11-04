@@ -128,12 +128,16 @@ export default component('Status')
         [els.root]: s({
           display: 'flex',
           justifyContent: 'space-between',
-          padding: `${rhythm(0.75)} ${feedGutter}`
+          padding: `${rhythm(1.5)} ${feedGutter}`
         }),
 
         [els.section.root()]: s({
           gap: '0',
           marginTop: '0 !important'
+        }),
+
+        [els.modes]: s({
+          gap: '2em'
         }),
 
         [els.section.title]: s({

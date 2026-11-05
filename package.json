@@ -29,7 +29,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "dprint": "^0.64.3",
     "fs-extra": "^11.4.1",
-    "larkspur": "^0.2.0",
+    "larkspur": "^0.2.1",
     "typescript": "^6.0.3",
     "vite": "^8.3.5",
     "vitest": "^5.0.0",

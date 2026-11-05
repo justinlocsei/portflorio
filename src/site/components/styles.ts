@@ -31,6 +31,7 @@ export const views = queries({
 });
 
 export const feedGutter = rhythm(2);
+export const anchorBufferRhythm = 2;
 
 /**
  * Define focus styles for an element

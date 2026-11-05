@@ -1,12 +1,12 @@
 import { component } from 'ruscus';
 
-import { rhythm, views } from './styles.ts';
+import { anchorBufferRhythm, rhythm, views } from './styles.ts';
 
 export default component('Gallery')
   .elements(e => ({
     logo: e({
       display: 'none',
-      marginBottom: rhythm(3),
+      marginBottom: rhythm(3 - anchorBufferRhythm),
       opacity: 0.9
     }).children({
       image: e({
@@ -17,12 +17,14 @@ export default component('Gallery')
 
     overviews: e(),
 
-    overview: e()
+    overview: e({
+      paddingTop: rhythm(anchorBufferRhythm)
+    })
   }))
   .variants((s, { els }) => ({
     list: s().nested({
       [`${els.overview} + ${els.overview}`]: s({
-        marginTop: rhythm(4)
+        marginTop: rhythm(4 - anchorBufferRhythm)
       })
     }),
 
@@ -33,6 +35,10 @@ export default component('Gallery')
         gridTemplateColumns: 'repeat(auto-fill, 30%)',
         justifyContent: 'start',
         rowGap: rhythm(2)
+      }),
+
+      [els.overview]: s({
+        paddingTop: 0
       })
     })
   }))

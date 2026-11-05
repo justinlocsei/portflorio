@@ -11,12 +11,14 @@ import Color from './Color.tsx';
 import Photo from './Photo.tsx';
 
 export default function Arrangement({
+  anchor,
   arrangement,
   index,
   mode,
   onSelect,
   view
 }: ViewProps & {
+  anchor: string;
   arrangement: ArrangementType;
   index: number;
   mode: ViewMode;
@@ -45,9 +47,11 @@ export default function Arrangement({
       <div className={C.meta}>
         <header className={C.details.root}>
           <h3 className={C.details.date}>
-            <time dateTime={getISODate(arrangement.date)} id={titleId}>
-              {formatDate(arrangement.date)}
-            </time>
+            <a className={C.details.link} href={`#${anchor}`}>
+              <time dateTime={getISODate(arrangement.date)} id={titleId}>
+                {formatDate(arrangement.date)}
+              </time>
+            </a>
           </h3>
 
           <p className={C.details.mechanic}>

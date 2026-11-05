@@ -24,18 +24,22 @@ export default function Gallery({
       </h2>
 
       <ul className={C.overviews}>
-        {arrangements.map((arrangement, index) => (
-          <li className={C.overview} key={arrangement.id}>
-            <Arrangement
-              arrangement={arrangement}
-              index={index}
-              mode={mode}
-              onSelect={() =>
-                onRequestArrangement(arrangement)}
-              view={view}
-            />
-          </li>
-        ))}
+        {arrangements.map((arrangement, index) => {
+          const anchor = arrangement.id.toString();
+
+          return (
+            <li className={C.overview} id={anchor} key={arrangement.id}>
+              <Arrangement
+                anchor={anchor}
+                arrangement={arrangement}
+                index={index}
+                mode={mode}
+                onSelect={() => onRequestArrangement(arrangement)}
+                view={view}
+              />
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

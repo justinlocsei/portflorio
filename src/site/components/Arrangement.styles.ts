@@ -45,6 +45,14 @@ export default component('Arrangement')
       fontWeight: weights.light,
       padding: `${rhythm(1)} 0`
     }).children({
+      link: e({
+        color: 'inherit',
+        display: 'inline-flex',
+        textDecoration: 'none'
+      }).is(focusable({
+        textDecoration: 'underline'
+      })),
+
       date: e({
         fontSize: '1.75em',
         lineHeight: 1.25

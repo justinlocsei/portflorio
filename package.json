@@ -39,6 +39,7 @@
   "allowScripts": {
     "dprint@0.64.3": true,
     "esbuild@0.28.2": true,
-    "fsevents@2.3.3": true
+    "fsevents@2.3.3": true,
+    "workerd@1.20261103.1": true
   }
 }

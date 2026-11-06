@@ -43,20 +43,7 @@ export default function Explorer({
     }
 
     const previouslyFocused = document.activeElement;
-
     closeRef.current?.focus();
-
-    return () => {
-      if (previouslyFocused instanceof HTMLElement) {
-        previouslyFocused.focus();
-      }
-    };
-  }, [arrangement?.id]);
-
-  useEffect(() => {
-    if (!arrangement) {
-      return;
-    }
 
     const { body, documentElement } = document;
     const previousBodyOverflow = body.style.overflow;
@@ -64,17 +51,6 @@ export default function Explorer({
 
     body.style.overflow = 'hidden';
     documentElement.style.overflow = 'hidden';
-
-    return () => {
-      body.style.overflow = previousBodyOverflow;
-      documentElement.style.overflow = previousHtmlOverflow;
-    };
-  }, [arrangement?.id]);
-
-  useEffect(() => {
-    if (!arrangement) {
-      return;
-    }
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -85,6 +61,12 @@ export default function Explorer({
     document.addEventListener('keydown', onKeyDown);
 
     return () => {
+      if (previouslyFocused instanceof HTMLElement) {
+        previouslyFocused.focus();
+      }
+
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousHtmlOverflow;
       document.removeEventListener('keydown', onKeyDown);
     };
   }, [arrangement?.id]);

@@ -189,19 +189,28 @@ function createViewFilter<T extends string>(
   return {
     active: set.size > 0,
     add: (...items: T[]) => {
-      setView({ ...view, [key]: [...view[key], ...items] });
+      setView(current => ({
+        ...current,
+        [key]: [...current[key], ...items],
+        source: undefined
+      }));
     },
     clear: () => {
-      setView({ ...view, [key]: [] });
+      setView(current => ({
+        ...current,
+        [key]: [],
+        source: undefined
+      }));
     },
     has: (item: T) => {
       return set.has(item);
     },
     remove: (...items: T[]) => {
-      setView({
-        ...view,
-        [key]: view[key].filter(item => !items.includes(item as T))
-      });
+      setView(current => ({
+        ...current,
+        [key]: current[key].filter(item => !items.includes(item as T)),
+        source: undefined
+      }));
     },
     toggle: (...items: T[]) => {
       let current = view[key];

@@ -110,7 +110,7 @@ export default function Explorer({
         <Status
           arrangements={arrangements.length}
           mode={mode}
-          onClear={() => setView(DEFAULT_VIEW)}
+          onClear={() => setView({ ...DEFAULT_VIEW })}
           onSelectMode={setMode}
           totalArrangements={allArrangements.length}
         />

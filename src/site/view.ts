@@ -36,25 +36,11 @@ export function createViewFilter<T extends string>(
 
   return {
     active: set.size > 0,
-    add: (...items: T[]) => {
-      setView(current => ({
-        ...current,
-        [key]: [...current[key], ...items],
-        focus: null
-      }));
-    },
     clear: () => {
       setView(current => ({ ...current, [key]: [], focus: null }));
     },
     has: (item: T) => {
       return set.has(item);
-    },
-    remove: (...items: T[]) => {
-      setView(current => ({
-        ...current,
-        [key]: current[key].filter(item => !items.includes(item as T)),
-        focus: null
-      }));
     },
     toggle: (item, options) => {
       setView(current => {

@@ -54,10 +54,8 @@ export type ViewFilterID = Select<keyof View, 'colors' | 'flowers'>;
  */
 export type ViewFilter<T extends string> = {
   active: boolean;
-  add: (...items: T[]) => void;
   clear: () => void;
   has: (item: T) => boolean;
-  remove: (...items: T[]) => void;
   toggle: (item: T, options?: { focus?: number }) => void;
 };
 

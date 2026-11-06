@@ -62,7 +62,9 @@ export default function Arrangement({
         <ul className={C.flowers}>
           {arrangement.flowers.map(flower => {
             const { name } = flower;
+
             const flowerActive = view.flowers.has(name);
+            const source = arrangement.id;
 
             return (
               <li
@@ -71,7 +73,7 @@ export default function Arrangement({
               >
                 <button
                   className={C.flower.name}
-                  onClick={() => view.flowers.toggle(name)}
+                  onClick={() => view.flowers.toggle(name, { source })}
                   type='button'
                 >
                   {name}
@@ -84,7 +86,7 @@ export default function Arrangement({
                         active={view.colors.has(color)}
                         id={color}
                         onClick={() =>
-                          view.colors.toggle(color)}
+                          view.colors.toggle(color, { source })}
                       />
                     </li>
                   ))}

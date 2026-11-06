@@ -17,7 +17,8 @@ import Status from './Status.tsx';
 
 const DEFAULT_VIEW: View = {
   colors: [],
-  flowers: []
+  flowers: [],
+  focus: null
 };
 
 export default function Explorer({
@@ -181,7 +182,7 @@ function filterArrangements(
 
 function createViewFilter<T extends string>(
   view: View,
-  setView: (view: (current: View) => View) => void,
+  setView: (view: View | ((current: View) => View)) => void,
   key: ViewFilterID
 ): ViewFilter<T> {
   const set = new Set(view[key] as string[]);
@@ -192,11 +193,11 @@ function createViewFilter<T extends string>(
       setView(current => ({
         ...current,
         [key]: [...current[key], ...items],
-        source: undefined
+        focus: null
       }));
     },
     clear: () => {
-      setView(current => ({ ...current, [key]: [], source: undefined }));
+      setView(current => ({ ...current, [key]: [], focus: null }));
     },
     has: (item: T) => {
       return set.has(item);
@@ -205,7 +206,7 @@ function createViewFilter<T extends string>(
       setView(current => ({
         ...current,
         [key]: current[key].filter(item => !items.includes(item as T)),
-        source: undefined
+        focus: null
       }));
     },
     toggle: (item, options) => {
@@ -217,7 +218,7 @@ function createViewFilter<T extends string>(
           [key]: values.includes(item)
             ? values.filter(value => value !== item)
             : [...values, item],
-          source: options?.source
+          focus: options?.focus ?? null
         };
       });
     }

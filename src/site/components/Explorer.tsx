@@ -196,11 +196,7 @@ function createViewFilter<T extends string>(
       }));
     },
     clear: () => {
-      setView(current => ({
-        ...current,
-        [key]: [],
-        source: undefined
-      }));
+      setView(current => ({ ...current, [key]: [], source: undefined }));
     },
     has: (item: T) => {
       return set.has(item);

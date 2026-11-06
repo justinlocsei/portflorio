@@ -8,7 +8,7 @@ import type {
   ViewManager,
   ViewMode
 } from '../types.ts';
-import { useEffect, useRef, useState } from '../ui.ts';
+import { useEffect, useLayoutEffect, useRef, useState } from '../ui.ts';
 import C from './Explorer.styles.ts';
 import Gallery from './Gallery.tsx';
 import Lens from './Lens.tsx';
@@ -33,6 +33,15 @@ export default function Explorer({
   const closeRef = useRef<HTMLButtonElement>(null);
   const allFlowers = summarizeFlowers(allArrangements);
   const arrangements = filterArrangements(allArrangements, view);
+
+  useLayoutEffect(() => {
+    const { focus } = view;
+
+    if (focus !== null) {
+      document.getElementById(String(focus))?.scrollIntoView();
+      setView(v => ({ ...v, focus: null }));
+    }
+  }, [view.focus]);
 
   useEffect(() => {
     if (!arrangement) {

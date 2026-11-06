@@ -29,7 +29,7 @@ export function filterArrangements(
  */
 export function createViewFilter<T extends string>(
   view: View,
-  setView: (view: View | ((current: View) => View)) => void,
+  setView: (view: (current: View) => View) => void,
   key: ViewFilterID
 ): ViewFilter<T> {
   const set = new Set(view[key] as string[]);

@@ -208,18 +208,18 @@ function createViewFilter<T extends string>(
         source: undefined
       }));
     },
-    toggle: (...items: T[]) => {
-      let current = view[key];
+    toggle: (item, options) => {
+      setView(current => {
+        const values = current[key] as T[];
 
-      for (const item of items) {
-        if (set.has(item)) {
-          current = current.filter(i => i !== item);
-        } else {
-          current = [...current, item];
-        }
-      }
-
-      setView({ ...view, [key]: [...current] });
+        return {
+          ...current,
+          [key]: values.includes(item)
+            ? values.filter(value => value !== item)
+            : [...values, item],
+          source: options?.source
+        };
+      });
     }
   };
 }

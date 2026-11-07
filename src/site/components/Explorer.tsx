@@ -24,7 +24,7 @@ export default function Explorer({
   const [view, setView] = useState<View>({ ...DEFAULT_VIEW });
   const [scrollTarget, setScrollTarget] = useState<number | null>(null);
 
-  const { arrangement } = view;
+  const { arrangement, colors, flowers } = view;
 
   const closeRef = useRef<HTMLButtonElement>(null);
   const skipLensScroll = useRef(true);
@@ -50,7 +50,7 @@ export default function Explorer({
     }
 
     window.scrollTo(0, 0);
-  }, [mode, view.colors, view.flowers]);
+  }, [mode, colors, flowers]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -60,7 +60,7 @@ export default function Explorer({
 
       if (arrangement) {
         setView(current => ({ ...current, arrangement: undefined }));
-      } else if (view.colors.length || view.flowers.length) {
+      } else if (colors.length || flowers.length) {
         setView({ ...DEFAULT_VIEW });
       }
     };
@@ -70,7 +70,7 @@ export default function Explorer({
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [arrangement, view.colors, view.flowers]);
+  }, [arrangement, colors, flowers]);
 
   useEffect(() => {
     if (!arrangement) {

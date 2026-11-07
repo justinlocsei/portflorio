@@ -1,6 +1,7 @@
 import type { Color } from '../../core/colors.ts';
 import { summarizeFlowers } from '../../core/flowers.ts';
 import { labelArrangement } from '../display.ts';
+import { useFrozenBodyScroll } from '../hooks.ts';
 import type { Arrangement, View, ViewManager, ViewMode } from '../types.ts';
 import { useEffect, useLayoutEffect, useRef, useState } from '../ui.ts';
 import { createViewFilter, filterArrangements } from '../view.ts';
@@ -25,8 +26,6 @@ export default function Explorer({
   const [scrollTarget, setScrollTarget] = useState<number | null>(null);
 
   const { arrangement, colors, flowers } = view;
-
-  const closeRef = useRef<HTMLButtonElement>(null);
   const skipLensScroll = useRef(true);
 
   const allFlowers = summarizeFlowers(allArrangements);
@@ -72,31 +71,7 @@ export default function Explorer({
     };
   }, [arrangement, colors, flowers]);
 
-  useEffect(() => {
-    if (!arrangement) {
-      return;
-    }
-
-    const previouslyFocused = document.activeElement;
-
-    closeRef.current?.focus();
-
-    const { body, documentElement } = document;
-    const previousBodyOverflow = body.style.overflow;
-    const previousHtmlOverflow = documentElement.style.overflow;
-
-    body.style.overflow = 'hidden';
-    documentElement.style.overflow = 'hidden';
-
-    return () => {
-      if (previouslyFocused instanceof HTMLElement) {
-        previouslyFocused.focus();
-      }
-
-      body.style.overflow = previousBodyOverflow;
-      documentElement.style.overflow = previousHtmlOverflow;
-    };
-  }, [arrangement?.id]);
+  const scroll = useFrozenBodyScroll(arrangement?.id);
 
   const manager: ViewManager = {
     colors: createViewFilter(view, setView, 'colors'),
@@ -171,7 +146,7 @@ export default function Explorer({
               className={C.arrangement.close}
               onClick={() =>
                 setView(current => ({ ...current, arrangement: undefined }))}
-              ref={closeRef}
+              ref={scroll.restore}
               type='button'
             >
               Close

@@ -38,7 +38,7 @@ export function createViewFilter<T extends string>(
     active: set.size > 0,
     clear: () => setView(v => ({ ...v, [key]: [] })),
     has: (item: T) => set.has(item),
-    toggle: item => {
+    toggle: item =>
       setView(current => {
         const values = current[key] as T[];
 
@@ -46,9 +46,8 @@ export function createViewFilter<T extends string>(
           ...current,
           [key]: values.includes(item)
             ? values.filter(value => value !== item)
-            : [...values, item],
+            : [...values, item]
         };
-      });
-    }
+      })
   };
 }

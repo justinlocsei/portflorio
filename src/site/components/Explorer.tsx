@@ -24,7 +24,10 @@ export default function Explorer({
   const [view, setView] = useState<View>({ ...DEFAULT_VIEW });
 
   const { arrangement } = view;
+
   const closeRef = useRef<HTMLButtonElement>(null);
+  const skipLensScroll = useRef(true);
+
   const allFlowers = summarizeFlowers(allArrangements);
   const arrangements = filterArrangements(allArrangements, view);
 
@@ -36,6 +39,17 @@ export default function Explorer({
       setView(v => ({ ...v, focus: null }));
     }
   }, [view.focus]);
+
+  useLayoutEffect(() => {
+    if (skipLensScroll.current) {
+      skipLensScroll.current = false;
+      return;
+    } else if (view.focus !== null) {
+      return;
+    }
+
+    window.scrollTo(0, 0);
+  }, [mode, view.colors, view.flowers]);
 
   useEffect(() => {
     if (!arrangement) {

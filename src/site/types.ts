@@ -41,7 +41,6 @@ export type View = {
   arrangement?: Arrangement;
   colors: Color[];
   flowers: string[];
-  focus: number | null;
 };
 
 /**
@@ -56,7 +55,7 @@ export type ViewFilter<T extends string> = {
   active: boolean;
   clear: () => void;
   has: (item: T) => boolean;
-  toggle: (item: T, options?: { focus?: number }) => void;
+  toggle: (item: T) => void;
 };
 
 /**

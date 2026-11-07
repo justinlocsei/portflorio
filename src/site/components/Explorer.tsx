@@ -58,6 +58,10 @@ export default function Explorer({
       } else if (colors.length || flowers.length) {
         setView({ ...DEFAULT_VIEW });
       }
+    },
+
+    'g': () => {
+      setMode(mode === 'list' ? 'grid' : 'list');
     }
   });
 

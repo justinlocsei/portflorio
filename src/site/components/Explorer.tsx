@@ -1,3 +1,4 @@
+import type { Color } from '../../core/colors.ts';
 import { summarizeFlowers } from '../../core/flowers.ts';
 import { labelArrangement } from '../display.ts';
 import type { Arrangement, View, ViewManager, ViewMode } from '../types.ts';
@@ -11,8 +12,7 @@ import Status from './Status.tsx';
 
 const DEFAULT_VIEW: View = {
   colors: [],
-  flowers: [],
-  focus: null
+  flowers: []
 };
 
 export default function Explorer({
@@ -22,6 +22,7 @@ export default function Explorer({
 }) {
   const [mode, setMode] = useState<ViewMode>('list');
   const [view, setView] = useState<View>({ ...DEFAULT_VIEW });
+  const [scrollTarget, setScrollTarget] = useState<number | null>(null);
 
   const { arrangement } = view;
 
@@ -32,19 +33,19 @@ export default function Explorer({
   const arrangements = filterArrangements(allArrangements, view);
 
   useLayoutEffect(() => {
-    const { focus } = view;
-
-    if (focus !== null) {
-      document.getElementById(String(focus))?.scrollIntoView();
-      setView(v => ({ ...v, focus: null }));
+    if (scrollTarget === null) {
+      return;
     }
-  }, [view.focus]);
+
+    document.getElementById(String(scrollTarget))?.scrollIntoView();
+    setScrollTarget(null);
+  }, [scrollTarget]);
 
   useLayoutEffect(() => {
     if (skipLensScroll.current) {
       skipLensScroll.current = false;
       return;
-    } else if (view.focus !== null) {
+    } else if (scrollTarget !== null) {
       return;
     }
 

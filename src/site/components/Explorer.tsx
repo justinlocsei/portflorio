@@ -53,11 +53,32 @@ export default function Explorer({
   }, [mode, view.colors, view.flowers]);
 
   useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') {
+        return;
+      }
+
+      if (arrangement) {
+        setView(current => ({ ...current, arrangement: undefined }));
+      } else if (view.colors.length || view.flowers.length) {
+        setView({ ...DEFAULT_VIEW });
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [arrangement, view.colors, view.flowers]);
+
+  useEffect(() => {
     if (!arrangement) {
       return;
     }
 
     const previouslyFocused = document.activeElement;
+
     closeRef.current?.focus();
 
     const { body, documentElement } = document;
@@ -67,14 +88,6 @@ export default function Explorer({
     body.style.overflow = 'hidden';
     documentElement.style.overflow = 'hidden';
 
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setView(current => ({ ...current, arrangement: undefined }));
-      }
-    };
-
-    document.addEventListener('keydown', onKeyDown);
-
     return () => {
       if (previouslyFocused instanceof HTMLElement) {
         previouslyFocused.focus();
@@ -82,7 +95,6 @@ export default function Explorer({
 
       body.style.overflow = previousBodyOverflow;
       documentElement.style.overflow = previousHtmlOverflow;
-      document.removeEventListener('keydown', onKeyDown);
     };
   }, [arrangement?.id]);
 

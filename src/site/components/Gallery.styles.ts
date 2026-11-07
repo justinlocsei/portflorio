@@ -6,13 +6,8 @@ export default component('Gallery')
   .elements(e => ({
     logo: e({
       display: 'none',
-      marginBottom: rhythm(3 - anchorBufferRhythm),
-      opacity: 0.9
-    }).children({
-      image: e({
-        margin: '0 auto',
-        width: '20em'
-      })
+      marginTop: rhythm(1),
+      textAlign: 'center'
     }),
 
     overviews: e(),
@@ -51,7 +46,7 @@ export default component('Gallery')
           })
         }),
 
-        [els.logo.root]: s({
+        [els.logo]: s({
           display: 'block'
         })
       },

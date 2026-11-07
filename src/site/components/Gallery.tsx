@@ -24,8 +24,8 @@ export default function Gallery({
 }) {
   return (
     <div className={C.root(mode)}>
-      <h2 className={C.logo.root}>
-        <Logo className={C.logo.image} />
+      <h2 className={C.logo}>
+        <Logo variant='header' />
       </h2>
 
       <ul className={C.overviews}>

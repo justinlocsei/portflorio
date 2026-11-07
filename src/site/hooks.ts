@@ -2,6 +2,25 @@ import type { Ref } from 'react';
 import { useEffect, useRef } from 'react';
 
 /**
+ * Define handlers for hotkeys
+ */
+export function useHotkeys(
+  handlers: Record<string, undefined | (() => void)>
+): void {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      handlers[event.key]?.();
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [handlers]);
+}
+
+/**
  * An interface to frozen body scrolling
  */
 type FrozenBodyScroll = {

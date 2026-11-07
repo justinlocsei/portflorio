@@ -90,6 +90,16 @@ export default function Explorer({
     flowers: createViewFilter(view, setView, 'flowers')
   };
 
+  const onToggleArrangementFlower = (id: number, flower: string) => {
+    manager.flowers.toggle(flower);
+    setScrollTarget(id);
+  };
+
+  const onToggleArrangementColor = (id: number, color: Color) => {
+    manager.colors.toggle(color);
+    setScrollTarget(id);
+  };
+
   const inert = arrangement !== undefined;
 
   return (
@@ -120,6 +130,8 @@ export default function Explorer({
         <Gallery
           arrangements={arrangements}
           mode={mode}
+          onToggleColor={onToggleArrangementColor}
+          onToggleFlower={onToggleArrangementFlower}
           onRequestArrangement={arrangement =>
             setView({ ...view, arrangement })}
           view={manager}

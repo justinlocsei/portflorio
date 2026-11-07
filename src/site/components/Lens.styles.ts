@@ -13,8 +13,6 @@ import {
   weights
 } from './styles.ts';
 
-const focusBG = 'rgba(255, 255, 255, 0.075)';
-
 const icon = (url: string, size = 'contain') =>
   css({
     backgroundImage: `url("${url}")`,
@@ -31,31 +29,7 @@ export default component('Lens')
     title: e({
       paddingBottom: rhythm(3),
       paddingTop: rhythm(1.25)
-    }).children({
-      link: e({
-        display: 'block'
-      }),
-
-      image: e({
-        margin: '0 auto',
-        opacity: 0.9,
-        ...transition('opacity')
-      })
-    }).variants((s, { els }) => ({
-      linked: s().nested({
-        [`${els.link}:hover`]: s().nested({
-          [els.image]: s({
-            opacity: 1
-          })
-        }),
-
-        [`${els.link}:focus-visible`]: s({
-          backgroundColor: focusBG,
-          outline: `4px solid ${focusBG}`,
-          outlineOffset: 0
-        })
-      })
-    })),
+    }),
 
     section: e({
       position: 'relative'
@@ -115,7 +89,7 @@ export default component('Lens')
           width: size,
           ...transition('opacity')
         }).is(focusable({
-          backgroundColor: focusBG,
+          backgroundColor: colors.focus,
           opacity: '1 !important'
         }));
       },
@@ -171,7 +145,7 @@ export default component('Lens')
           padding: `0 ${gutter}`,
           width: '100%'
         }).is(focusable({
-          backgroundColor: focusBG
+          backgroundColor: colors.focus
         })),
 
         name: e(),

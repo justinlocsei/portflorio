@@ -25,7 +25,9 @@ export default function Lens({
 
   return (
     <div className={C.root}>
-      <Title filtered={view.flowers.active || view.colors.active} />
+      <h1 className={C.title}>
+        <Logo />
+      </h1>
 
       <Section
         filtered={view.flowers.active}
@@ -50,20 +52,6 @@ export default function Lens({
         />
       </Section>
     </div>
-  );
-}
-
-function Title({ filtered }: { filtered: boolean }) {
-  const S = C.title;
-
-  const logo = <Logo className={S.image} />;
-
-  return (
-    <h1 className={S.root(filtered && 'linked')}>
-      {filtered
-        ? <a className={S.link} href='/'>{logo}</a>
-        : <span className={S.link}>{logo}</span>}
-    </h1>
   );
 }
 

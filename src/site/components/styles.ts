@@ -6,6 +6,7 @@ export const colors = {
   bg: '#252725',
   border: '#41443f',
   borderDark: '#1e201d',
+  focus: 'rgba(255, 255, 255, 0.075)',
   muted: '#595a4f',
   text: '#f0ede4',
   textAccent: '#fff'

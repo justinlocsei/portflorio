@@ -1,9 +1,9 @@
 import type { Color } from '../../core/colors.ts';
 import { summarizeFlowers } from '../../core/flowers.ts';
 import { labelArrangement } from '../display.ts';
-import { useFrozenBodyScroll } from '../hooks.ts';
+import { useFrozenBodyScroll, useHotkeys } from '../hooks.ts';
 import type { Arrangement, View, ViewManager, ViewMode } from '../types.ts';
-import { useEffect, useLayoutEffect, useRef, useState } from '../ui.ts';
+import { useLayoutEffect, useRef, useState } from '../ui.ts';
 import { createViewFilter, filterArrangements } from '../view.ts';
 import C from './Explorer.styles.ts';
 import Gallery from './Gallery.tsx';
@@ -51,25 +51,15 @@ export default function Explorer({
     window.scrollTo(0, 0);
   }, [mode, colors, flowers]);
 
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') {
-        return;
-      }
-
+  useHotkeys({
+    'Escape': () => {
       if (arrangement) {
         setView(current => ({ ...current, arrangement: undefined }));
       } else if (colors.length || flowers.length) {
         setView({ ...DEFAULT_VIEW });
       }
-    };
-
-    document.addEventListener('keydown', onKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-    };
-  }, [arrangement, colors, flowers]);
+    }
+  });
 
   const scroll = useFrozenBodyScroll(arrangement?.id);
 

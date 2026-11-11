@@ -29,6 +29,7 @@ export default component('Gallery')
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, 30%)',
         justifyContent: 'start',
+        paddingTop: rhythm(anchorBufferRhythm),
         rowGap: rhythm(2)
       }),
 

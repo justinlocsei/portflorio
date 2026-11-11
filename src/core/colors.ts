@@ -12,7 +12,7 @@ export const COLORS = {
     name: 'Blush'
   },
   burgundy: {
-    hex: '460506',
+    hex: '561314',
     name: 'Burgundy'
   },
   chartreuse: {
@@ -48,7 +48,7 @@ export const COLORS = {
     name: 'Purple'
   },
   red: {
-    hex: '8f0218',
+    hex: 'b7132d',
     name: 'Red'
   },
   sage: {

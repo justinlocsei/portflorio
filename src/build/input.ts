@@ -1,5 +1,5 @@
 import { COLOR_IDS, parseColors } from '../core/colors.ts';
-import type { ArrangedFlower } from '../core/types.ts';
+import type { ArrangedFlower, Color } from '../core/types.ts';
 
 import readline from 'node:readline';
 
@@ -16,6 +16,27 @@ function completeColors(trimmed: string): string[] {
   return COLOR_IDS
     .filter(id => id.startsWith(prefix))
     .map(id => `${head}${id}`);
+}
+
+/**
+ * Add a flower and its colors to a collection
+ */
+function addFlower(
+  flowers: ArrangedFlower[],
+  name: string,
+  colors: Color[]
+): void {
+  const existing = flowers.find(f => f.name === name);
+
+  if (existing) {
+    for (const color of colors) {
+      if (!existing.colors.includes(color)) {
+        existing.colors.push(color);
+      }
+    }
+  } else {
+    flowers.push({ colors, name });
+  }
 }
 
 /**
@@ -86,10 +107,7 @@ export function requestFlowers({
         return;
       }
 
-      flowers.push({
-        colors,
-        name: flower
-      });
+      addFlower(flowers, flower, colors);
 
       flower = '';
       step = 'flower';

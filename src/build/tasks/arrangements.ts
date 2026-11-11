@@ -20,6 +20,7 @@ export default C.group('Manage the catalog of arrangements', {
   add: C(
     'Add an arrangement',
     {
+      commit: C.flag('boolean', 'Commit the arrangement', { default: true }),
       date: C.flag('string', 'A custom ISO date', { isValid: isISODate }),
       id: C.flag('string', 'The ID of the source images', { required: true }),
       mechanic: C.flag('choice', 'The mechanic of the arrangement', {
@@ -27,7 +28,7 @@ export default C.group('Manage the catalog of arrangements', {
         required: true
       })
     },
-    async ({ date, id, mechanic }) => {
+    async ({ commit, date, id, mechanic }) => {
       const images = await findSourceImages(paths.images, Number(id));
 
       showOutput('imgcat', [images.preview]);
@@ -44,6 +45,10 @@ export default C.group('Manage the catalog of arrangements', {
         flowers,
         mechanic
       });
+
+      if (!commit) {
+        return;
+      }
 
       showOutput('git', ['add', paths.arrangements]);
 

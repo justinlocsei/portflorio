@@ -1,4 +1,3 @@
-import type { Color as ColorID } from '../../core/colors.ts';
 import { formatDate, getISODate } from '../../core/time.ts';
 import { labelMechanic } from '../display.ts';
 import type {
@@ -17,7 +16,6 @@ export default function Arrangement({
   index,
   mode,
   onSelect,
-  onToggleColor,
   onToggleFlower,
   view
 }: ViewProps & {
@@ -26,7 +24,6 @@ export default function Arrangement({
   index: number;
   mode: ViewMode;
   onSelect: () => void;
-  onToggleColor: (color: ColorID) => void;
   onToggleFlower: (flower: string) => void;
 }) {
   const titleId = useId();
@@ -67,6 +64,7 @@ export default function Arrangement({
         <ul className={C.flowers}>
           {arrangement.flowers.map(flower => {
             const { name } = flower;
+            const colors = flower.colors.filter(c => view.colors.has(c));
 
             return (
               <li
@@ -81,18 +79,15 @@ export default function Arrangement({
                   {name}
                 </button>
 
-                <ul className={C.flower.colors}>
-                  {flower.colors.map(color => (
-                    <li className={C.flower.color} key={color}>
-                      <Color
-                        active={view.colors.has(color)}
-                        id={color}
-                        onClick={() =>
-                          onToggleColor(color)}
-                      />
-                    </li>
-                  ))}
-                </ul>
+                {colors.length > 0 && (
+                  <ul className={C.flower.colors}>
+                    {colors.map(color => (
+                      <li className={C.flower.color} key={color}>
+                        <Color id={color} />
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             );
           })}

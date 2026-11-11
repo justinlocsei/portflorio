@@ -1,4 +1,3 @@
-import type { Color } from '../../core/colors.ts';
 import { summarizeFlowers } from '../../core/flowers.ts';
 import { labelArrangement } from '../display.ts';
 import { useFrozenBodyScroll, useHotkeys } from '../hooks.ts';
@@ -77,11 +76,6 @@ export default function Explorer({
     setScrollTarget(id);
   };
 
-  const onToggleArrangementColor = (id: number, color: Color) => {
-    manager.colors.toggle(color);
-    setScrollTarget(id);
-  };
-
   const inert = arrangement !== undefined;
 
   return (
@@ -112,7 +106,6 @@ export default function Explorer({
         <Gallery
           arrangements={arrangements}
           mode={mode}
-          onToggleColor={onToggleArrangementColor}
           onToggleFlower={onToggleArrangementFlower}
           onRequestArrangement={arrangement =>
             setView({ ...view, arrangement })}

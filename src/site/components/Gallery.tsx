@@ -1,4 +1,3 @@
-import type { Color } from '../../core/colors.ts';
 import type {
   Arrangement as ArrangementType,
   ViewMode,
@@ -11,14 +10,12 @@ import Logo from './Logo.tsx';
 export default function Gallery({
   arrangements,
   mode,
-  onToggleColor,
   onToggleFlower,
   onRequestArrangement,
   view
 }: ViewProps & {
   arrangements: ArrangementType[];
   onRequestArrangement: (arrangement: ArrangementType) => void;
-  onToggleColor: (arrangementID: number, color: Color) => void;
   onToggleFlower: (arrangementID: number, flower: string) => void;
   mode: ViewMode;
 }) {
@@ -41,7 +38,6 @@ export default function Gallery({
                 index={index}
                 mode={mode}
                 onSelect={() => onRequestArrangement(arrangement)}
-                onToggleColor={color => onToggleColor(id, color)}
                 onToggleFlower={flower => onToggleFlower(id, flower)}
                 view={view}
               />

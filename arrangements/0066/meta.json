@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-12",
+  "flowers": {
+    "Dianthus": [
+      "peach"
+    ],
+    "Eucalyptus": [
+      "green"
+    ],
+    "Hypericum berries": [
+      "white"
+    ],
+    "Leucadendron": [
+      "burgundy"
+    ],
+    "Mums": [
+      "orange",
+      "peach",
+      "yellow"
+    ],
+    "Roses": [
+      "white"
+    ],
+    "Yarrow": [
+      "yellow"
+    ]
+  },
+  "mechanic": "foam"
+}

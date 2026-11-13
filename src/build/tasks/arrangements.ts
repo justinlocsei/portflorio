@@ -66,14 +66,24 @@ export default C.group('Manage the catalog of arrangements', {
     'Share an arrangement',
     {
       id: C.flag('string', 'The ID of the arrangement to share', {
-        completion: listArrangementIDs,
-        required: true
+        completion: listArrangementIDs
       })
     },
     async flags => {
+      const arrangements = await loadArrangements();
+
+      const latestID = arrangements
+        .map(a => a.storedID)
+        .sort()
+        .pop();
+
+      if (!latestID) {
+        throw new Error('No arrangements found');
+      }
+
       const arrangement = pickArrangement(
-        await loadArrangements(),
-        tryStoredID(flags.id)
+        arrangements,
+        tryStoredID(flags.id || latestID)
       );
 
       console.log(shareArrangement(arrangement));

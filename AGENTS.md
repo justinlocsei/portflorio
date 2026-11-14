@@ -1,5 +1,9 @@
 # Agent instructions
 
+## Node and npm
+
+This repo pins Node with [mise](mise.toml) (`node = "24.19.0"`). Run **npm** through mise so installs match the lockfile (for example `mise exec -- npm install`), not a stray global Node/npm.
+
 ## ID spelling
 
 When referring to an identifier in **prose** (comments, docs, commit messages, test descriptions), write **ID**, not `id`.

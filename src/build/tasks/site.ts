@@ -32,5 +32,10 @@ export default C.group('Manage the site', {
 
   prepare: C('Prepare site data', async () => {
     await generateData();
+  }),
+
+  preview: C('Preview the site', async () => {
+    await buildStaticSite();
+    npx('wrangler', ['versions', 'upload', '--preview-alias', 'staging']);
   })
 });

@@ -33,6 +33,9 @@ portflorio test
 # Start a development server
 portflorio site develop
 
+# Preview the site
+portflorio site preview
+
 # Deploy the site
 portflorio site deploy
 ```

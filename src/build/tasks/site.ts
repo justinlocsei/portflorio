@@ -14,16 +14,14 @@ export default C.group('Manage the site', {
 
   deploy: C(
     'Deploy the site',
-    {
-      build: C.flag('boolean', 'Build before deploying', { default: true }),
-      'dry-run': C.flag('boolean', 'Test deployment', { default: false })
-    },
+    { 'dry-run': C.flag('boolean', 'Test deployment', { default: false }) },
     async flags => {
-      if (flags.build) {
-        await buildStaticSite();
-      }
+      await buildStaticSite();
 
-      npx('wrangler', ['deploy', ...(flags['dry-run'] ? ['--dry-run'] : [])]);
+      npx('wrangler', [
+        'deploy',
+        ...(flags['dry-run'] ? ['--dry-run'] : [])
+      ]);
     }
   ),
 

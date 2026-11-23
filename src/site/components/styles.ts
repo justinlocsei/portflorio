@@ -1,4 +1,9 @@
-import type { CSS, NestedStyles, StyleFragmentBuilder } from 'ruscus';
+import type {
+  CSS,
+  NestedStyles,
+  PropertyName,
+  StyleFragmentBuilder
+} from 'ruscus';
 import { css, queries, trait } from 'ruscus';
 
 export const colors = {
@@ -68,7 +73,7 @@ export function rhythm(factor = 1): string {
  * Define transitions with shared timing
  */
 export function transition(
-  ...properties: string[]
+  ...properties: PropertyName[]
 ): CSS {
   return css({
     transition: properties.map(p => `${p} 150ms ease-out`).join(', ')

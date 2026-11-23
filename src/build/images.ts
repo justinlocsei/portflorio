@@ -56,7 +56,7 @@ export async function buildArrangementImages(
 /**
  * Find source images for an arrangement that match a pattern
  *
- * This naming pattern is enforced by Lightroom export presents.
+ * This naming pattern is enforced by Lightroom export presets.
  */
 export async function findSourceImages(
   directory: string,

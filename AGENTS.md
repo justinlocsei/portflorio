@@ -2,7 +2,7 @@
 
 ## Node and npm
 
-This repo pins Node with [mise](mise.toml) (`node = "24.19.0"`). Run **npm** through mise so installs match the lockfile (for example `mise exec -- npm install`), not a stray global Node/npm.
+This repo pins Node with [mise](mise.toml) (`node = "26.13.1"`). Run **npm** through mise so installs match the lockfile (for example `mise exec -- npm install`), not a stray global Node/npm.
 
 ## ID spelling
 

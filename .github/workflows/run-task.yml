@@ -22,7 +22,7 @@ jobs:
       - uses: ./.github/actions/install-node
         name: Install Node.js
         with:
-          node-version: 24
+          node-version: 26
 
       - name: Generate site data
         run: ./bin/portflorio site prepare

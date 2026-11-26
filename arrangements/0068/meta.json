@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-26",
+  "flowers": {
+    "Baby's breath": [
+      "white"
+    ],
+    "Dianthus": [
+      "orange"
+    ],
+    "Eucalyptus": [
+      "sage"
+    ],
+    "Hypericum berries": [
+      "yellow"
+    ],
+    "Mums": [
+      "yellow"
+    ],
+    "Roses": [
+      "orange",
+      "peach"
+    ],
+    "Stock": [
+      "white"
+    ]
+  },
+  "mechanic": "foam"
+}
